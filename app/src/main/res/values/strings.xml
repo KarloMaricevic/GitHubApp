@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">GitHubApp</string>
+    <string name="app_name">GitHub app</string>
+
+    <!--toolbar_search_menu-->
+    <string name="search_title">search</string>
+    <string name="sort_title">sort by</string>
+
+
+    <!--toolbar_sort_menu-->
+    <string name="sortByStarText">By star</string>
+    <string name="sortByDateText">By date</string>
+    <string name="sortByForkedText">By forked</string>
+
+    <!--item_basic_repository_info-->
+    <string name="owner_image_content_description">Owner image</string>
+    
+    
 </resources>

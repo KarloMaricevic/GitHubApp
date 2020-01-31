@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="gitHubRepo"
+            type="my.app.githubapp.domain.GitHubRepo" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="100dp"
+            android:layout_width="match_parent">
+
+            <ImageView
+                android:id="@+id/owner_picture_image_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/owner_name_text_view"
+                app:layout_constraintEnd_toStartOf="@id/repository_name_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                android:contentDescription="@string/owner_image_content_description"
+                >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/owner_name_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{gitHubRepo.owner.login}"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/number_of_forks_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/owner_picture_image_button"
+                tools:text="Karlo Maricevic">
+            </TextView>
+
+            <TextView
+                android:id="@+id/repository_name_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{gitHubRepo.name}"
+                android:gravity="center"
+                app:layout_constraintStart_toEndOf="@id/owner_picture_image_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/number_of_watchers_text_view"
+                app:layout_constraintHorizontal_weight="2"
+                tools:text="Repository name">
+            </TextView>
+
+            <TextView
+                android:id="@+id/number_of_forks_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(gitHubRepo.forks)}"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_forked"
+                app:layout_constraintStart_toEndOf="@id/owner_picture_image_button"
+                app:layout_constraintEnd_toStartOf="@id/number_of_watchers_text_view"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="4">
+            </TextView>
+
+
+            <TextView
+                android:id="@+id/number_of_watchers_text_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@{Integer.toString(gitHubRepo.watcherNumber)}"
+                android:drawableTop="@drawable/ic_eye_24dp"
+                app:layout_constraintStart_toEndOf="@id/number_of_forks_text_view"
+                app:layout_constraintEnd_toStartOf="@id/number_of_issues_text_view"
+                app:layout_constraintTop_toTopOf="@id/number_of_forks_text_view"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center_horizontal|bottom"
+                tools:text="6">
+            </TextView>
+
+            <TextView
+                android:id="@+id/number_of_issues_text_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@{Integer.toString(gitHubRepo.openIssues)}"
+                android:gravity="center_horizontal|bottom"
+                android:drawableTop="@drawable/ic_issues_24dp"
+                app:layout_constraintStart_toEndOf="@id/number_of_watchers_text_view"
+                app:layout_constraintTop_toTopOf="@id/number_of_forks_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="2">
+            </TextView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
+
