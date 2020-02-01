@@ -9,12 +9,24 @@
         <variable
             name="gitHubRepo"
             type="my.app.githubapp.domain.GitHubRepo" />
+
+
+        <variable
+            name="userOnClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="repoOnClick"
+            type="android.view.View.OnClickListener" />
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
 
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:onClick="@{repoOnClick}"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_height="100dp"
@@ -24,6 +36,7 @@
                 android:id="@+id/owner_picture_image_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:onClick="@{userOnClick}"
                 app:layout_constraintBottom_toTopOf="@id/owner_name_text_view"
                 app:layout_constraintEnd_toStartOf="@id/repository_name_text_view"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{gitHubRepo.owner.login}"
                 android:gravity="center"
+                android:onClick="@{userOnClick}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/number_of_forks_text_view"
                 app:layout_constraintStart_toStartOf="parent"

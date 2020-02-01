@@ -1,9 +1,6 @@
-package my.app.githubapp.ui
+package my.app.githubapp.ui.RepositorySearchView
 
-import android.os.Parcel
-import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import my.app.githubapp.core.State
 import my.app.githubapp.mvp.contract.RepositorySearchContract
 
 const val SORT_BY_REPO_NAME = 1

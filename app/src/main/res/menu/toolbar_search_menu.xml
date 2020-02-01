@@ -21,6 +21,13 @@
         <menu>
 
             <item
+                android:id="@+id/sort_by_repo_name"
+                android:icon="@drawable/ic_sort_by_text_24dp"
+                android:title="@string/sortByRepoName"
+                >
+            </item>
+
+            <item
                 android:id="@+id/sort_by_star_item"
                 android:icon="@drawable/ic_star_24dp"
                 android:title="@string/sortByStarText">
@@ -34,7 +41,7 @@
             </item>
 
             <item
-                android:id="@+id/number_of_forks_item"
+                android:id="@+id/sort_by_forks_item"
                 android:icon="@drawable/ic_forked"
                 android:title="@string/sortByForkedText"
                 >

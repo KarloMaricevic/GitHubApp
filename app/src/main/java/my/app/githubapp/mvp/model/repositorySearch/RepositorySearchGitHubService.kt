@@ -17,5 +17,4 @@ interface RepositorySearchGitHubService{
 
     @GET("repos/{owner}/{repo}/subscribers")
     fun getRepoWatchers(@Path("owner") ownerName: String,@Path("repo") repoName : String) : Observable<List<GitHubUser>>
-
 }

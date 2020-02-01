@@ -5,8 +5,8 @@ import my.app.githubapp.domain.GitHubRepo
 
 data class GitHubApiQueryResponse<T>(
 
-    @SerializedName("total_cont")
-    val totalCountOfRepositorys : Double,
+    @SerializedName("total_count")
+    val totalCountOfRepositories : Int,
 
     @SerializedName("incomplete_results")
     val isListIncomplete : Boolean,

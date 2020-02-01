@@ -3,6 +3,7 @@ package my.app.githubapp.domain
 import com.bumptech.glide.annotation.Excludes
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class GitHubRepo(
 
@@ -10,6 +11,8 @@ data class GitHubRepo(
     val name: String,
     @SerializedName("id")
     val id : Int,
+    @SerializedName("updated_at")
+    val lastUpdateDate: Date,
     @SerializedName("owner")
     val owner : GitHubUser,
     @SerializedName("watchers_count")

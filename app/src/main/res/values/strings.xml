@@ -7,12 +7,16 @@
 
 
     <!--toolbar_sort_menu-->
+    <string name="sortByRepoName">By repo name</string>
     <string name="sortByStarText">By star</string>
     <string name="sortByDateText">By date</string>
     <string name="sortByForkedText">By forked</string>
 
     <!--item_basic_repository_info-->
     <string name="owner_image_content_description">Owner image</string>
-    
-    
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
