@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="gitHubRepo"
+            type="my.app.githubapp.domain.GitHubRepo">
+        </variable>
     </data>
 
     <LinearLayout
@@ -27,9 +30,13 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchToolbar"
-            tools:listitem="@layout/item_basic_repository_info">
+            tools:listitem="@layout/item_basic_repository_info"
+            tools:itemCount="3"
+            >
 
         </androidx.recyclerview.widget.RecyclerView>
+
+
 
 
     </LinearLayout>

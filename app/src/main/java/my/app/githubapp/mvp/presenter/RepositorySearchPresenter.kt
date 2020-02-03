@@ -16,8 +16,7 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
 
     private var mView: RepositorySearchContract.RepositorySearchView? = null
     private var mQuery: String = ""
-    private var mSortBy: Int =
-        SORT_BY_REPO_NAME
+    private var mSortBy: Int = SORT_BY_REPO_NAME
 
     private val compositeDisposable = CompositeDisposable()
 

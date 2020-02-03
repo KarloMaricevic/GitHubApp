@@ -1,7 +1,6 @@
-package my.app.githubapp.mvp.model
+package my.app.githubapp.mvp.model.repositorySearch
 
 import com.google.gson.annotations.SerializedName
-import my.app.githubapp.domain.GitHubRepo
 
 data class GitHubApiQueryResponse<T>(
 

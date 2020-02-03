@@ -1,13 +1,21 @@
 package my.app.githubapp.mvp.model.repositorySearch
 
 import android.util.Log
+import com.dropbox.android.external.store4.StoreBuilder
+import com.dropbox.android.external.store4.get
+import io.reactivex.BackpressureStrategy
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.combineLatest
+import io.reactivex.rxkotlin.toFlowable
+import io.reactivex.rxkotlin.toObservable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.reactive.asFlow
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
+import retrofit2.Call
 import javax.inject.Inject
 
 
@@ -75,9 +83,10 @@ class RepositorySearchRepository @Inject constructor(private val mRepositorySear
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { cacheGitHubRepoList(it,query) },
-                { Log.e("Caching error:",it.message) },
+                { Log.e("Caching error:",it?.message) },
                 {disposable.dispose()})
     }
+
 
     private fun cacheGitHubRepoList(gitHubRepoList : List<GitHubRepo>,query : String){
         mRepositorySearchCache.cacheData(gitHubRepoList,query)
@@ -90,5 +99,4 @@ class RepositorySearchRepository @Inject constructor(private val mRepositorySear
             }
         }
     }
-
 }

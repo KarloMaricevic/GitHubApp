@@ -11,7 +11,6 @@ import my.app.githubapp.BaseApplication
 import my.app.githubapp.R
 
 import my.app.githubapp.adapter.RepositorySearchAdapter
-import my.app.githubapp.adapter.RepositorySearchAdapterInterface
 import my.app.githubapp.databinding.FragmentRepositorySearchBinding
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositorySearchContract
@@ -89,7 +88,6 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
                 mPresenter.sortShowingRepos(SORT_BY_FORKED)
                 return@setOnMenuItemClickListener true
             }
-
         return mBinding.root
     }
 
@@ -102,9 +100,14 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
     }
 
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         mPresenter.subscribe(this,mStateView)
+    }
+
+    override fun onStop() {
+        mPresenter.unsubscribe()
+        super.onStop()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -135,15 +138,15 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
 
     //endregion
 
-    override fun navigateToUserDetailView(userId : Int) {
-        val action = RepositorySearchFragmentDirections.actionRepositorySearchFragment2ToUserDetailsFragment(userId)
-        (activity!!.application as BaseApplication).releaseRepertorySearchSobcomponent()
+    override fun navigateToUserDetailView(userLogin: String) {
+        val action = RepositorySearchFragmentDirections.actionRepositorySearchFragment2ToUserDetailsFragment(userLogin)
+        (activity!!.application as BaseApplication).releaseRepositorySearchSobcomponent()
         findNavController().navigate(action)
     }
 
-    override fun navigateToRepoDetailView(repoId : Int) {
-        val action = RepositorySearchFragmentDirections.actionRepositorySearchFragment2ToRepositoryDetailsScreen(repoId)
-        (activity!!.application as BaseApplication).releaseRepertorySearchSobcomponent()
+    override fun navigateToRepoDetailView(ownerLogin: String, repoName: String) {
+        val action = RepositorySearchFragmentDirections.actionRepositorySearchFragment2ToRepositoryDetailsScreen(ownerLogin,repoName)
+        (activity!!.application as BaseApplication).releaseRepositorySearchSobcomponent()
         findNavController().navigate(action)
     }
 }

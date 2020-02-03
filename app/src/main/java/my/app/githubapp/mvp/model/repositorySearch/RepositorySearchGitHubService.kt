@@ -2,8 +2,7 @@ package my.app.githubapp.mvp.model.repositorySearch
 
 import io.reactivex.Observable
 import my.app.githubapp.domain.GitHubRepo
-import my.app.githubapp.domain.GitHubUser
-import my.app.githubapp.mvp.model.GitHubApiQueryResponse
+import my.app.githubapp.domain.GitHubRepoOwner
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -16,5 +15,5 @@ interface RepositorySearchGitHubService{
 
 
     @GET("repos/{owner}/{repo}/subscribers")
-    fun getRepoWatchers(@Path("owner") ownerName: String,@Path("repo") repoName : String) : Observable<List<GitHubUser>>
+    fun getRepoWatchers(@Path("owner") ownerName: String,@Path("repo") repoName : String) : Observable<List<GitHubRepoOwner>>
 }

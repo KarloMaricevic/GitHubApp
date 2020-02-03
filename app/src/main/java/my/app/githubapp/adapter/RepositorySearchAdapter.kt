@@ -45,12 +45,12 @@ class RepositorySearchAdapter(mContext : Context,val mCallback : RepositorySearc
         notifyDataSetChanged()
     }
 
-    override fun clickedOnUser(userId: Int) {
-        mCallback.navigateToUserDetailView(userId)
+    override fun clickedOnOwner(ownerLogin: String) {
+        mCallback.navigateToUserDetailView(ownerLogin)
     }
 
-    override fun clickedOnRepo(repoId: Int) {
-        mCallback.navigateToRepoDetailView(repoId)
+    override fun clickedOnRepo(ownerLogin: String, repoName: String) {
+        mCallback.navigateToRepoDetailView(ownerLogin,repoName)
     }
 
 }
@@ -62,8 +62,8 @@ class BasicRepositoryInfoViewHolder(private val mBinding : ItemBasicRepositoryIn
 
     fun bind(item : GitHubRepo){
         mBinding.gitHubRepo = item
-        mBinding.repoOnClick = View.OnClickListener { mRepositorySearchAdapterInterface.clickedOnRepo(item.id) }
-        mBinding.userOnClick = View.OnClickListener { mRepositorySearchAdapterInterface.clickedOnUser(item.owner.id) }
+        mBinding.repoOnClick = View.OnClickListener { mRepositorySearchAdapterInterface.clickedOnRepo(item.owner.login,item.name) }
+        mBinding.userOnClick = View.OnClickListener { mRepositorySearchAdapterInterface.clickedOnOwner(item.owner.login) }
         mBinding.executePendingBindings()
     }
 

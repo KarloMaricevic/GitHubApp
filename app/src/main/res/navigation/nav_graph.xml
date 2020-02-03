@@ -21,16 +21,19 @@
         android:label="fragment_user_details"
         tools:layout="@layout/fragment_user_details" >
         <argument
-            android:name="userId"
-            app:argType="integer" />
+            android:name="userLogin"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/repositoryDetailsScreen"
-        android:name="my.app.githubapp.RepositoryDetailsScreen"
+        android:name="my.app.githubapp.ui.RepositoryDetailsView.RepositoryDetailsFragment"
         android:label="fragment_repository_details_screen"
         tools:layout="@layout/fragment_repository_details_screen" >
         <argument
-            android:name="repoId"
-            app:argType="integer" />
+            android:name="ownerLogin"
+            app:argType="string" />
+        <argument
+            android:name="repoName"
+            app:argType="string" />
     </fragment>
 </navigation>

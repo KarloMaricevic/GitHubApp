@@ -1,6 +1,6 @@
 package my.app.githubapp.ui.RepositorySearchView
 
 interface RepositorySearchViewAdapterCallback {
-    fun navigateToUserDetailView(userId : Int)
-    fun navigateToRepoDetailView(repoId : Int)
+    fun navigateToUserDetailView(userLogin : String)
+    fun navigateToRepoDetailView(ownerLogin : String,repoName : String)
 }

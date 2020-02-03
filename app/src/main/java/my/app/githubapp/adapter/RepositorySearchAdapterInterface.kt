@@ -1,6 +1,6 @@
 package my.app.githubapp.adapter
 
 interface RepositorySearchAdapterInterface{
-    fun clickedOnUser(userId : Int)
-    fun clickedOnRepo(repoId :Int)
+    fun clickedOnOwner(ownerLogin : String)
+    fun clickedOnRepo(ownerLogin : String,repoName : String)
 }
