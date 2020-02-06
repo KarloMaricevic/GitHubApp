@@ -1,11 +1,11 @@
 package my.app.githubapp
 
 import android.app.Application
-import android.telephony.mbms.MbmsErrors
 import my.app.githubapp.di.AppComponent
 import my.app.githubapp.di.DaggerAppComponent
-import my.app.githubapp.di.RepositoryDetailsSubcomponent.RepositoryDetailSubcomponent
-import my.app.githubapp.di.RepositorySearchSubcomponent.RepositorySearchSubcomponent
+import my.app.githubapp.di.repositoryDetailsSubcomponent.RepositoryDetailSubcomponent
+import my.app.githubapp.di.repositorySearchSubcomponent.RepositorySearchSubcomponent
+import my.app.githubapp.di.userDetailsSubcompnent.UserDetailsSubcomponent
 import java.lang.NullPointerException
 
 class BaseApplication : Application() {
@@ -14,6 +14,7 @@ class BaseApplication : Application() {
     private lateinit var mAppComponent : AppComponent
     private var mRepositorySearchSubcomponent : RepositorySearchSubcomponent? = null
     private var mRepositoryDetailSubcomponent : RepositoryDetailSubcomponent? = null
+    private var mUserDetailSubcomponent : UserDetailsSubcomponent? = null
 
 
     override fun onCreate() {
@@ -33,16 +34,27 @@ class BaseApplication : Application() {
         mRepositorySearchSubcomponent = null
     }
 
-    fun getRepositoryDetailSubcomponent(ownerLogin : String,repoName : String) : RepositoryDetailSubcomponent{
+    fun getRepositoryDetailSubcomponent() : RepositoryDetailSubcomponent{
         if(mRepositoryDetailSubcomponent == null) {
             mRepositoryDetailSubcomponent =
-                mAppComponent.getRepositoryDetailsSubcmponentFactory().create(ownerLogin,repoName)
+                mAppComponent.getRepositoryDetailsSubcmponentFactory().create()
         }
         return mRepositoryDetailSubcomponent ?: throw NullPointerException()
     }
 
     fun releaseRepositoryDetailSobcomponent(){
         mRepositoryDetailSubcomponent = null
+    }
+
+    fun getUserDetailSubcomponent() : UserDetailsSubcomponent{
+        if(mUserDetailSubcomponent == null){
+            mUserDetailSubcomponent = mAppComponent.getUserDetailsSubcomponentFactory().create()
+        }
+        return mUserDetailSubcomponent ?: throw NullPointerException()
+    }
+
+    fun releaseUserDetailSubcomponent(){
+        mUserDetailSubcomponent = null
     }
 
 

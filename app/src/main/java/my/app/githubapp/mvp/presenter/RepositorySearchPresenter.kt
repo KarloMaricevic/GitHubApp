@@ -6,13 +6,15 @@ import io.reactivex.disposables.CompositeDisposable
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositorySearchContract
+import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchInteractorInterface
+import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchPresenterInterface
 import my.app.githubapp.mvp.model.repositorySearch.RepositorySearchInteractor
-import my.app.githubapp.ui.RepositorySearchView.*
+import my.app.githubapp.ui.repositorySearchView.*
 import javax.inject.Inject
 
 
 @PerFragment
-class RepositorySearchPresenter @Inject constructor(private val mRepositorySearchInteractor: RepositorySearchInteractor) : RepositorySearchContract.RepositorySearchPresenterInterface {
+class RepositorySearchPresenter @Inject constructor(private val mRepositorySearchInteractor: RepositorySearchInteractorInterface) : RepositorySearchPresenterInterface {
 
     private var mView: RepositorySearchContract.RepositorySearchView? = null
     private var mQuery: String = ""
@@ -46,13 +48,13 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
     }
 
     override fun searchForRepos(query: String) {
+        mQuery = query
         compositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(query)
             .observeOn(AndroidSchedulers.mainThread())
             .map {sortList(it,mSortBy) }
             .subscribe(
                 {
-                    mQuery = query
                     mView?.showData(it)
                 },
                 {
@@ -82,7 +84,7 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
         return when(sort) {
             SORT_BY_REPO_NAME -> gitHubRepoList.sortedBy { it.name }
             SORT_BY_STAR -> gitHubRepoList.sortedByDescending  { it.staredNumber }
-            SORT_BY_DATE -> gitHubRepoList.sortedByDescending  { it.lastUpdateDate }
+            SORT_BY_DATE -> gitHubRepoList.sortedByDescending  { it.createdAt }
             SORT_BY_FORKED ->  gitHubRepoList.sortedByDescending { it.forks }
             else -> throw NoSuchMethodException("Sort not implemented")
         }

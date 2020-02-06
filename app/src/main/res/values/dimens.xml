@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_top">8dp</dimen>
+    <dimen name="margin_end">16dp</dimen>
+
+    <dimen name="text_margin_top">4dp</dimen>
+    <dimen name="text_margin_bottom">4dp</dimen>
+    <dimen name="text_margin_start">8dp</dimen>
+
+    <!--fragment_repository_details_screen-->
+    <dimen name="owner_name_margin_start">16dp</dimen>
+    <dimen name="repo_name_text_size">25sp</dimen>
+    <dimen name="text_size">18sp</dimen>
+
+
+
+    <!--fragment_user_details-->
+    <dimen name="to_web_image_view_height">40dp</dimen>
+    <dimen name="to_web_image_view_width">40dp</dimen>
+
+    <!--item_contributor-->
+    <dimen name="contributor_picture_image_dimen">50dp</dimen>
+
+    <!--item_user_repository-->
+    <dimen name="repo_language_text_view_width">150dp</dimen>
+
+
+    <!--layout_owner_info-->
+    <dimen name="user_picture_image_view_dimen">100dp</dimen>
+
+</resources>

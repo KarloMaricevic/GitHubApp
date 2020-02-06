@@ -1,14 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".UserDetailsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="gitHubUser"
+            type="my.app.githubapp.domain.GitHubUser" />
+
+    </data>
+
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/go_to_web_image_view"
+                android:layout_width="@dimen/to_web_image_view_width"
+                android:layout_height="@dimen/to_web_image_view_height"
+                android:layout_marginTop="@dimen/margin_top"
+                android:layout_marginEnd="@dimen/margin_end"
+                android:src="@drawable/ic_open_in_browser_24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/go_to_web_repo_content_description"
+                >
+            </ImageView>
+
+
+            <ImageView
+                android:id="@+id/user_thumbnail_image_view"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/owner_image_content_description"
+                tools:src="@drawable/ic_person_24dp"
+                >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/user_login_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{gitHubUser.login}"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/text_margin_top"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_thumbnail_image_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="UserLogin">
+            </TextView>
+
+            <TextView
+                android:id="@+id/user_username_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@{gitHubUser.name}"
+                android:layout_marginTop="@dimen/text_margin_top"
+                android:layout_marginBottom="@dimen/text_margin_bottom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_login_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="User username"
+                >
+            </TextView>
+
+            <TextView
+                android:id="@+id/e_mail_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{"E-mail: " + (gitHubUser.email ?? "not specified")}'
+                android:layout_marginTop="@dimen/margin_top"
+                android:layout_marginStart="@dimen/text_margin_start"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_username_text_view"
+                tools:text="E:mail: karlomaricevic@gmail.com"
+                >
+            </TextView>
+
+            <TextView
+                android:id="@+id/user_date_of_creation_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_top"
+                android:layout_marginStart="@dimen/text_margin_start"
+                android:text='@{"Date created: " + gitHubUser.createdAt}'
+                app:layout_constraintTop_toBottomOf="@+id/e_mail_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Date created: 21.2.2015"
+                >
+            </TextView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/show_user_repos_card_view"
+                android:layout_marginTop="@dimen/margin_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/user_date_of_creation_text_view">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/text_margin_top"
+                        android:layout_marginBottom="@dimen/text_margin_bottom"
+                        android:layout_marginStart="@dimen/text_margin_start"
+                        android:text="@string/Repository"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/text_size">
+                    </TextView>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/show_contributors_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/selector_expand_button">
+                    </androidx.appcompat.widget.AppCompatImageButton>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/users_repositories_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/show_user_repos_card_view"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_users_repository"
+                tools:itemCount="6"
+
+                >
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

@@ -1,6 +1,7 @@
 package my.app.githubapp.mvp.contract
 
 import io.reactivex.Observable
+import io.reactivex.Single
 import my.app.githubapp.core.BaseInteractor
 import my.app.githubapp.core.BaseStatefulPresenter
 import my.app.githubapp.core.BaseView
@@ -25,7 +26,11 @@ interface RepositorySearchContract {
     }
 
     interface RepositorySearchInteractorInterface : BaseInteractor{
-        fun getReposForQuery(query : String) : Observable<List<GitHubRepo>>
+        fun getReposForQuery(query : String) : Single<List<GitHubRepo>>
+    }
+
+    interface RepositorySearchRepositoryInterface{
+        fun getReposFromQuery(query : String) : Single<List<GitHubRepo>>
     }
 
 }

@@ -10,13 +10,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import my.app.githubapp.databinding.ItemBasicRepositoryInfoBinding
 import my.app.githubapp.domain.GitHubRepo
-import my.app.githubapp.ui.RepositorySearchView.RepositorySearchViewAdapterCallback
+import my.app.githubapp.ui.repositorySearchView.RepositorySearchViewAdapterCallback
 
 class RepositorySearchAdapter(mContext : Context,val mCallback : RepositorySearchViewAdapterCallback) : RecyclerView.Adapter<BasicRepositoryInfoViewHolder>(),RepositorySearchAdapterInterface {
 
 
     private var mData : List<GitHubRepo> = listOf()
-    private val mGlide = Glide.with(mContext)
+    private var mGlide = Glide.with(mContext)
 
 
     override fun onCreateViewHolder(
@@ -44,6 +44,12 @@ class RepositorySearchAdapter(mContext : Context,val mCallback : RepositorySearc
         mData = newData
         notifyDataSetChanged()
     }
+
+
+    fun changeContext(context: Context){
+        mGlide = Glide.with(context)
+    }
+
 
     override fun clickedOnOwner(ownerLogin: String) {
         mCallback.navigateToUserDetailView(ownerLogin)

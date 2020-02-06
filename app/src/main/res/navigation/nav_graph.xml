@@ -6,7 +6,7 @@
     app:startDestination="@id/repositorySearchFragment2">
     <fragment
         android:id="@+id/repositorySearchFragment2"
-        android:name="my.app.githubapp.ui.RepositorySearchView.RepositorySearchFragment"
+        android:name="my.app.githubapp.ui.repositorySearchView.RepositorySearchFragment"
         android:label="RepositorySearchFragment" >
         <action
             android:id="@+id/action_repositorySearchFragment2_to_userDetailsFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/userDetailsFragment"
-        android:name="my.app.githubapp.UserDetailsFragment"
+        android:name="my.app.githubapp.ui.userDetailsView.UserDetailsFragment"
         android:label="fragment_user_details"
         tools:layout="@layout/fragment_user_details" >
         <argument
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/repositoryDetailsScreen"
-        android:name="my.app.githubapp.ui.RepositoryDetailsView.RepositoryDetailsFragment"
+        android:name="my.app.githubapp.ui.repositoryDetailsView.RepositoryDetailsFragment"
         android:label="fragment_repository_details_screen"
         tools:layout="@layout/fragment_repository_details_screen" >
         <argument

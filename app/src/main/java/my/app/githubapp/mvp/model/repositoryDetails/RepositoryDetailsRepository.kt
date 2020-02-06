@@ -1,108 +1,50 @@
 package my.app.githubapp.mvp.model.repositoryDetails
 
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.Single
+import my.app.githubapp.cacher.DataSource
+import my.app.githubapp.domain.GitHubContributor
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.domain.GitHubUser
 import my.app.githubapp.domain.LanguagePercentile
-import my.app.githubapp.utils.mapper.LanguageResponseMapper
+import my.app.githubapp.mvp.contract.RepositoryDetailsContract
+import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsRepositoryInterface
+import my.app.githubapp.mvp.model.caching.key.ContributorsKey
+import my.app.githubapp.mvp.model.caching.key.GitHubUserKey
+import my.app.githubapp.mvp.model.caching.key.LanguageKey
+import my.app.githubapp.mvp.model.caching.key.RepoKey
 import javax.inject.Inject
 
-class RepositoryDetailsRepository @Inject constructor(private val mRepositoryDetailsGitHubService: RepositoryDetailsGitHubService,private val mCache : RepositoryDetailsCache){
+class RepositoryDetailsRepository @Inject constructor(
+    private val mContributorsSource : DataSource<ContributorsKey,List<GitHubContributor>>,
+    private val mGitHubRepoSource : DataSource<RepoKey,GitHubRepo>,
+    private val mLanguagesSource : DataSource<LanguageKey,List<LanguagePercentile>>,
+    private val mOwnerSource : DataSource<GitHubUserKey,GitHubUser>
 
-    private var mCachingGitHubRepoDisposable : Disposable? = null
-    private var mCachingGitHubUserDisposable : Disposable? = null
-
-    fun getGitHubRepo(ownerLogin : String,repoName : String) : Observable<GitHubRepo>{
-
-        if(mCache.isGitHubRepoCached()){
-            if(ownerLogin == mCache.getGitHubRepo().owner.login && repoName == mCache.getGitHubRepo().name){
-                return Observable.just(mCache.getGitHubRepo())
-            }
-        }
-
-          val gitHubRepoObservable = mRepositoryDetailsGitHubService
-                .getRepositoryInformation(ownerLogin,repoName)
-                .subscribeOn(Schedulers.io())
-                .flatMap { gitHubRepo -> getRepoWatchersCount(gitHubRepo.owner.login,gitHubRepo.name)
-                .map { gitHubRepo.copy(watcherNumber = it) } }
-
-
-
-        mCachingGitHubRepoDisposable?.dispose()
-        mCachingGitHubRepoDisposable = gitHubRepoObservable.subscribe(
-            {
-                mCache.cacheGitHubRepo(it)
-            },
-            {}
-        )
-        return gitHubRepoObservable
+) : RepositoryDetailsRepositoryInterface {
+    override fun getGitHubRepo(ownerLogin: String, repoName: String) : Single<GitHubRepo>{
+        val key =
+            RepoKey(ownerLogin, repoName)
+        return mGitHubRepoSource.getFromMemory(key)
     }
 
-
-    private fun getRepoWatchersCount(repoOwnerLogin : String,repoName: String) : Observable<Int>{
-        return mRepositoryDetailsGitHubService
-            .getRepoWatchers(repoOwnerLogin,repoName)
-            .subscribeOn(Schedulers.io())
-            .map {
-                it.count()
-            }
+    override fun getRepoContributors(ownerLogin : String, repoName : String ) : Single<List<GitHubContributor>> {
+        val key = ContributorsKey(
+            ownerLogin,
+            repoName
+        )
+        return mContributorsSource.getFromMemory(key)
     }
 
-    fun getRepoLanguages(ownerLogin : String,repoName: String) : Observable<List<LanguagePercentile>>{
-
-        if(mCache.areRepoLanguagesCached()){
-            if(ownerLogin == mCache.getGitHubRepo().owner.login && repoName == mCache.getGitHubRepo().name){
-                return Observable.just(mCache.getGitHubRepo().languagePercentile)
-            }
-        }
-
-
-        mCachingGitHubRepoDisposable?.dispose()
-        val getRepoLanguages = mRepositoryDetailsGitHubService
-            .getRepositoryLanguage(ownerLogin,repoName)
-            .subscribeOn(Schedulers.io())
-            .map {
-                LanguageResponseMapper.toLanguagePercentileList(it)
-            }
-        mCachingGitHubRepoDisposable = getRepoLanguages.subscribe(
-            {
-                if(mCache.isGitHubRepoCached()) {
-                    val gitHubRepo = mCache.getGitHubRepo().copy(languagePercentile = it)
-                    mCache.cacheGitHubRepo(gitHubRepo)
-                }
-            },
-            {
-
-            }
+    override fun getRepoLanguages(ownerLogin: String, repoName: String) : Single<List<LanguagePercentile>>{
+        val key = LanguageKey(
+            ownerLogin,
+            repoName
         )
-
-        return getRepoLanguages
+        return mLanguagesSource.getFromMemory(key)
     }
 
-
-
-
-    fun getOwnerUserInfo(owner : String) : Observable<GitHubUser> {
-        if(mCache.isGitHubRepoOwnerCached()){
-            if(mCache.getGitHubRepoOwner().login == owner)
-                return Observable.just(mCache.getGitHubRepoOwner())
-        }
-
-        val getRepoOwnerObservable = mRepositoryDetailsGitHubService
-            .getUserInfo(owner)
-            .subscribeOn(Schedulers.io())
-
-        mCachingGitHubUserDisposable?.dispose()
-        mCachingGitHubUserDisposable = getRepoOwnerObservable.subscribe(
-            {
-                mCache.cacheGitHubOwner(it)
-            },
-            {
-
-            }
-        )
-        return getRepoOwnerObservable
+    override fun getOwnerDetails(ownerLogin: String) : Single<GitHubUser>{
+        val key = GitHubUserKey(ownerLogin)
+        return mOwnerSource.getFromMemory(key)
     }
 }

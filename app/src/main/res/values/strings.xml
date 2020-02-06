@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name">GitHub app</string>
 
+
+    <string name="viewState">viewState</string>
+
+    <!--try_again_snackbar_text-->
+    <string name="try_again">TRY AGAIN</string>
+
+
+    <!--repository_details_fragment-->
+    <string name="error_loading_languages_snackbar_text">Error loading languages</string>
+    <string name="error_loading_contributors_snackbar_text">Error loading_contributors</string>
+
+    <!--user_details_fragment-->
+    <string name="error_loading_user_repositories">Error loading repositories</string>
+
+
     <!--toolbar_search_menu-->
     <string name="search_title">search</string>
     <string name="sort_title">sort by</string>
@@ -15,8 +30,25 @@
     <!--item_basic_repository_info-->
     <string name="owner_image_content_description">Owner image</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--error_snackbar-->
+    <string name="error_snackbar_text">Oops,Something went wrong!!</string>
+
+
+    <!--fragment_repository_details_screen-->
+     <string name="slash"> / </string>
+    <string name="look_repo_with_explorer">look repo with explorer</string>
+    <string name="languages">Languages</string>
+    <string name="contributors">Contributors</string>
+
+    <!--fragment_user_details-->
+    <string name="go_to_web_repo_content_description">Show repo with explorer</string>
+    <string name="Repository">Repository</string>
+
+    <!--item_contributor-->
+    <string name="contributor_picture_content_description">Contributor picture</string>
+
+    <!--layout_owner_info-->
+    <string name="owner">Owner</string>
 
 
 </resources>
