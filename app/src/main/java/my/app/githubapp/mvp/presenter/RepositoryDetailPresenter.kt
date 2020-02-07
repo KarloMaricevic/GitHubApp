@@ -94,6 +94,7 @@ class RepositoryDetailPresenter @Inject constructor(private val mInteractor: Rep
     }
 
     override fun hideContributors() {
+        areContributorsExpanded = false
         mView?.hideContributors()
     }
 

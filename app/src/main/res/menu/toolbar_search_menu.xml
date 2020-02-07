@@ -55,4 +55,11 @@
 
     </item>
 
+    <item
+        android:id="@+id/login_item"
+        app:showAsAction="never"
+        android:title="Login"
+        >
+    </item>
+
 </menu>

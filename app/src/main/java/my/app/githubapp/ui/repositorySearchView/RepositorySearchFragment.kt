@@ -35,11 +35,15 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
 
     private var mStateView : RepositorySearchContract.RepositorySearchViewStateInterface? = null
 
+    private lateinit var mSnackbar : Snackbar
+
     private val mOnSearchActionClickListener = { it : View ->
         (it as androidx.appcompat.widget.SearchView).setQuery(mPresenter.getState().getQuery(),false)
         val width = Resources.getSystem().displayMetrics.widthPixels
         it.maxWidth = width
     }
+
+
 
     //region lifecycle
 
@@ -88,6 +92,12 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
         mPresenter.subscribe(this,mStateView)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable(getString(R.string.viewState),mPresenter.getState())
@@ -98,12 +108,21 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
         super.onStop()
     }
 
+
     //endregion
 
     //region view-presenter methods
 
     override fun showData(data: List<GitHubRepo>) {
         mAdapter.setData(data)
+    }
+
+    override fun queryError() {
+        mSnackbar = Snackbar
+            .make(mBinding.root, R.string.query_error,Snackbar.LENGTH_LONG)
+            .setAction(R.string.try_again) {
+                mPresenter.tryQueryAgain()
+            }
     }
 
     override fun fatalError() {
@@ -162,5 +181,12 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
                 mPresenter.sortShowingRepos(SORT_BY_FORKED)
                 return@setOnMenuItemClickListener true
             }
+        (mBinding).searchToolbar.menu.findItem(R.id.login_item).setOnMenuItemClickListener {
+
+            return@setOnMenuItemClickListener true
+        }
     }
+
+
+
 }

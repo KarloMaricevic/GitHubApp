@@ -4,6 +4,9 @@
 
     <string name="viewState">viewState</string>
 
+    <!--repository search fragment-->
+    <string name="query_error">Query error</string>
+
     <!--try_again_snackbar_text-->
     <string name="try_again">TRY AGAIN</string>
 
@@ -42,7 +45,8 @@
 
     <!--fragment_user_details-->
     <string name="go_to_web_repo_content_description">Show repo with explorer</string>
-    <string name="Repository">Repository</string>
+    <string name="repository">Repository</string>
+    <string name="created">Created: </string>
 
     <!--item_contributor-->
     <string name="contributor_picture_content_description">Contributor picture</string>
@@ -50,5 +54,9 @@
     <!--layout_owner_info-->
     <string name="owner">Owner</string>
 
+    
+    <!--github_login_strings-->
+    <string name="client_id">f8ef25223d07c22f3747</string>
+    <string name="client_secret">48d912bc686b73d3e1459305eba920928a73a67c</string>
 
 </resources>

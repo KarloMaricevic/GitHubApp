@@ -10,10 +10,9 @@
 
     </data>
 
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -87,16 +86,30 @@
                 >
             </TextView>
 
+
             <TextView
-                android:id="@+id/user_date_of_creation_text_view"
-                android:layout_width="match_parent"
+                android:id="@+id/created_place_holder"
+                android:text="@string/created"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_margin_top"
                 android:layout_marginStart="@dimen/text_margin_start"
-                android:text='@{"Date created: " + gitHubUser.createdAt}'
-                app:layout_constraintTop_toBottomOf="@+id/e_mail_text_view"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="Date created: 21.2.2015"
+                app:layout_constraintTop_toBottomOf="@id/e_mail_text_view"
+                app:layout_constraintBottom_toTopOf="@id/show_user_repos_card_view"
+                >
+            </TextView>
+
+            <TextView
+                android:id="@+id/user_date_of_creation_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{gitHubUser.createdAt}'
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="@+id/created_place_holder"
+                app:layout_constraintBottom_toBottomOf="@id/created_place_holder"
+                app:layout_constraintStart_toEndOf="@id/created_place_holder"
+                tools:text="21.2.2015"
                 >
             </TextView>
 
@@ -120,7 +133,7 @@
                         android:layout_marginTop="@dimen/text_margin_top"
                         android:layout_marginBottom="@dimen/text_margin_bottom"
                         android:layout_marginStart="@dimen/text_margin_start"
-                        android:text="@string/Repository"
+                        android:text="@string/repository"
                         android:layout_gravity="center"
                         android:textSize="@dimen/text_size">
                     </TextView>
@@ -139,7 +152,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/users_repositories_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="500dp"
                 app:layout_constraintTop_toBottomOf="@id/show_user_repos_card_view"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_users_repository"

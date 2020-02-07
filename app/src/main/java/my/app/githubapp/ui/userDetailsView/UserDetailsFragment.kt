@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
@@ -55,7 +55,8 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
             .getUserDetailSubcomponent()
             .inject(this)
 
-        mPresenter.setUserLogin("karlomaricevic")
+        val navigationArgs : UserDetailsFragmentArgs by navArgs()
+        mPresenter.setUserLogin(navigationArgs.userLogin)
         super.onCreate(savedInstanceState)
     }
 

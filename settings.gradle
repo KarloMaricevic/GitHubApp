@@ -1,2 +1,2 @@
-include ':app', ':myCacher'
+include ':app', ':mycacher'
 rootProject.name='GitHubApp'

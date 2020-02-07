@@ -21,4 +21,13 @@ class GitHubRepo(
     val createdAt: Date,
     @SerializedName("language")
     val language : String?
-    ) : BasicGitHubRepo(name,id,owner)
+    ) : BasicGitHubRepo(name,id,owner){
+
+    override fun equals(other: Any?): Boolean {
+        if(other is GitHubRepo){
+            return this.id  == other.id
+        }
+
+        return super.equals(other)
+    }
+}

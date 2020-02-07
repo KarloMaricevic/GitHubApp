@@ -13,11 +13,11 @@
             name="owner"
             type="my.app.githubapp.domain.GitHubUser" />
 
-    </data>
+        <variable
+            name="ownerOnClick"
+            type="android.view.View.OnClickListener" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -185,7 +185,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/languages_recycler_view"
-            bind:owner="@{owner}">
+            bind:owner="@{owner}"
+            bind:onClickListener="@{ownerOnClick}"
+            >
         </include>
 
 
@@ -226,11 +228,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/show_contributors_card_view"
-            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:listitem="@layout/item_contributor"
             tools:orientation="horizontal">
         </androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
 </layout>

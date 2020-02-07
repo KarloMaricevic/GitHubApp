@@ -34,9 +34,7 @@
             tools:listitem="@layout/item_basic_repository_info"
             tools:itemCount="3"
             >
-
         </androidx.recyclerview.widget.RecyclerView>
-
 
 
 

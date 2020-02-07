@@ -58,7 +58,7 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
                     mView?.showData(it)
                 },
                 {
-                    Log.e("Error",it.message ?: "" )
+                    mView?.queryError()
                 }
             )
         )
@@ -75,9 +75,13 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
                     mView?.showData(it)
                 },
                 {
-                    Log.e("Error",it.message ?: "" )
+                    mView?.queryError()
                 })
         )
+    }
+
+    override fun tryQueryAgain() {
+        searchForRepos(mQuery)
     }
 
     private fun sortList(gitHubRepoList : List<GitHubRepo>,sort : Int) : List<GitHubRepo>{

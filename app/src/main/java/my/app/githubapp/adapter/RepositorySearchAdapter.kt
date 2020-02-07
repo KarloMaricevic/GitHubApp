@@ -12,7 +12,7 @@ import my.app.githubapp.databinding.ItemBasicRepositoryInfoBinding
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.ui.repositorySearchView.RepositorySearchViewAdapterCallback
 
-class RepositorySearchAdapter(mContext : Context,val mCallback : RepositorySearchViewAdapterCallback) : RecyclerView.Adapter<BasicRepositoryInfoViewHolder>(),RepositorySearchAdapterInterface {
+class RepositorySearchAdapter(mContext : Context, private val mCallback : RepositorySearchViewAdapterCallback) : RecyclerView.Adapter<BasicRepositoryInfoViewHolder>(),RepositorySearchAdapterInterface {
 
 
     private var mData : List<GitHubRepo> = listOf()

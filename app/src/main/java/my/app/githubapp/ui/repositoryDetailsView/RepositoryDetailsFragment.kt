@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavGraph
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
@@ -57,7 +58,7 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
             loadRepositoriesLanguages()
         }
         else{
-            hideRepoLanguages()
+            mPresenter.hideRepoLanguages()
         }
     }
 
@@ -65,7 +66,7 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
         if (!it.isActivated) {
             loadRepositoriesContributors()
         } else {
-            hideContributors()
+            mPresenter.hideContributors()
         }
     }
 
@@ -73,21 +74,35 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
         openBrowserWithLink(Uri.parse(mBinding.gitHubRepo?.pageUrl))
     }
 
+    private val mOwnerClickedLister = View.OnClickListener{
+         val ownerLogin = mBinding.gitHubRepo?.owner?.login
+        if(ownerLogin != null) {
+            navigate2UserDetailsScreen(ownerLogin)
+        }
+    }
+
 
     //region Lifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val navigationArgs : RepositoryDetailsFragmentArgs by navArgs()
-
         (activity!!.application as BaseApplication)
             .getRepositoryDetailSubcomponent()
             .inject(this)
+
+        val navigationArgs : RepositoryDetailsFragmentArgs by navArgs()
 
         mPresenter.setLoginAndRepoName(navigationArgs.ownerLogin,navigationArgs.repoName)
 
         super.onCreate(savedInstanceState)
 
          mBackCallback = requireActivity().onBackPressedDispatcher.addCallback(this){ navigateBack() }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if(savedInstanceState != null){
+            mViewState = savedInstanceState.getParcelable(getString(R.string.viewState))
+        }
     }
 
     override fun onCreateView(
@@ -98,7 +113,7 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
         mContributorsAdapter = RepositoryContributorsAdapter(context!!)
 
         mBinding.languagesRecyclerView.adapter = mLanguagesAdapter
-        //mBinding.contributorsRecyclerView.layoutManager = GridLayoutManager(context,3)
+        mBinding.contributorsRecyclerView.layoutManager = GridLayoutManager(context,4)
         mBinding.contributorsRecyclerView.adapter = mContributorsAdapter
 
         mBinding.showLanguagesButton.setOnClickListener(mShowLanguagesOnClick)
@@ -106,6 +121,8 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
         mBinding.showContributorsButton.setOnClickListener(mShowConstructorsOnClick)
 
         mBinding.toWebImageView.setOnClickListener (mGoToWebPictureClicked)
+
+        mBinding.ownerOnClick = mOwnerClickedLister
 
         requireActivity().onBackPressedDispatcher.addCallback(this,mBackCallback)
 
@@ -152,9 +169,8 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
 
     override fun hideRepoLanguages() {
         mLanguagesAdapter.setData(listOf())
-        mBinding.languagesRecyclerView.isClickable = true
-        mBinding.languagesRecyclerView.isActivated = false
-        mPresenter.hideRepoLanguages()
+        mBinding.showLanguagesButton.isClickable = true
+        mBinding.showLanguagesButton.isActivated = false
     }
 
     override fun showContributors(contributorsList: List<GitHubContributor>) {
@@ -166,7 +182,7 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
     override fun hideContributors() {
         mBinding.showContributorsButton.isClickable = true
         mBinding.showContributorsButton.isActivated = false
-        mPresenter.hideContributors()
+        mContributorsAdapter.setData(listOf())
     }
 
     override fun loadingContributorsError() {
@@ -205,6 +221,13 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
         mPresenter.presentContributors()
     }
 
+    private fun navigate2UserDetailsScreen(userLogin : String){
+        val action = RepositoryDetailsFragmentDirections.actionRepositoryDetailsScreenToUserDetailsFragment(userLogin)
+        (activity!!.application as BaseApplication)
+            .releaseRepositoryDetailSobcomponent()
+        findNavController().navigate(action)
+    }
+
     private fun openBrowserWithLink(uri : Uri){
         val browserIntent = Intent(Intent.ACTION_VIEW,uri)
         ContextCompat.startActivity(context!!,browserIntent,null)
@@ -215,5 +238,7 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
             .releaseRepositoryDetailSobcomponent()
         findNavController().popBackStack()
     }
+
+
 
 }

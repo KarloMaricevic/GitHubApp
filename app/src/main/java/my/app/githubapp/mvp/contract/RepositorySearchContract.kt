@@ -12,6 +12,7 @@ interface RepositorySearchContract {
 
     interface RepositorySearchView : BaseView {
         fun showData(data : List<GitHubRepo>)
+        fun queryError()
     }
 
 
@@ -23,6 +24,7 @@ interface RepositorySearchContract {
     interface RepositorySearchPresenterInterface : BaseStatefulPresenter<RepositorySearchView,RepositorySearchViewStateInterface>{
         fun searchForRepos(query : String)
         fun sortShowingRepos(sort : Int)
+        fun tryQueryAgain()
     }
 
     interface RepositorySearchInteractorInterface : BaseInteractor{
