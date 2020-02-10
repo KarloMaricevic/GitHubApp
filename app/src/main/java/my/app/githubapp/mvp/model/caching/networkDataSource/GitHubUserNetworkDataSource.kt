@@ -12,6 +12,6 @@ import javax.inject.Singleton
 
 class GitHubUserNetworkDataSource  @Inject constructor(private val mService : UserGitHubService) : NetworkDataSourceInterface<GitHubUserKey,GitHubUser> {
     override fun getData(key: GitHubUserKey): Single<GitHubUser> {
-        return mService.getUserInfo(key.userLogin).map { it.gitHubUser }
+        return mService.getUserInfo(key.userLogin)
     }
 }

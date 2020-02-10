@@ -2,12 +2,10 @@ package my.app.githubapp.ui.repositorySearchView
 
 
 import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import my.app.githubapp.BaseApplication
 import my.app.githubapp.R
@@ -31,7 +29,7 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
 
     private lateinit var mBinding : FragmentRepositorySearchBinding
 
-    private lateinit var mAdapter :RepositorySearchAdapter
+    private lateinit  var mAdapter :RepositorySearchAdapter
 
     private var mStateView : RepositorySearchContract.RepositorySearchViewStateInterface? = null
 
@@ -53,6 +51,8 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
             .inject(this)
 
         super.onCreate(savedInstanceState)
+
+        mAdapter = RepositorySearchAdapter(this,this)
     }
 
     override fun onCreateView(
@@ -61,13 +61,6 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
     ): View? {
 
         mBinding = FragmentRepositorySearchBinding.inflate(inflater,container,false)
-
-        if(::mAdapter.isInitialized){
-            mAdapter.changeContext(context!!)
-        }
-        else{
-            mAdapter = RepositorySearchAdapter(context!!,this)
-        }
 
         mBinding.githubBasicInfoRecyclerView.adapter = mAdapter
 
@@ -90,12 +83,6 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
     override fun onStart() {
         super.onStart()
         mPresenter.subscribe(this,mStateView)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

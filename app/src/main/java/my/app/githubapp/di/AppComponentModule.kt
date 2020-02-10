@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import my.app.githubapp.domain.GitHubUser
+import my.app.githubapp.domain.LanguagePercentile
 import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.responceModel.LanguageResponse
 import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.responceModel.ContributorsResponse
 import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.responceModel.GitHubRepoResponse
@@ -34,21 +35,6 @@ interface AppComponentModule {
                 .registerTypeAdapter(
                     LanguageResponse::class.java,
                     LanguageResponseDeserializer())
-                .registerTypeAdapter(
-                    GitHubRepoResponse::class.java,
-                    GitHubRepoResponseDeserializer())
-                .registerTypeAdapter(
-                    GitHubUser::class.java,
-                    GitHubUserDeserializer())
-                .registerTypeAdapter(
-                    GitHubUserResponse::class.java,
-                    GitHubUserResponseDeserializer()
-                )
-                .registerTypeAdapter(
-                    GitHubUsersRepositoriesResponse::class.java,
-                    GitHubUsersRepositoryResponseDeserializer()
-
-                )
                 .create()
 
             return Retrofit

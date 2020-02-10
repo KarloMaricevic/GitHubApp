@@ -68,6 +68,11 @@ class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDet
         mCompositeDisposable.add(getUsersRepoDisposable)
     }
 
+    override fun hideUserRepositories() {
+        isUserRepositoriesButtonActivated = false
+        mView?.hideUsersRepositories()
+    }
+
     override fun setUserLogin(userLogin: String) {
         mUserLogin = userLogin
     }

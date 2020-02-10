@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -12,11 +13,11 @@ import my.app.githubapp.databinding.ItemBasicRepositoryInfoBinding
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.ui.repositorySearchView.RepositorySearchViewAdapterCallback
 
-class RepositorySearchAdapter(mContext : Context, private val mCallback : RepositorySearchViewAdapterCallback) : RecyclerView.Adapter<BasicRepositoryInfoViewHolder>(),RepositorySearchAdapterInterface {
+class RepositorySearchAdapter(fragment : Fragment, private val mCallback : RepositorySearchViewAdapterCallback) : RecyclerView.Adapter<BasicRepositoryInfoViewHolder>(),RepositorySearchAdapterInterface {
 
 
     private var mData : List<GitHubRepo> = listOf()
-    private var mGlide = Glide.with(mContext)
+    private var mGlide = Glide.with(fragment)
 
 
     override fun onCreateViewHolder(

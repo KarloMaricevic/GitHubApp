@@ -9,12 +9,11 @@ object BindingConversions {
         @BindingConversion
         @JvmStatic
         fun convertDateToString(date: Date?) : String{
-                if(date == null) {
-                        return "Not specified"
-                }
-                else{
+                return if(date == null) {
+                        "Not specified"
+                } else{
                         val format = SimpleDateFormat("dd/MM/yyyy")
-                        return format.format(date)
+                        format.format(date)
                 }
         }
 

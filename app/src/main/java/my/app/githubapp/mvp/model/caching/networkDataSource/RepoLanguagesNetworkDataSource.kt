@@ -12,9 +12,8 @@ import javax.inject.Inject
 class RepoLanguagesNetworkDataSource @Inject constructor(private val mService : RepositoryGitHubService) : NetworkDataSourceInterface<LanguageKey,List<LanguagePercentile>> {
 
     override fun getData(key: LanguageKey): Single<List<LanguagePercentile>> {
-        return mService.getRepositoryLanguage(key.ownerLogin,key.repoName).subscribeOn(Schedulers.io())
-            .map {
-                LanguageResponseMapper.toLanguagePercentileList(it)
-            }
+        return mService.getRepositoryLanguage(key.ownerLogin,key.repoName)
+            .subscribeOn(Schedulers.io())
+            .map { LanguageResponseMapper.toLanguagePercentileList(it) }
     }
 }

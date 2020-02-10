@@ -24,6 +24,7 @@ interface UserDetailsContract {
     interface UserDetailsPresenterInterface : BaseStatefulPresenter<UserDetailsView,UserDetailsViewStateInterface> {
         fun presentUserInfo()
         fun presentUserRepositories()
+        fun hideUserRepositories()
         fun setUserLogin(userLogin: String)
     }
 

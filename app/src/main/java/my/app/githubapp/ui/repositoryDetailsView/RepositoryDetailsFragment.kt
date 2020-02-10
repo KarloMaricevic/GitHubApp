@@ -95,7 +95,10 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
 
         super.onCreate(savedInstanceState)
 
-         mBackCallback = requireActivity().onBackPressedDispatcher.addCallback(this){ navigateBack() }
+        mBackCallback = requireActivity().onBackPressedDispatcher.addCallback(this){ navigateBack() }
+
+        mContributorsAdapter = RepositoryContributorsAdapter(this)
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -110,7 +113,6 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = FragmentRepositoryDetailsScreenBinding.inflate(inflater,container,false)
-        mContributorsAdapter = RepositoryContributorsAdapter(context!!)
 
         mBinding.languagesRecyclerView.adapter = mLanguagesAdapter
         mBinding.contributorsRecyclerView.layoutManager = GridLayoutManager(context,4)

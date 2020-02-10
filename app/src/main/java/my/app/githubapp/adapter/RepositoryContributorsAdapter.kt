@@ -4,16 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import my.app.githubapp.databinding.ItemContributorBinding
 import my.app.githubapp.domain.GitHubContributor
 
-class RepositoryContributorsAdapter(context : Context) : RecyclerView.Adapter<ContributorViewHolder>() {
+class RepositoryContributorsAdapter(fragment : Fragment) : RecyclerView.Adapter<ContributorViewHolder>() {
 
     var mContributorList = listOf<GitHubContributor>()
-    val mGlide = Glide.with(context)
+    val mGlide = Glide.with(fragment)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContributorViewHolder {
         return ContributorViewHolder(ItemContributorBinding.inflate(LayoutInflater.from(parent.context),parent,false))

@@ -39,7 +39,7 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
             loadUsersRepositories()
         }
         else{
-            hideUsersRepositories()
+            mPresenter.hideUserRepositories()
         }
     }
 
@@ -129,7 +129,6 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
             }
         mSnackbar.show()
     }
-
 
 
     override fun fatalError() {
