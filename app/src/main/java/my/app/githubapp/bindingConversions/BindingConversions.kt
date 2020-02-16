@@ -1,6 +1,7 @@
 package my.app.githubapp.bindingConversions
 
 import androidx.databinding.BindingConversion
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -12,8 +13,7 @@ object BindingConversions {
                 return if(date == null) {
                         "Not specified"
                 } else{
-                        val format = SimpleDateFormat("dd/MM/yyyy")
-                        format.format(date)
+                        return DateFormat.getDateInstance().format(date)
                 }
         }
 

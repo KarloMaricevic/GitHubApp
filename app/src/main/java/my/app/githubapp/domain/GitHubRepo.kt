@@ -7,6 +7,8 @@ class GitHubRepo(
     name : String,
     id : Int,
     owner : BasicGitHubUser,
+    @SerializedName("full_name")
+    val fullName : String,
     @SerializedName("html_url")
     val pageUrl : String,
     @SerializedName("watchers_count")

@@ -29,43 +29,17 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/owner_name_text_view"
+            android:id="@+id/repo_full_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{gitHubRepo.owner.login}"
+            android:text="@{gitHubRepo.fullName}"
             android:layout_marginStart="@dimen/owner_name_margin_start"
             android:layout_marginTop="@dimen/margin_top"
             android:textSize="@dimen/repo_name_text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:lines="1"
-            tools:text="OwnerName">
-        </TextView>
-
-        <TextView
-            android:id="@+id/slash_holder_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top"
-            android:text="@string/slash"
-            android:textSize="@dimen/repo_name_text_size"
-            app:layout_constraintStart_toEndOf="@id/owner_name_text_view"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text=" / ">
-        </TextView>
-
-        <TextView
-            android:id="@+id/repository_name_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{gitHubRepo.name}"
-            android:layout_marginTop="@dimen/margin_top"
-            android:textSize="@dimen/repo_name_text_size"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/slash_holder_text_view"
-            app:layout_constraintTop_toTopOf="parent"
-            android:lines="1"
-            tools:text="RepoName">
+            tools:text="OwnerName/RepoName">
         </TextView>
 
         <ImageView
@@ -74,9 +48,9 @@
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/margin_end"
             android:src="@drawable/ic_open_in_browser_24dp"
-            app:layout_constraintBottom_toBottomOf="@id/repository_name_text_view"
+            app:layout_constraintBottom_toBottomOf="@id/repo_full_name_text_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/repository_name_text_view"
+            app:layout_constraintTop_toTopOf="@id/repo_full_name_text_view"
             android:contentDescription="@string/look_repo_with_explorer"
             >
         </ImageView>
@@ -92,7 +66,7 @@
             android:text="@{Integer.toString(gitHubRepo.forks)}"
             app:layout_constraintEnd_toStartOf="@id/number_of_started_text_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/owner_name_text_view"
+            app:layout_constraintTop_toBottomOf="@id/repo_full_name_text_view"
             tools:text="4">
         </TextView>
 

@@ -30,15 +30,13 @@
     <string name="sortByDateText">By date</string>
     <string name="sortByForkedText">By forked</string>
 
+    <!--toolbar_login_menu-->
+     <string name="login">Login</string>
+
     <!--item_basic_repository_info-->
     <string name="owner_image_content_description">Owner image</string>
 
-    <!--error_snackbar-->
-    <string name="error_snackbar_text">Oops,Something went wrong!!</string>
-
-
     <!--fragment_repository_details_screen-->
-     <string name="slash"> / </string>
     <string name="look_repo_with_explorer">look repo with explorer</string>
     <string name="languages">Languages</string>
     <string name="contributors">Contributors</string>

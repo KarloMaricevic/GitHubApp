@@ -41,7 +41,7 @@
             android:id="@+id/owner_picture_image_button"
             android:layout_width="@dimen/user_picture_image_view_dimen"
             android:layout_height="@dimen/user_picture_image_view_dimen"
-            app:layout_constraintBottom_toTopOf="@id/owner_name_text_view"
+            app:layout_constraintBottom_toTopOf="@id/owner_login_text_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/owner_text_holder"
             app:layout_constraintHorizontal_weight="1"
@@ -51,7 +51,7 @@
         </ImageView>
 
         <TextView
-            android:id="@+id/owner_name_text_view"
+            android:id="@+id/owner_login_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{owner.login}"
