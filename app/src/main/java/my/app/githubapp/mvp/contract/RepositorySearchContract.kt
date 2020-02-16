@@ -1,6 +1,5 @@
 package my.app.githubapp.mvp.contract
 
-import io.reactivex.Observable
 import io.reactivex.Single
 import my.app.githubapp.core.BaseInteractor
 import my.app.githubapp.core.BaseStatefulPresenter

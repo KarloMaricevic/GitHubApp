@@ -6,7 +6,6 @@ import my.app.githubapp.di.DaggerAppComponent
 import my.app.githubapp.di.repositoryDetailsSubcomponent.RepositoryDetailSubcomponent
 import my.app.githubapp.di.repositorySearchSubcomponent.RepositorySearchSubcomponent
 import my.app.githubapp.di.userDetailsSubcompnent.UserDetailsSubcomponent
-import java.lang.NullPointerException
 
 class BaseApplication : Application() {
 

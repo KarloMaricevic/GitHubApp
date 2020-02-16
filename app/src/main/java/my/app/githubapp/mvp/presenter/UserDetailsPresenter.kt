@@ -1,13 +1,13 @@
 package my.app.githubapp.mvp.presenter
 
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.coroutines.processNextEventInCurrentThread
 import my.app.githubapp.mvp.contract.UserDetailsContract.*
 import my.app.githubapp.ui.userDetailsView.UserDetailsViewState
 import javax.inject.Inject
+import javax.inject.Named
 
-class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDetailsInteractorInterface) : UserDetailsPresenterInterface{
+class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDetailsInteractorInterface,@Named("MainThread") private val mMainThread : Scheduler) : UserDetailsPresenterInterface{
 
     private var mView : UserDetailsView? = null
 
@@ -24,7 +24,7 @@ class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDet
         mView = view
 
         val gitHubUserDisposable = getUserInfo(mUserLogin)
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(mMainThread)
             .subscribe(
                 {
                     mView?.showUserInfo(it)
@@ -54,7 +54,7 @@ class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDet
     override fun presentUserRepositories() {
         isUserRepositoriesButtonActivated = true
         val getUsersRepoDisposable = getUsersRepositories(mUserLogin)
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(mMainThread)
             .subscribe(
                 {
                     mView?.showUsersRepositories(it)

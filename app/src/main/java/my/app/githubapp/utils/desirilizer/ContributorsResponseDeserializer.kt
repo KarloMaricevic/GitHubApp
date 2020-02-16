@@ -1,6 +1,9 @@
 package my.app.githubapp.utils.desirilizer
 
-import com.google.gson.*
+import com.google.gson.Gson
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
 import my.app.githubapp.domain.BasicGitHubUser
 import my.app.githubapp.domain.GitHubContributor
 import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.responceModel.ContributorsResponse

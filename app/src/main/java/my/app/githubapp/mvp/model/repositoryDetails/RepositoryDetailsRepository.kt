@@ -6,7 +6,6 @@ import my.app.githubapp.domain.GitHubContributor
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.domain.GitHubUser
 import my.app.githubapp.domain.LanguagePercentile
-import my.app.githubapp.mvp.contract.RepositoryDetailsContract
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsRepositoryInterface
 import my.app.githubapp.mvp.model.caching.key.ContributorsKey
 import my.app.githubapp.mvp.model.caching.key.GitHubUserKey

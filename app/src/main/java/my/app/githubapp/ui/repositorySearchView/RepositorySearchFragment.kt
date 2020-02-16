@@ -2,19 +2,25 @@ package my.app.githubapp.ui.repositorySearchView
 
 
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.View
+import android.view.ViewGroup
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import my.app.githubapp.BaseApplication
 import my.app.githubapp.R
-
 import my.app.githubapp.adapter.RepositorySearchAdapter
 import my.app.githubapp.databinding.FragmentRepositorySearchBinding
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositorySearchContract
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchPresenterInterface
+import my.app.githubapp.utils.authLink
+import my.app.githubapp.utils.clientId
 import javax.inject.Inject
 import kotlin.system.exitProcess
 
@@ -170,9 +176,13 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
             }
         (mBinding).searchToolbar.menu.findItem(R.id.login_item).setOnMenuItemClickListener {
 
+            val builder = CustomTabsIntent.Builder()
+                .build()
+            builder.launchUrl(context!!, Uri.parse(authLink + clientId))
             return@setOnMenuItemClickListener true
         }
     }
+
 
 
 

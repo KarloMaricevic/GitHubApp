@@ -1,7 +1,6 @@
 package my.app.githubapp.mvp.model.caching.networkDataSource
 
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import my.app.githubapp.cacher.NetworkDataSourceInterface
 import my.app.githubapp.domain.LanguagePercentile
 import my.app.githubapp.mvp.model.caching.key.LanguageKey
@@ -13,7 +12,6 @@ class RepoLanguagesNetworkDataSource @Inject constructor(private val mService : 
 
     override fun getData(key: LanguageKey): Single<List<LanguagePercentile>> {
         return mService.getRepositoryLanguage(key.ownerLogin,key.repoName)
-            .subscribeOn(Schedulers.io())
             .map { LanguageResponseMapper.toLanguagePercentileList(it) }
     }
 }

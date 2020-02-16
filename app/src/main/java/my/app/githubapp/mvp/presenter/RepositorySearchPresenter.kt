@@ -1,20 +1,18 @@
 package my.app.githubapp.mvp.presenter
 
-import android.util.Log
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositorySearchContract
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchInteractorInterface
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchPresenterInterface
-import my.app.githubapp.mvp.model.repositorySearch.RepositorySearchInteractor
 import my.app.githubapp.ui.repositorySearchView.*
 import javax.inject.Inject
-
+import javax.inject.Named
 
 @PerFragment
-class RepositorySearchPresenter @Inject constructor(private val mRepositorySearchInteractor: RepositorySearchInteractorInterface) : RepositorySearchPresenterInterface {
+class RepositorySearchPresenter @Inject constructor(private val mRepositorySearchInteractor: RepositorySearchInteractorInterface,@Named("MainThread") private val mMainThread : Scheduler) : RepositorySearchPresenterInterface{
 
     private var mView: RepositorySearchContract.RepositorySearchView? = null
     private var mQuery: String = ""
@@ -51,7 +49,7 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
         mQuery = query
         compositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(query)
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(mMainThread)
             .map {sortList(it,mSortBy) }
             .subscribe(
                 {
@@ -67,7 +65,7 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
     override fun sortShowingRepos(sort : Int){
         compositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(mQuery)
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(mMainThread)
             .map { sortList(it,sort) }
             .subscribe(
                 {

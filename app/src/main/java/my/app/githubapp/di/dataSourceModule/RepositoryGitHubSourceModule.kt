@@ -1,10 +1,8 @@
 package my.app.githubapp.di.dataSourceModule
 
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import my.app.githubapp.cacher.DataSource
-import my.app.githubapp.cacher.NetworkDataSourceInterface
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubContributor
 import my.app.githubapp.domain.GitHubRepo
@@ -15,7 +13,6 @@ import my.app.githubapp.mvp.model.caching.key.RepoKey
 import my.app.githubapp.mvp.model.caching.networkDataSource.ContributorsNetworkDataSource
 import my.app.githubapp.mvp.model.caching.networkDataSource.GitHubRepositoryNetworkDataSource
 import my.app.githubapp.mvp.model.caching.networkDataSource.RepoLanguagesNetworkDataSource
-import javax.inject.Singleton
 
 @Module
 interface RepositoryGitHubSourceModule {

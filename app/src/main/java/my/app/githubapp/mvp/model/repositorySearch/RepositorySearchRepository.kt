@@ -4,7 +4,6 @@ import io.reactivex.Single
 import my.app.githubapp.cacher.DataSource
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
-import my.app.githubapp.mvp.contract.RepositorySearchContract
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchRepositoryInterface
 import my.app.githubapp.mvp.model.caching.key.QueryKey
 import javax.inject.Inject

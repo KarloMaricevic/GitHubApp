@@ -4,7 +4,6 @@ import io.reactivex.Single
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.domain.GitHubUser
-import my.app.githubapp.mvp.contract.UserDetailsContract
 import my.app.githubapp.mvp.contract.UserDetailsContract.UserDetailsInteractorInterface
 import javax.inject.Inject
 

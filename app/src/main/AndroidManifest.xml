@@ -12,13 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.GitHubApp">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW"></action>
+            <category android:name="android.intent.category.DEFAULT"></category>
+            <category android:name="android.intent.category.BROWSABLE"></category>
+            <data
+                android:host ="callback"
+                android:scheme="mygithubapp">
+            </data>
+        </intent-filter>
         </activity>
+
 
 
 

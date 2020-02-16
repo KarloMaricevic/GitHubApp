@@ -1,10 +1,9 @@
 package my.app.githubapp.utils.desirilizer
 
-import com.google.gson.*
-import my.app.githubapp.domain.LanguagePercentile
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
 import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.responceModel.LanguageResponse
-import my.app.githubapp.utils.MathFunctions
-import java.lang.NullPointerException
 import java.lang.reflect.Type
 
 class LanguageResponseDeserializer :  JsonDeserializer<LanguageResponse> {

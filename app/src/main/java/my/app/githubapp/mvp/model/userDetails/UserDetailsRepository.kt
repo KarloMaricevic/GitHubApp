@@ -5,7 +5,6 @@ import my.app.githubapp.cacher.DataSource
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.domain.GitHubUser
-import my.app.githubapp.mvp.contract.UserDetailsContract
 import my.app.githubapp.mvp.contract.UserDetailsContract.UserDetailsRepositoryInterface
 import my.app.githubapp.mvp.model.caching.key.GitHubUserKey
 import my.app.githubapp.mvp.model.caching.key.UsersRepositoriesKey

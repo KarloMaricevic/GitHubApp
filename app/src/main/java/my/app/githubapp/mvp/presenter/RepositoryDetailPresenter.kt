@@ -1,16 +1,17 @@
 package my.app.githubapp.mvp.presenter
 
+import io.reactivex.Scheduler
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract.*
 import my.app.githubapp.ui.repositoryDetailsView.RepositoryDetailsViewState
 import javax.inject.Inject
+import javax.inject.Named
 
 @PerFragment
-class RepositoryDetailPresenter @Inject constructor(private val mInteractor: RepositoryDetailsInteractorInterface) :
+class RepositoryDetailPresenter @Inject constructor(private val mInteractor: RepositoryDetailsInteractorInterface,@Named("MainThread") private val mMainThread : Scheduler ) :
     RepositoryDetailsPresenterInterface {
 
 
@@ -60,7 +61,7 @@ class RepositoryDetailPresenter @Inject constructor(private val mInteractor: Rep
     override fun presentRepoLanguages() {
         areLanguagesExpanded = true
         val getRepoLanguagesDisposable = getRepositoryLanguages(mOwnerName, mRepoName)
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(mMainThread)
             .subscribe(
                 {
                     mView?.showRepoLanguages(it)
@@ -81,7 +82,7 @@ class RepositoryDetailPresenter @Inject constructor(private val mInteractor: Rep
         areContributorsExpanded = true
         val getRepoContributorsDisposable =
             mInteractor.getRepoContributors(mOwnerName, mRepoName)
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(mMainThread)
                 .subscribe(
                     {
                         mView?.showContributors(it)
@@ -102,7 +103,7 @@ class RepositoryDetailPresenter @Inject constructor(private val mInteractor: Rep
 
         val repoDetailsDisposable =
             getRepositoryDetails(mOwnerName, mRepoName)
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(mMainThread)
                 .subscribe(
                     {
                         mView?.bindRepoDetails(it)
@@ -114,7 +115,7 @@ class RepositoryDetailPresenter @Inject constructor(private val mInteractor: Rep
 
         val ownerDetailsDisposable =
             getOwnerDetails(mOwnerName)
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(mMainThread)
                 .subscribe(
                     {
                         mView?.bindUserInfo(it)

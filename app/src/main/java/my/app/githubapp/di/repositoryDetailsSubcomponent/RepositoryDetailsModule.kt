@@ -4,7 +4,8 @@ import dagger.Binds
 import dagger.Module
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract.*
-import my.app.githubapp.mvp.model.repositoryDetails.*
+import my.app.githubapp.mvp.model.repositoryDetails.RepositoryDetailsInteractor
+import my.app.githubapp.mvp.model.repositoryDetails.RepositoryDetailsRepository
 import my.app.githubapp.mvp.presenter.RepositoryDetailPresenter
 
 @Module

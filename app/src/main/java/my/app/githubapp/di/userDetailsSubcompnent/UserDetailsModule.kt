@@ -3,7 +3,6 @@ package my.app.githubapp.di.userDetailsSubcompnent
 import dagger.Binds
 import dagger.Module
 import my.app.githubapp.di.scope.PerFragment
-import my.app.githubapp.mvp.contract.UserDetailsContract
 import my.app.githubapp.mvp.contract.UserDetailsContract.*
 import my.app.githubapp.mvp.model.userDetails.UserDetailsInteractor
 import my.app.githubapp.mvp.model.userDetails.UserDetailsRepository

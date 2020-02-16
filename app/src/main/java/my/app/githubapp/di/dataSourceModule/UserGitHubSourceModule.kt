@@ -1,6 +1,5 @@
 package my.app.githubapp.di.dataSourceModule
 
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import my.app.githubapp.cacher.DataSource
@@ -11,7 +10,6 @@ import my.app.githubapp.mvp.model.caching.key.GitHubUserKey
 import my.app.githubapp.mvp.model.caching.key.UsersRepositoriesKey
 import my.app.githubapp.mvp.model.caching.networkDataSource.GitHubUserNetworkDataSource
 import my.app.githubapp.mvp.model.caching.networkDataSource.UsersRepositoriesNetworkDataSource
-import javax.inject.Singleton
 
 @Module
 interface UserGitHubSourceModule {

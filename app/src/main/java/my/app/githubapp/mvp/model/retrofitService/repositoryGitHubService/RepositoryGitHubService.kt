@@ -4,9 +4,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import my.app.githubapp.domain.BasicGitHubUser
 import my.app.githubapp.domain.GitHubRepo
-import my.app.githubapp.domain.LanguagePercentile
 import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.responceModel.ContributorsResponse
-import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.responceModel.GitHubRepoResponse
 import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.responceModel.LanguageResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
