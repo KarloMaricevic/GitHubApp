@@ -20,7 +20,7 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-interface AppComponentModule {
+interface RetrofitServicesModule {
 
 
     companion object{
@@ -83,13 +83,6 @@ interface AppComponentModule {
         @Singleton
         fun providesAuthGitHubService(@Named("GitHubAuthRetrofit") retrofit: Retrofit) : AuthGitHubService{
             return retrofit.create(AuthGitHubService::class.java)
-        }
-
-        @Provides
-        @Singleton
-        @Named("MainThread")
-        fun providesMainThread() : Scheduler {
-            return AndroidSchedulers.mainThread()
         }
 
     }

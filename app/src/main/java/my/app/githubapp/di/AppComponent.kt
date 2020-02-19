@@ -13,7 +13,8 @@ import javax.inject.Singleton
 @Component
     (
     modules = [
-        AppComponentModule::class,
+        RetrofitServicesModule::class,
+        SchedulerModule::class,
         RepositorySearchSubomponentFactory::class,
         RepositoryDetailsSubcomponentFactory::class,
         UserDetailSubcomponentFactory::class
