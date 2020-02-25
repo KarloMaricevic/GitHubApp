@@ -20,10 +20,10 @@ interface RepositorySearchContract {
         fun getSortBy() : Int
     }
 
-    interface RepositorySearchPresenterInterface : BaseStatefulPresenter<RepositorySearchView,RepositorySearchViewStateInterface>{
-        fun searchForRepos(query : String)
-        fun sortShowingRepos(sort : Int)
-        fun tryQueryAgain()
+    abstract class RepositorySearchPresenterAbstraction : BaseStatefulPresenter<RepositorySearchView, RepositorySearchViewStateInterface>() {
+        abstract fun searchForRepos(query : String)
+        abstract fun sortShowingRepos(sort : Int)
+        abstract fun tryQueryAgain()
     }
 
     interface RepositorySearchInteractorInterface : BaseInteractor{

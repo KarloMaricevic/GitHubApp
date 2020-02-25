@@ -3,15 +3,11 @@ package my.app.githubapp.di
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import my.app.githubapp.mvp.model.retrofitService.authGitHubService.AuthGitHubService
-import my.app.githubapp.mvp.model.retrofitService.queryGitHubService.QueryGitHubService
-import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.RepositoryGitHubService
-import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.responceModel.ContributorsResponse
-import my.app.githubapp.mvp.model.retrofitService.repositoryGitHubService.responceModel.LanguageResponse
-import my.app.githubapp.mvp.model.retrofitService.userGitHubService.UserGitHubService
-import my.app.githubapp.utils.desirilizer.ContributorsResponseDeserializer
+import my.app.githubapp.mvp.model.retrofitService.AuthGitHubService
+import my.app.githubapp.mvp.model.retrofitService.QueryGitHubService
+import my.app.githubapp.mvp.model.retrofitService.RepositoryGitHubService
+import my.app.githubapp.mvp.model.retrofitService.responses.LanguageResponse
+import my.app.githubapp.mvp.model.retrofitService.UserGitHubService
 import my.app.githubapp.utils.desirilizer.LanguageResponseDeserializer
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -30,9 +26,6 @@ interface RetrofitServicesModule {
         fun providesApiRetrofit(): Retrofit {
             val repoLanguageDeserializer = GsonBuilder()
                 .setLenient()
-                .registerTypeAdapter(
-                    ContributorsResponse::class.java,
-                    ContributorsResponseDeserializer())
                 .registerTypeAdapter(
                     LanguageResponse::class.java,
                     LanguageResponseDeserializer())
@@ -81,7 +74,7 @@ interface RetrofitServicesModule {
 
         @Provides
         @Singleton
-        fun providesAuthGitHubService(@Named("GitHubAuthRetrofit") retrofit: Retrofit) : AuthGitHubService{
+        fun providesAuthGitHubService(@Named("GitHubAuthRetrofit") retrofit: Retrofit) : AuthGitHubService {
             return retrofit.create(AuthGitHubService::class.java)
         }
 

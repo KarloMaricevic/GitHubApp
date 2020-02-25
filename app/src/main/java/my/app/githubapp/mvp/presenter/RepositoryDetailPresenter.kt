@@ -1,18 +1,17 @@
 package my.app.githubapp.mvp.presenter
 
-import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract.*
 import my.app.githubapp.ui.repositoryDetailsView.RepositoryDetailsViewState
+import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
 import javax.inject.Inject
-import javax.inject.Named
 
 @PerFragment
-class RepositoryDetailPresenter @Inject constructor(private val mInteractor: RepositoryDetailsInteractorInterface,@Named("MainThread") private val mMainThread : Scheduler ) :
-    RepositoryDetailsPresenterInterface {
+class RepositoryDetailPresenter @Inject constructor(private val mInteractor: RepositoryDetailsInteractorInterface,private val mSchedulersProvider : SchedulersProviderInterface ) :
+    RepositoryDetailsPresenterAbstraction() {
 
 
     private var mView: RepositoryDetailsView? = null
@@ -39,10 +38,7 @@ class RepositoryDetailPresenter @Inject constructor(private val mInteractor: Rep
                 presentContributors()
             }
         }
-
     }
-
-    override fun subscribe(view: RepositoryDetailsView) = subscribe(view, null)
 
     override fun getState(): RepositoryDetailsViewStateInterface {
         return RepositoryDetailsViewState(areLanguagesExpanded, areContributorsExpanded)
@@ -61,7 +57,7 @@ class RepositoryDetailPresenter @Inject constructor(private val mInteractor: Rep
     override fun presentRepoLanguages() {
         areLanguagesExpanded = true
         val getRepoLanguagesDisposable = getRepositoryLanguages(mOwnerName, mRepoName)
-            .observeOn(mMainThread)
+            .observeOn(mSchedulersProvider.getMainThread())
             .subscribe(
                 {
                     mView?.showRepoLanguages(it)
@@ -82,7 +78,7 @@ class RepositoryDetailPresenter @Inject constructor(private val mInteractor: Rep
         areContributorsExpanded = true
         val getRepoContributorsDisposable =
             mInteractor.getRepoContributors(mOwnerName, mRepoName)
-                .observeOn(mMainThread)
+                .observeOn(mSchedulersProvider.getMainThread())
                 .subscribe(
                     {
                         mView?.showContributors(it)
@@ -103,7 +99,7 @@ class RepositoryDetailPresenter @Inject constructor(private val mInteractor: Rep
 
         val repoDetailsDisposable =
             getRepositoryDetails(mOwnerName, mRepoName)
-                .observeOn(mMainThread)
+                .observeOn(mSchedulersProvider.getMainThread())
                 .subscribe(
                     {
                         mView?.bindRepoDetails(it)
@@ -115,7 +111,7 @@ class RepositoryDetailPresenter @Inject constructor(private val mInteractor: Rep
 
         val ownerDetailsDisposable =
             getOwnerDetails(mOwnerName)
-                .observeOn(mMainThread)
+                .observeOn(mSchedulersProvider.getMainThread())
                 .subscribe(
                     {
                         mView?.bindUserInfo(it)

@@ -18,7 +18,7 @@ import my.app.githubapp.adapter.RepositorySearchAdapter
 import my.app.githubapp.databinding.FragmentRepositorySearchBinding
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositorySearchContract
-import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchPresenterInterface
+import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchPresenterAbstraction
 import my.app.githubapp.utils.authLink
 import my.app.githubapp.utils.clientId
 import javax.inject.Inject
@@ -31,7 +31,7 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
 
 
     @Inject
-    lateinit var mPresenter : RepositorySearchPresenterInterface
+    lateinit var mPresenter : RepositorySearchPresenterAbstraction
 
     private lateinit var mBinding : FragmentRepositorySearchBinding
 

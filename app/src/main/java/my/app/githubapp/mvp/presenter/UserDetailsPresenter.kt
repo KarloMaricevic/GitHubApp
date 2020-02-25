@@ -1,13 +1,12 @@
 package my.app.githubapp.mvp.presenter
 
-import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import my.app.githubapp.mvp.contract.UserDetailsContract.*
 import my.app.githubapp.ui.userDetailsView.UserDetailsViewState
+import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
 import javax.inject.Inject
-import javax.inject.Named
 
-class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDetailsInteractorInterface,@Named("MainThread") private val mMainThread : Scheduler) : UserDetailsPresenterInterface{
+class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDetailsInteractorInterface,private val mSchedulersProvider : SchedulersProviderInterface) : UserDetailsPresenterAbstraction() {
 
     private var mView : UserDetailsView? = null
 
@@ -24,7 +23,7 @@ class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDet
         mView = view
 
         val gitHubUserDisposable = getUserInfo(mUserLogin)
-            .observeOn(mMainThread)
+            .observeOn(mSchedulersProvider.getMainThread())
             .subscribe(
                 {
                     mView?.showUserInfo(it)
@@ -43,8 +42,6 @@ class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDet
         mCompositeDisposable.add(gitHubUserDisposable)
     }
 
-    override fun subscribe(view: UserDetailsView) = subscribe(view,null)
-
     override fun getState(): UserDetailsViewStateInterface = UserDetailsViewState(isUserRepositoriesButtonActivated)
 
     override fun presentUserInfo() {
@@ -54,7 +51,7 @@ class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDet
     override fun presentUserRepositories() {
         isUserRepositoriesButtonActivated = true
         val getUsersRepoDisposable = getUsersRepositories(mUserLogin)
-            .observeOn(mMainThread)
+            .observeOn(mSchedulersProvider.getMainThread())
             .subscribe(
                 {
                     mView?.showUsersRepositories(it)

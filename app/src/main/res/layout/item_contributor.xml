@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="contributor"
             type="my.app.githubapp.domain.GitHubContributor" />
@@ -16,30 +17,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
 
-        <ImageView
-            android:id="@+id/contributor_image_view"
-            android:layout_width="@dimen/contributor_picture_image_dimen"
-            android:layout_height="@dimen/contributor_picture_image_dimen"
-            android:layout_gravity="center"
-            tools:src="@drawable/ic_person_24dp"
-            android:contentDescription="@string/contributor_picture_content_description"
-            >
-        </ImageView>
+            <ImageView
+                android:id="@+id/contributor_image_view"
+                android:layout_width="@dimen/contributor_picture_image_dimen"
+                android:layout_height="@dimen/contributor_picture_image_dimen"
+                android:layout_gravity="center"
+                tools:src="@drawable/ic_person_24dp"
+                android:contentDescription="@string/contributor_picture_content_description"></ImageView>
 
-        <TextView
-            android:id="@+id/contributor_login_text_view"
-            android:text="@{contributor.login}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:lines="1"
-            tools:text="Contributor login"
-            >
-        </TextView>
+            <TextView
+                android:id="@+id/contributor_login_text_view"
+                android:text="@{contributor.login}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lines="1"
+                tools:text="Contributor login"></TextView>
 
 
             <TextView
@@ -49,9 +45,7 @@
                 android:text="@{Integer.toString(contributor.numberOfCommits)}"
                 android:layout_gravity="center"
                 android:gravity="center"
-                tools:text="26"
-                >
-            </TextView>
+                tools:text="26"></TextView>
 
         </LinearLayout>
 

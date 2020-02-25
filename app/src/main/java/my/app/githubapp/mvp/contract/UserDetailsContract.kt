@@ -21,11 +21,11 @@ interface UserDetailsContract {
         fun showErrorLoadingRepositories()
     }
 
-    interface UserDetailsPresenterInterface : BaseStatefulPresenter<UserDetailsView,UserDetailsViewStateInterface> {
-        fun presentUserInfo()
-        fun presentUserRepositories()
-        fun hideUserRepositories()
-        fun setUserLogin(userLogin: String)
+    abstract class UserDetailsPresenterAbstraction : BaseStatefulPresenter<UserDetailsView, UserDetailsViewStateInterface>() {
+        abstract fun presentUserInfo()
+        abstract fun presentUserRepositories()
+        abstract fun hideUserRepositories()
+        abstract fun setUserLogin(userLogin: String)
     }
 
     interface UserDetailsInteractorInterface : BaseInteractor{

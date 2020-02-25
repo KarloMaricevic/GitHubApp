@@ -4,7 +4,7 @@ import io.reactivex.Single
 import my.app.githubapp.domain.GitHubContributor
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.domain.GitHubUser
-import my.app.githubapp.domain.LanguagePercentile
+import my.app.githubapp.domain.LanguagePercentage
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsInteractorInterface
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsRepositoryInterface
 import javax.inject.Inject
@@ -16,7 +16,7 @@ class RepositoryDetailsInteractor @Inject constructor(private  val mRepository :
         return mRepository.getGitHubRepo(ownerLogin,repoName)
     }
 
-    override fun getRepoLanguages(ownerLogin: String, repoName: String) : Single<List<LanguagePercentile>> {
+    override fun getRepoLanguages(ownerLogin: String, repoName: String) : Single<List<LanguagePercentage>> {
         return mRepository.getRepoLanguages(ownerLogin,repoName)
     }
 

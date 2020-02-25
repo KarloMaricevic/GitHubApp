@@ -13,7 +13,7 @@ interface UserDetailsModule{
 
     @Binds
     @PerFragment
-    fun providePresenter(userDetailsPresenter: UserDetailsPresenter) : UserDetailsPresenterInterface
+    fun providePresenter(userDetailsPresenter: UserDetailsPresenter) : UserDetailsPresenterAbstraction
 
     @Binds
     @PerFragment

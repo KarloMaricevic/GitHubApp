@@ -6,7 +6,7 @@ import my.app.githubapp.cacher.DataSource
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubContributor
 import my.app.githubapp.domain.GitHubRepo
-import my.app.githubapp.domain.LanguagePercentile
+import my.app.githubapp.domain.LanguagePercentage
 import my.app.githubapp.mvp.model.caching.key.ContributorsKey
 import my.app.githubapp.mvp.model.caching.key.LanguageKey
 import my.app.githubapp.mvp.model.caching.key.RepoKey
@@ -28,8 +28,8 @@ interface RepositoryGitHubSourceModule {
 
         @Provides
         @PerFragment
-        fun provides(networkDataSource: RepoLanguagesNetworkDataSource): DataSource<LanguageKey, List<LanguagePercentile>> {
-            return DataSource.Builder<LanguageKey, List<LanguagePercentile>>()
+        fun provides(networkDataSource: RepoLanguagesNetworkDataSource): DataSource<LanguageKey, List<LanguagePercentage>> {
+            return DataSource.Builder<LanguageKey, List<LanguagePercentage>>()
                 .setNetworkDataSource(networkDataSource).build()
         }
 

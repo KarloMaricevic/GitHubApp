@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import my.app.githubapp.databinding.ItemLanguageBinding
-import my.app.githubapp.domain.LanguagePercentile
+import my.app.githubapp.domain.LanguagePercentage
 
 class RepositoryLanguagesAdapter : RecyclerView.Adapter<ItemLanguageViewHolder>() {
 
 
-    private var mData : List<LanguagePercentile> = listOf()
+    private var mData : List<LanguagePercentage> = listOf()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,7 +28,7 @@ class RepositoryLanguagesAdapter : RecyclerView.Adapter<ItemLanguageViewHolder>(
     }
 
 
-    fun setData(newData : List<LanguagePercentile>){
+    fun setData(newData : List<LanguagePercentage>){
         mData = newData
         notifyDataSetChanged()
     }
@@ -37,7 +37,7 @@ class RepositoryLanguagesAdapter : RecyclerView.Adapter<ItemLanguageViewHolder>(
 
 class ItemLanguageViewHolder(private val mBinding : ItemLanguageBinding) : RecyclerView.ViewHolder(mBinding.root){
 
-    fun bind(data : LanguagePercentile){
+    fun bind(data : LanguagePercentage){
         mBinding.language = data
         mBinding.executePendingBindings()
 

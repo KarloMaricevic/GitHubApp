@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="owner"
             type="my.app.githubapp.domain.GitHubUser" />
@@ -16,104 +17,94 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{onClickListener}"
-        >
+        android:onClick="@{onClickListener}">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <TextView
-            android:id="@+id/owner_text_holder"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/owner"
-            android:textSize="@dimen/text_size"
-            android:textStyle="bold"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </TextView>
+            android:layout_height="wrap_content">
 
 
-        <ImageView
-            android:id="@+id/owner_picture_image_button"
-            android:layout_width="@dimen/user_picture_image_view_dimen"
-            android:layout_height="@dimen/user_picture_image_view_dimen"
-            app:layout_constraintBottom_toTopOf="@id/owner_login_text_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/owner_text_holder"
-            app:layout_constraintHorizontal_weight="1"
-            android:contentDescription="@string/owner_image_content_description"
-            tools:src="@drawable/ic_person_24dp"
-            >
-        </ImageView>
+            <TextView
+                android:id="@+id/owner_text_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/owner"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/owner_login_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{owner.login}"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/owner_picture_image_button"
-            app:layout_constraintTop_toBottomOf="@id/owner_picture_image_button"
-            tools:text="Karlo Maricevic">
-        </TextView>
-
-        <TextView
-            android:id="@+id/user_name_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text='@{"Name: " + (owner.name ?? "Not specified")}'
-            android:gravity="center"
-            android:layout_marginTop="@dimen/text_margin_top"
-            android:layout_marginStart="@dimen/text_margin_start"
-            app:layout_constraintTop_toBottomOf="@id/owner_text_holder"
-            app:layout_constraintStart_toEndOf="@id/owner_picture_image_button"
-            app:layout_constraintBottom_toTopOf="@id/e_mail_text_view"
-            tools:text="Name: KarloM."
-            >
-        </TextView>
-
-        <TextView
-            android:id="@+id/e_mail_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text='@{"Email: " + (owner.email ?? "Not specified")}'
-            android:gravity="center"
-            android:layout_marginStart="@dimen/text_margin_start"
-            app:layout_constraintTop_toBottomOf="@id/user_name_text_view"
-            app:layout_constraintStart_toEndOf="@id/owner_picture_image_button"
-            app:layout_constraintBottom_toTopOf="@id/github_page_url_text_view"
-            tools:text="Email: karlomaricevic@gmail.com">
-        </TextView>
-
-        <TextView
-            android:id="@+id/github_page_url_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text='@{"Github page: " + (owner.htmlUrl ?? "Not specified")}'
-            android:gravity="center"
-            android:lines="1"
-            android:layout_marginStart="@dimen/text_margin_start"
-            android:layout_marginBottom="@dimen/text_margin_bottom"
-            tools:text="Git hub page:https://github.com/blablabal"
-            app:layout_constraintTop_toBottomOf="@id/e_mail_text_view"
-            app:layout_constraintStart_toEndOf="@id/owner_picture_image_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            >
-        </TextView>
+            </TextView>
 
 
+            <ImageView
+                android:id="@+id/owner_picture_image_button"
+                android:layout_width="@dimen/user_picture_image_view_dimen"
+                android:layout_height="@dimen/user_picture_image_view_dimen"
+                app:layout_constraintBottom_toTopOf="@id/owner_login_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/owner_text_holder"
+                app:layout_constraintHorizontal_weight="1"
+                android:contentDescription="@string/owner_image_content_description"
+                tools:src="@drawable/ic_person_24dp"></ImageView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/owner_login_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{owner.login}"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/owner_picture_image_button"
+                app:layout_constraintTop_toBottomOf="@id/owner_picture_image_button"
+                tools:text="Karlo Maricevic"></TextView>
+
+            <TextView
+                android:id="@+id/user_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text='@{"Name: " + (owner.name ?? "Not specified")}'
+                android:gravity="center"
+                android:layout_marginTop="@dimen/text_margin_top"
+                android:layout_marginStart="@dimen/text_margin_start"
+                app:layout_constraintTop_toBottomOf="@id/owner_text_holder"
+                app:layout_constraintStart_toEndOf="@id/owner_picture_image_button"
+                app:layout_constraintBottom_toTopOf="@id/e_mail_text_view"
+                tools:text="Name: KarloM."></TextView>
+
+            <TextView
+                android:id="@+id/e_mail_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text='@{"Email: " + (owner.email ?? "Not specified")}'
+                android:gravity="center"
+                android:layout_marginStart="@dimen/text_margin_start"
+                app:layout_constraintTop_toBottomOf="@id/user_name_text_view"
+                app:layout_constraintStart_toEndOf="@id/owner_picture_image_button"
+                app:layout_constraintBottom_toTopOf="@id/github_page_url_text_view"
+                tools:text="Email: karlomaricevic@gmail.com"></TextView>
+
+            <TextView
+                android:id="@+id/github_page_url_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text='@{"Github page: " + (owner.htmlUrl ?? "Not specified")}'
+                android:gravity="center"
+                android:lines="1"
+                android:layout_marginStart="@dimen/text_margin_start"
+                android:layout_marginBottom="@dimen/text_margin_bottom"
+                tools:text="Git hub page:https://github.com/blablabal"
+                app:layout_constraintTop_toBottomOf="@id/e_mail_text_view"
+                app:layout_constraintStart_toEndOf="@id/owner_picture_image_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                ></TextView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 
 </layout>

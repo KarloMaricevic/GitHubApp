@@ -26,7 +26,7 @@ import javax.inject.Inject
 class UserDetailsFragment : Fragment(), UserDetailsView {
 
     @Inject
-    lateinit var mPresenter : UserDetailsPresenterInterface
+    lateinit var mPresenter : UserDetailsPresenterAbstraction
 
     private lateinit var mBinding : FragmentUserDetailsBinding
 

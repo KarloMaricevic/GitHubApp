@@ -1,7 +1,7 @@
-package my.app.githubapp.mvp.model.retrofitService.authGitHubService
+package my.app.githubapp.mvp.model.retrofitService
 
 import io.reactivex.Single
-import my.app.githubapp.domain.AccessToken
+import my.app.githubapp.mvp.model.retrofitService.responses.AccessTokenResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Headers
@@ -17,5 +17,5 @@ interface AuthGitHubService {
         @Field("client_id") clientId : String,
         @Field("client_secret") clientSecret : String,
         @Field("client_id") code : String
-    ) : Single<AccessToken>
+    ) : Single<AccessTokenResponse>
 }

@@ -9,10 +9,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 
-android.defaultConfig.manifestPlaceholders = [
-        'appAuthRedirectScheme': 'com.example.app'
-]
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -40,6 +36,8 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+
 }
 
 dependencies {
@@ -77,7 +75,9 @@ dependencies {
 
     //testing
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_jupiter_version"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_jupiter_version"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_jupiter_version"
+    testImplementation "com.google.truth:truth:$truth_version"
+
     testImplementation "io.mockk:mockk:$mockk_version"
 }

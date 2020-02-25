@@ -14,7 +14,7 @@ interface RepositorySearchModule {
 
     @Binds
     @PerFragment
-    fun providesPresenter(presenter : RepositorySearchPresenter) : RepositorySearchPresenterInterface
+    fun providesPresenter(presenter : RepositorySearchPresenter) : RepositorySearchPresenterAbstraction
 
     @Binds
     @PerFragment

@@ -1,18 +1,18 @@
 package my.app.githubapp.mvp.presenter
 
-import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositorySearchContract
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchInteractorInterface
-import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchPresenterInterface
+import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchPresenterAbstraction
 import my.app.githubapp.ui.repositorySearchView.*
+import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
 import javax.inject.Inject
-import javax.inject.Named
 
 @PerFragment
-class RepositorySearchPresenter @Inject constructor(private val mRepositorySearchInteractor: RepositorySearchInteractorInterface,@Named("MainThread") private val mMainThread : Scheduler) : RepositorySearchPresenterInterface{
+class RepositorySearchPresenter @Inject constructor(private val mRepositorySearchInteractor: RepositorySearchInteractorInterface,private val mSchedulersProvider : SchedulersProviderInterface) :
+    RepositorySearchPresenterAbstraction() {
 
     private var mView: RepositorySearchContract.RepositorySearchView? = null
     private var mQuery: String = ""
@@ -20,10 +20,6 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
 
     private val compositeDisposable = CompositeDisposable()
 
-
-
-    override fun subscribe(view: RepositorySearchContract.RepositorySearchView) =
-        subscribe(view, null)
 
     override fun subscribe(
         view: RepositorySearchContract.RepositorySearchView,
@@ -49,7 +45,7 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
         mQuery = query
         compositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(query)
-            .observeOn(mMainThread)
+            .observeOn(mSchedulersProvider.getMainThread())
             .map {sortList(it,mSortBy) }
             .subscribe(
                 {
@@ -65,7 +61,7 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
     override fun sortShowingRepos(sort : Int){
         compositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(mQuery)
-            .observeOn(mMainThread)
+            .observeOn(mSchedulersProvider.getMainThread())
             .map { sortList(it,sort) }
             .subscribe(
                 {

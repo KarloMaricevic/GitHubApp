@@ -5,7 +5,7 @@ import my.app.githubapp.cacher.DataSource
 import my.app.githubapp.domain.GitHubContributor
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.domain.GitHubUser
-import my.app.githubapp.domain.LanguagePercentile
+import my.app.githubapp.domain.LanguagePercentage
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsRepositoryInterface
 import my.app.githubapp.mvp.model.caching.key.ContributorsKey
 import my.app.githubapp.mvp.model.caching.key.GitHubUserKey
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class RepositoryDetailsRepository @Inject constructor(
     private val mContributorsSource : DataSource<ContributorsKey,List<GitHubContributor>>,
     private val mGitHubRepoSource : DataSource<RepoKey,GitHubRepo>,
-    private val mLanguagesSource : DataSource<LanguageKey,List<LanguagePercentile>>,
+    private val mLanguagesSource : DataSource<LanguageKey,List<LanguagePercentage>>,
     private val mOwnerSource : DataSource<GitHubUserKey,GitHubUser>
 
 ) : RepositoryDetailsRepositoryInterface {
@@ -34,7 +34,7 @@ class RepositoryDetailsRepository @Inject constructor(
         return mContributorsSource.getFromMemory(key)
     }
 
-    override fun getRepoLanguages(ownerLogin: String, repoName: String) : Single<List<LanguagePercentile>>{
+    override fun getRepoLanguages(ownerLogin: String, repoName: String) : Single<List<LanguagePercentage>>{
         val key = LanguageKey(
             ownerLogin,
             repoName

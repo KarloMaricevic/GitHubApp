@@ -1,6 +1,7 @@
 package my.app.githubapp.core
 
-interface BaseStatefulPresenter<in V : BaseView,S> : BasePresenter<V> {
-    fun subscribe(view : V,state : S?)
-    fun getState() : S
+abstract class BaseStatefulPresenter<in V : BaseView,S> : BasePresenter<V> {
+    abstract fun subscribe(view : V,state : S?)
+    override fun subscribe(view: V) = subscribe(view,null)
+    abstract fun getState() : S
 }

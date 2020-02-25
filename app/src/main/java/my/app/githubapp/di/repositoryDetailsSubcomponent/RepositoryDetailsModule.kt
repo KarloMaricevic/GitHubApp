@@ -13,7 +13,7 @@ interface RepositoryDetailsModule {
 
     @Binds
     @PerFragment
-    fun providesPresenter(presenter : RepositoryDetailPresenter) : RepositoryDetailsPresenterInterface
+    fun providesPresenter(presenter : RepositoryDetailPresenter) : RepositoryDetailsPresenterAbstraction
 
     @Binds
     @PerFragment

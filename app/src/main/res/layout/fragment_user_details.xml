@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="gitHubUser"
             type="my.app.githubapp.domain.GitHubUser" />
@@ -12,7 +13,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,9 +28,7 @@
                 android:src="@drawable/ic_open_in_browser_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/go_to_web_repo_content_description"
-                >
-            </ImageView>
+                android:contentDescription="@string/go_to_web_repo_content_description"></ImageView>
 
 
             <ImageView
@@ -41,9 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:contentDescription="@string/owner_image_content_description"
-                tools:src="@drawable/ic_person_24dp"
-                >
-            </ImageView>
+                tools:src="@drawable/ic_person_24dp"></ImageView>
 
             <TextView
                 android:id="@+id/user_login_text_view"
@@ -56,8 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/user_thumbnail_image_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="UserLogin">
-            </TextView>
+                tools:text="UserLogin"></TextView>
 
             <TextView
                 android:id="@+id/user_username_text_view"
@@ -69,9 +65,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/user_login_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="User username"
-                >
-            </TextView>
+                tools:text="User username"></TextView>
 
             <TextView
                 android:id="@+id/e_mail_text_view"
@@ -82,9 +76,7 @@
                 android:layout_marginStart="@dimen/text_margin_start"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/user_username_text_view"
-                tools:text="E:mail: karlomaricevic@gmail.com"
-                >
-            </TextView>
+                tools:text="E:mail: karlomaricevic@gmail.com"></TextView>
 
 
             <TextView
@@ -96,9 +88,7 @@
                 android:layout_marginStart="@dimen/text_margin_start"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/e_mail_text_view"
-                app:layout_constraintBottom_toTopOf="@id/show_user_repos_card_view"
-                >
-            </TextView>
+                app:layout_constraintBottom_toTopOf="@id/show_user_repos_card_view"></TextView>
 
             <TextView
                 android:id="@+id/user_date_of_creation_text_view"
@@ -109,9 +99,7 @@
                 app:layout_constraintTop_toTopOf="@+id/created_place_holder"
                 app:layout_constraintBottom_toBottomOf="@id/created_place_holder"
                 app:layout_constraintStart_toEndOf="@id/created_place_holder"
-                tools:text="21.2.2015"
-                >
-            </TextView>
+                tools:text="21.2.2015"></TextView>
 
 
             <androidx.cardview.widget.CardView
@@ -135,15 +123,13 @@
                         android:layout_marginStart="@dimen/text_margin_start"
                         android:text="@string/repository"
                         android:layout_gravity="center"
-                        android:textSize="@dimen/text_size">
-                    </TextView>
+                        android:textSize="@dimen/text_size"></TextView>
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/show_contributors_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:src="@drawable/selector_expand_button">
-                    </androidx.appcompat.widget.AppCompatImageButton>
+                        android:src="@drawable/selector_expand_button"></androidx.appcompat.widget.AppCompatImageButton>
 
                 </LinearLayout>
 
@@ -158,8 +144,7 @@
                 tools:listitem="@layout/item_users_repository"
                 tools:itemCount="6"
 
-                >
-            </androidx.recyclerview.widget.RecyclerView>
+                ></androidx.recyclerview.widget.RecyclerView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -31,7 +31,7 @@
     <string name="sortByForkedText">By forked</string>
 
     <!--toolbar_login_menu-->
-     <string name="login">Login</string>
+    <string name="login">Login</string>
 
     <!--item_basic_repository_info-->
     <string name="owner_image_content_description">Owner image</string>
@@ -52,7 +52,7 @@
     <!--layout_owner_info-->
     <string name="owner">Owner</string>
 
-    
+
     <!--github_login_strings-->
     <string name="client_id">f8ef25223d07c22f3747</string>
     <string name="client_secret">48d912bc686b73d3e1459305eba920928a73a67c</string>

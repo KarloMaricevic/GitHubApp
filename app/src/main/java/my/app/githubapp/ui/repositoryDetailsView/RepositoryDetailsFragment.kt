@@ -25,7 +25,7 @@ import my.app.githubapp.databinding.FragmentRepositoryDetailsScreenBinding
 import my.app.githubapp.domain.GitHubContributor
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.domain.GitHubUser
-import my.app.githubapp.domain.LanguagePercentile
+import my.app.githubapp.domain.LanguagePercentage
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsView
 import my.app.githubapp.mvp.presenter.RepositoryDetailPresenter
@@ -162,7 +162,7 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
             .into(mBinding.ownerInfoLayout.ownerPictureImageButton)
     }
 
-    override fun showRepoLanguages(languagesPercentileList: List<LanguagePercentile>) {
+    override fun showRepoLanguages(languagesPercentileList: List<LanguagePercentage>) {
         mBinding.showLanguagesButton.isClickable = true
         mLanguagesAdapter.setData(languagesPercentileList)
     }
