@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class LanguageResponseMapperTest {
 
     @Test
-    fun getEmptyListWhenLanguageResponseHashMapEmpty(){
+    fun getEmptyListWhenLanguageResponseHashMapEmpty() {
         val emptyLanguageResponse =
             LanguageResponse(
                 hashMapOf()
@@ -18,13 +18,13 @@ class LanguageResponseMapperTest {
 
 
         val actualValue = LanguageResponseMapper.convert(emptyLanguageResponse)
-        assertEquals(expectedValue,actualValue)
+        assertEquals(expectedValue, actualValue)
 
 
     }
 
     @Test
-    fun getLanguagePercentageListWhenLanguageResponseHashMapIsPopulated(){
+    fun getLanguagePercentageListWhenLanguageResponseHashMapIsPopulated() {
         val populatedLanguageResponse =
             LanguageResponse(
                 hashMapOf(
@@ -34,9 +34,9 @@ class LanguageResponseMapperTest {
                 )
             )
         val expectedValue = listOf(
-            LanguagePercentage("LanguageName2",7.91),
-            LanguagePercentage("LanguageName1",92.01),
-            LanguagePercentage("LanguageName3",0.08)
+            LanguagePercentage("LanguageName2", 7.91),
+            LanguagePercentage("LanguageName1", 92.01),
+            LanguagePercentage("LanguageName3", 0.08)
         )
 
         val actualValue = LanguageResponseMapper.convert(populatedLanguageResponse)

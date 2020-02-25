@@ -9,10 +9,10 @@ import my.app.githubapp.mvp.model.caching.key.QueryKey
 import javax.inject.Inject
 
 @PerFragment
-class RepositorySearchRepository @Inject constructor(private val dataSource : DataSource<QueryKey,List<GitHubRepo>>)
-    : RepositorySearchRepositoryInterface{
+class RepositorySearchRepository @Inject constructor(private val dataSource: DataSource<QueryKey, List<GitHubRepo>>) :
+    RepositorySearchRepositoryInterface {
 
-    override fun getReposFromQuery(query : String) : Single<List<GitHubRepo>>{
+    override fun getReposFromQuery(query: String): Single<List<GitHubRepo>> {
         val key = QueryKey(query)
         return dataSource.getFromMemory(key)
     }

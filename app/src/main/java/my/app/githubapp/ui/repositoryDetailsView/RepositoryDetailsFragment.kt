@@ -34,33 +34,32 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
+class RepositoryDetailsFragment : Fragment(), RepositoryDetailsView {
 
     @Inject
-    lateinit var mPresenter : RepositoryDetailPresenter
+    lateinit var mPresenter: RepositoryDetailPresenter
 
-    private lateinit var mBinding : FragmentRepositoryDetailsScreenBinding
+    private lateinit var mBinding: FragmentRepositoryDetailsScreenBinding
 
     private var mLanguagesAdapter = RepositoryLanguagesAdapter()
 
     private lateinit var mContributorsAdapter: RepositoryContributorsAdapter
 
-    private var mViewState : RepositoryDetailsContract.RepositoryDetailsViewStateInterface? = null
+    private var mViewState: RepositoryDetailsContract.RepositoryDetailsViewStateInterface? = null
 
-    private lateinit var mSnackbar : Snackbar
+    private lateinit var mSnackbar: Snackbar
 
-    private lateinit var mBackCallback : OnBackPressedCallback
+    private lateinit var mBackCallback: OnBackPressedCallback
 
     private val mShowLanguagesOnClick = View.OnClickListener {
-        if(!it.isActivated) {
+        if (!it.isActivated) {
             loadRepositoriesLanguages()
-        }
-        else{
+        } else {
             mPresenter.hideRepoLanguages()
         }
     }
 
-    private val mShowConstructorsOnClick = View.OnClickListener{
+    private val mShowConstructorsOnClick = View.OnClickListener {
         if (!it.isActivated) {
             loadRepositoriesContributors()
         } else {
@@ -72,9 +71,9 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
         openBrowserWithLink(Uri.parse(mBinding.gitHubRepo?.pageUrl))
     }
 
-    private val mOwnerClickedLister = View.OnClickListener{
-         val ownerLogin = mBinding.gitHubRepo?.owner?.login
-        if(ownerLogin != null) {
+    private val mOwnerClickedLister = View.OnClickListener {
+        val ownerLogin = mBinding.gitHubRepo?.owner?.login
+        if (ownerLogin != null) {
             navigate2UserDetailsScreen(ownerLogin)
         }
     }
@@ -87,13 +86,14 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
             .getRepositoryDetailSubcomponent()
             .inject(this)
 
-        val navigationArgs : RepositoryDetailsFragmentArgs by navArgs()
+        val navigationArgs: RepositoryDetailsFragmentArgs by navArgs()
 
-        mPresenter.setLoginAndRepoName(navigationArgs.ownerLogin,navigationArgs.repoName)
+        mPresenter.setLoginAndRepoName(navigationArgs.ownerLogin, navigationArgs.repoName)
 
         super.onCreate(savedInstanceState)
 
-        mBackCallback = requireActivity().onBackPressedDispatcher.addCallback(this){ navigateBack() }
+        mBackCallback =
+            requireActivity().onBackPressedDispatcher.addCallback(this) { navigateBack() }
 
         mContributorsAdapter = RepositoryContributorsAdapter(this)
 
@@ -101,7 +101,7 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             mViewState = savedInstanceState.getParcelable(getString(R.string.viewState))
         }
     }
@@ -110,28 +110,28 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = FragmentRepositoryDetailsScreenBinding.inflate(inflater,container,false)
+        mBinding = FragmentRepositoryDetailsScreenBinding.inflate(inflater, container, false)
 
         mBinding.languagesRecyclerView.adapter = mLanguagesAdapter
-        mBinding.contributorsRecyclerView.layoutManager = GridLayoutManager(context,4)
+        mBinding.contributorsRecyclerView.layoutManager = GridLayoutManager(context, 4)
         mBinding.contributorsRecyclerView.adapter = mContributorsAdapter
 
         mBinding.showLanguagesButton.setOnClickListener(mShowLanguagesOnClick)
 
         mBinding.showContributorsButton.setOnClickListener(mShowConstructorsOnClick)
 
-        mBinding.toWebImageView.setOnClickListener (mGoToWebPictureClicked)
+        mBinding.toWebImageView.setOnClickListener(mGoToWebPictureClicked)
 
         mBinding.ownerOnClick = mOwnerClickedLister
 
-        requireActivity().onBackPressedDispatcher.addCallback(this,mBackCallback)
+        requireActivity().onBackPressedDispatcher.addCallback(this, mBackCallback)
 
         return mBinding.root
     }
 
     override fun onStart() {
         super.onStart()
-        mPresenter.subscribe(this,mViewState)
+        mPresenter.subscribe(this, mViewState)
     }
 
     override fun onStop() {
@@ -141,7 +141,7 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable(getString(R.string.viewState),mPresenter.getState())
+        outState.putParcelable(getString(R.string.viewState), mPresenter.getState())
     }
 
     //endregion
@@ -189,7 +189,11 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
         mBinding.showContributorsButton.isClickable = true
         mBinding.showContributorsButton.isActivated = false
         mSnackbar = Snackbar
-            .make(mBinding.root, R.string.error_loading_contributors_snackbar_text,Snackbar.LENGTH_LONG)
+            .make(
+                mBinding.root,
+                R.string.error_loading_contributors_snackbar_text,
+                Snackbar.LENGTH_LONG
+            )
             .setAction(R.string.try_again) {
                 mPresenter.presentContributors()
             }
@@ -198,9 +202,10 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
     override fun loadingLanguagesError() {
         mBinding.showLanguagesButton.isClickable = true
         mBinding.showLanguagesButton.isActivated = false
-        mSnackbar =  Snackbar.make(
-            mBinding.root,R.string.error_loading_languages_snackbar_text,Snackbar.LENGTH_LONG)
-            .setAction(R.string.try_again){mPresenter.presentRepoLanguages()}
+        mSnackbar = Snackbar.make(
+            mBinding.root, R.string.error_loading_languages_snackbar_text, Snackbar.LENGTH_LONG
+        )
+            .setAction(R.string.try_again) { mPresenter.presentRepoLanguages() }
     }
 
     override fun fatalError() {
@@ -209,36 +214,38 @@ class RepositoryDetailsFragment :   Fragment(), RepositoryDetailsView {
 
     //endregion presenter_view
 
-    private fun loadRepositoriesLanguages(){
+    private fun loadRepositoriesLanguages() {
         mBinding.showLanguagesButton.isClickable = false
         mBinding.showLanguagesButton.isActivated = true
         mPresenter.presentRepoLanguages()
     }
 
-    private fun loadRepositoriesContributors(){
+    private fun loadRepositoriesContributors() {
         mBinding.showContributorsButton.isClickable = false
         mBinding.showContributorsButton.isActivated = true
         mPresenter.presentContributors()
     }
 
-    private fun navigate2UserDetailsScreen(userLogin : String){
-        val action = RepositoryDetailsFragmentDirections.actionRepositoryDetailsScreenToUserDetailsFragment(userLogin)
+    private fun navigate2UserDetailsScreen(userLogin: String) {
+        val action =
+            RepositoryDetailsFragmentDirections.actionRepositoryDetailsScreenToUserDetailsFragment(
+                userLogin
+            )
         (activity!!.application as BaseApplication)
             .releaseRepositoryDetailSobcomponent()
         findNavController().navigate(action)
     }
 
-    private fun openBrowserWithLink(uri : Uri){
-        val browserIntent = Intent(Intent.ACTION_VIEW,uri)
-        ContextCompat.startActivity(context!!,browserIntent,null)
+    private fun openBrowserWithLink(uri: Uri) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, uri)
+        ContextCompat.startActivity(context!!, browserIntent, null)
     }
 
-    private fun navigateBack(){
+    private fun navigateBack() {
         (activity!!.application as BaseApplication)
             .releaseRepositoryDetailSobcomponent()
         findNavController().popBackStack()
     }
-
 
 
 }

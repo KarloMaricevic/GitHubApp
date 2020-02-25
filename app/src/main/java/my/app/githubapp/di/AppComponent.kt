@@ -23,13 +23,13 @@ import javax.inject.Singleton
 
 interface AppComponent {
 
-    fun getRepositorySearchSubcomponentFactory() : RepositorySearchSubcomponent.Factory
-    fun getRepositoryDetailsSubcmponentFactory()  : RepositoryDetailSubcomponent.Factory
-    fun getUserDetailsSubcomponentFactory() : UserDetailsSubcomponent.Factory
+    fun getRepositorySearchSubcomponentFactory(): RepositorySearchSubcomponent.Factory
+    fun getRepositoryDetailsSubcmponentFactory(): RepositoryDetailSubcomponent.Factory
+    fun getUserDetailsSubcomponentFactory(): UserDetailsSubcomponent.Factory
 
     @Component.Factory
-    interface Factory{
-        fun create() : AppComponent
+    interface Factory {
+        fun create(): AppComponent
     }
 
 }

@@ -10,13 +10,20 @@ import com.bumptech.glide.request.RequestOptions
 import my.app.githubapp.databinding.ItemContributorBinding
 import my.app.githubapp.domain.GitHubContributor
 
-class RepositoryContributorsAdapter(fragment : Fragment) : RecyclerView.Adapter<ContributorViewHolder>() {
+class RepositoryContributorsAdapter(fragment: Fragment) :
+    RecyclerView.Adapter<ContributorViewHolder>() {
 
     var mContributorList = listOf<GitHubContributor>()
     val mGlide = Glide.with(fragment)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContributorViewHolder {
-        return ContributorViewHolder(ItemContributorBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ContributorViewHolder(
+            ItemContributorBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {
@@ -24,7 +31,7 @@ class RepositoryContributorsAdapter(fragment : Fragment) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ContributorViewHolder, position: Int) {
-        val gitHubContributor  = mContributorList[position]
+        val gitHubContributor = mContributorList[position]
         holder.bind(gitHubContributor)
         mGlide
             .load(gitHubContributor.thumbnailUrl)
@@ -32,19 +39,21 @@ class RepositoryContributorsAdapter(fragment : Fragment) : RecyclerView.Adapter<
             .into(holder.getImageView())
     }
 
-    fun setData(contributorsList : List<GitHubContributor>){
+    fun setData(contributorsList: List<GitHubContributor>) {
         mContributorList = contributorsList
         notifyDataSetChanged()
     }
 }
 
-class ContributorViewHolder(private val mBinding : ItemContributorBinding) : RecyclerView.ViewHolder(mBinding.root){
+class ContributorViewHolder(private val mBinding: ItemContributorBinding) :
+    RecyclerView.ViewHolder(mBinding.root) {
 
-    fun bind(item : GitHubContributor){
+    fun bind(item: GitHubContributor) {
         mBinding.contributor = item
         mBinding.executePendingBindings()
     }
-    fun getImageView() : ImageView{
+
+    fun getImageView(): ImageView {
         return mBinding.contributorImageView
     }
 }

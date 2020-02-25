@@ -5,8 +5,10 @@ import my.app.githubapp.mvp.contract.RepositoryDetailsContract
 
 
 @Parcelize
-data class RepositoryDetailsViewState(private val isRepoLanguagesShown : Boolean,private val isContributorsShown : Boolean)
-    : RepositoryDetailsContract.RepositoryDetailsViewStateInterface {
+data class RepositoryDetailsViewState(
+    private val isRepoLanguagesShown: Boolean,
+    private val isContributorsShown: Boolean
+) : RepositoryDetailsContract.RepositoryDetailsViewStateInterface {
     override fun isRepoLanguagesVisible(): Boolean = isRepoLanguagesShown
     override fun isContributorsShown(): Boolean = isContributorsShown
 }

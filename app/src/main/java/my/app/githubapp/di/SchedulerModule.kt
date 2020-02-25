@@ -9,10 +9,10 @@ import javax.inject.Singleton
 @Module
 interface SchedulerModule {
 
-    companion object{
+    companion object {
         @Provides
         @Singleton
-        fun providesSchedulers() : SchedulersProviderInterface = SchedulersProvider
+        fun providesSchedulers(): SchedulersProviderInterface = SchedulersProvider
 
     }
 }

@@ -11,7 +11,10 @@ import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
 import javax.inject.Inject
 
 @PerFragment
-class RepositorySearchPresenter @Inject constructor(private val mRepositorySearchInteractor: RepositorySearchInteractorInterface,private val mSchedulersProvider : SchedulersProviderInterface) :
+class RepositorySearchPresenter @Inject constructor(
+    private val mRepositorySearchInteractor: RepositorySearchInteractorInterface,
+    private val mSchedulersProvider: SchedulersProviderInterface
+) :
     RepositorySearchPresenterAbstraction() {
 
     private var mView: RepositorySearchContract.RepositorySearchView? = null
@@ -46,7 +49,7 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
         compositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(query)
             .observeOn(mSchedulersProvider.getMainThread())
-            .map {sortList(it,mSortBy) }
+            .map { sortList(it, mSortBy) }
             .subscribe(
                 {
                     mView?.showData(it)
@@ -58,11 +61,11 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
         )
     }
 
-    override fun sortShowingRepos(sort : Int){
+    override fun sortShowingRepos(sort: Int) {
         compositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(mQuery)
             .observeOn(mSchedulersProvider.getMainThread())
-            .map { sortList(it,sort) }
+            .map { sortList(it, sort) }
             .subscribe(
                 {
                     mSortBy = sort
@@ -78,12 +81,12 @@ class RepositorySearchPresenter @Inject constructor(private val mRepositorySearc
         searchForRepos(mQuery)
     }
 
-    private fun sortList(gitHubRepoList : List<GitHubRepo>,sort : Int) : List<GitHubRepo>{
-        return when(sort) {
+    private fun sortList(gitHubRepoList: List<GitHubRepo>, sort: Int): List<GitHubRepo> {
+        return when (sort) {
             SORT_BY_REPO_NAME -> gitHubRepoList.sortedBy { it.name }
-            SORT_BY_STAR -> gitHubRepoList.sortedByDescending  { it.staredNumber }
-            SORT_BY_DATE -> gitHubRepoList.sortedByDescending  { it.createdAt }
-            SORT_BY_FORKED ->  gitHubRepoList.sortedByDescending { it.forks }
+            SORT_BY_STAR -> gitHubRepoList.sortedByDescending { it.staredNumber }
+            SORT_BY_DATE -> gitHubRepoList.sortedByDescending { it.createdAt }
+            SORT_BY_FORKED -> gitHubRepoList.sortedByDescending { it.forks }
             else -> throw NoSuchMethodException("Sort not implemented")
         }
     }

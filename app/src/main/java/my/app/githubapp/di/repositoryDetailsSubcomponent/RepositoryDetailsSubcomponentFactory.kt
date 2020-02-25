@@ -5,5 +5,4 @@ import dagger.Module
 
 @Module
     (subcomponents = [RepositoryDetailSubcomponent::class])
-abstract class RepositoryDetailsSubcomponentFactory {
-}
+abstract class RepositoryDetailsSubcomponentFactory 

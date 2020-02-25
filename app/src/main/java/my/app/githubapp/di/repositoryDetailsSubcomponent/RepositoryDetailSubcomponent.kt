@@ -9,16 +9,18 @@ import my.app.githubapp.ui.repositoryDetailsView.RepositoryDetailsFragment
 
 @PerFragment
 @Subcomponent
-    (modules = [RepositoryDetailsModule::class,
-                RepositoryGitHubSourceModule::class,
-                UserGitHubSourceModule::class])
+    (
+    modules = [RepositoryDetailsModule::class,
+        RepositoryGitHubSourceModule::class,
+        UserGitHubSourceModule::class]
+)
 interface RepositoryDetailSubcomponent {
 
     fun inject(repositoryDetailsFragment: RepositoryDetailsFragment)
 
 
     @Subcomponent.Factory
-    interface Factory{
-        fun create() : RepositoryDetailSubcomponent
+    interface Factory {
+        fun create(): RepositoryDetailSubcomponent
     }
 }

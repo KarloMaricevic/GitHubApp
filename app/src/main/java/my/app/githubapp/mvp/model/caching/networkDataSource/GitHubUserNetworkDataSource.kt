@@ -9,7 +9,8 @@ import my.app.githubapp.utils.mapper.GitHubUserResponseMapper
 import javax.inject.Inject
 
 
-class GitHubUserNetworkDataSource  @Inject constructor(private val mService : UserGitHubService) : NetworkDataSourceInterface<GitHubUserKey,GitHubUser> {
+class GitHubUserNetworkDataSource @Inject constructor(private val mService: UserGitHubService) :
+    NetworkDataSourceInterface<GitHubUserKey, GitHubUser> {
     override fun getData(key: GitHubUserKey): Single<GitHubUser> {
         return mService.getUserInfo(key.userLogin)
             .map { GitHubUserResponseMapper.convert(it) }

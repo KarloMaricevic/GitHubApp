@@ -6,13 +6,16 @@ import my.app.githubapp.ui.userDetailsView.UserDetailsViewState
 import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
 import javax.inject.Inject
 
-class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDetailsInteractorInterface,private val mSchedulersProvider : SchedulersProviderInterface) : UserDetailsPresenterAbstraction() {
+class UserDetailsPresenter @Inject constructor(
+    private val mInteractor: UserDetailsInteractorInterface,
+    private val mSchedulersProvider: SchedulersProviderInterface
+) : UserDetailsPresenterAbstraction() {
 
-    private var mView : UserDetailsView? = null
+    private var mView: UserDetailsView? = null
 
-    private var isUserRepositoriesButtonActivated : Boolean = false
+    private var isUserRepositoriesButtonActivated: Boolean = false
 
-    private lateinit var mUserLogin : String
+    private lateinit var mUserLogin: String
 
     private val mCompositeDisposable = CompositeDisposable()
 
@@ -33,8 +36,8 @@ class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDet
                 }
             )
 
-        if(state != null){
-            if(state.isUserRepositoriesShown()){
+        if (state != null) {
+            if (state.isUserRepositoriesShown()) {
                 presentUserRepositories()
             }
         }
@@ -42,7 +45,8 @@ class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDet
         mCompositeDisposable.add(gitHubUserDisposable)
     }
 
-    override fun getState(): UserDetailsViewStateInterface = UserDetailsViewState(isUserRepositoriesButtonActivated)
+    override fun getState(): UserDetailsViewStateInterface =
+        UserDetailsViewState(isUserRepositoriesButtonActivated)
 
     override fun presentUserInfo() {
         getUserInfo(mUserLogin)
@@ -79,7 +83,7 @@ class UserDetailsPresenter @Inject constructor(private val mInteractor : UserDet
         mView = null
     }
 
-    private fun getUserInfo(userLogin : String) = mInteractor.getUserInfo(userLogin)
+    private fun getUserInfo(userLogin: String) = mInteractor.getUserInfo(userLogin)
 
     private fun getUsersRepositories(userLogin: String) = mInteractor.getUserRepositories(userLogin)
 

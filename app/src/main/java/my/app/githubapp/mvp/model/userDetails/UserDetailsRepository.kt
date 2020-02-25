@@ -12,16 +12,16 @@ import javax.inject.Inject
 
 @PerFragment
 class UserDetailsRepository @Inject constructor(
-    private val mGitHubUserDataSource  : DataSource<GitHubUserKey,GitHubUser>,
-    private val mUsersRepositoriesDataSource: DataSource<UsersRepositoriesKey,List<GitHubRepo>>
+    private val mGitHubUserDataSource: DataSource<GitHubUserKey, GitHubUser>,
+    private val mUsersRepositoriesDataSource: DataSource<UsersRepositoriesKey, List<GitHubRepo>>
 
-) : UserDetailsRepositoryInterface{
-    override fun getGitHubUser(userLogin : String) : Single<GitHubUser>{
+) : UserDetailsRepositoryInterface {
+    override fun getGitHubUser(userLogin: String): Single<GitHubUser> {
         val key = GitHubUserKey(userLogin)
         return mGitHubUserDataSource.getFromMemory(key)
     }
 
-    override fun getUsersRepositories(userLogin: String) : Single<List<GitHubRepo>>{
+    override fun getUsersRepositories(userLogin: String): Single<List<GitHubRepo>> {
         val key = UsersRepositoriesKey(userLogin)
         return mUsersRepositoriesDataSource.getFromMemory(key)
     }

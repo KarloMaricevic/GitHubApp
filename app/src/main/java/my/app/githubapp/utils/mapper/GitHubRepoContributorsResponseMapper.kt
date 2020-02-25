@@ -2,6 +2,7 @@ package my.app.githubapp.utils.mapper
 
 import my.app.githubapp.domain.GitHubContributor
 import my.app.githubapp.mvp.model.retrofitService.responses.GitHubRepoContributorResponse
+
 object GitHubRepoContributorsResponseMapper :
     BasicListMapper<GitHubRepoContributorResponse, GitHubContributor>() {
 
@@ -10,6 +11,7 @@ object GitHubRepoContributorsResponseMapper :
             objectToConvert.login,
             objectToConvert.id,
             objectToConvert.avatarUrl,
-            objectToConvert.contributions)
+            objectToConvert.contributions
+        )
     }
 }

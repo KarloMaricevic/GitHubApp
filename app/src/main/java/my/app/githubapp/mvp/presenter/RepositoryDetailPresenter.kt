@@ -10,7 +10,10 @@ import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
 import javax.inject.Inject
 
 @PerFragment
-class RepositoryDetailPresenter @Inject constructor(private val mInteractor: RepositoryDetailsInteractorInterface,private val mSchedulersProvider : SchedulersProviderInterface ) :
+class RepositoryDetailPresenter @Inject constructor(
+    private val mInteractor: RepositoryDetailsInteractorInterface,
+    private val mSchedulersProvider: SchedulersProviderInterface
+) :
     RepositoryDetailsPresenterAbstraction() {
 
 

@@ -9,8 +9,11 @@ const val SORT_BY_DATE = 3
 const val SORT_BY_FORKED = 4
 
 @Parcelize
-data class RepositorySearchViewState(private val query : String,private val sortBy : Int = SORT_BY_REPO_NAME) : RepositorySearchContract.RepositorySearchViewStateInterface {
-    override fun getQuery()  = query
+data class RepositorySearchViewState(
+    private val query: String,
+    private val sortBy: Int = SORT_BY_REPO_NAME
+) : RepositorySearchContract.RepositorySearchViewStateInterface {
+    override fun getQuery() = query
     override fun getSortBy(): Int = sortBy
 
 }

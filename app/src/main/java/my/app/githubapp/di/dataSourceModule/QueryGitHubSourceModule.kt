@@ -16,7 +16,8 @@ interface QueryGitHubSourceModule {
         @Provides
         @PerFragment
         fun providesNetworkDataSource(networkSource: RepositorySearchNetworkDataSource): DataSource<QueryKey, List<GitHubRepo>> {
-            return DataSource.Builder<QueryKey,List<GitHubRepo>>().setNetworkDataSource(networkSource).build()
+            return DataSource.Builder<QueryKey, List<GitHubRepo>>()
+                .setNetworkDataSource(networkSource).build()
         }
     }
 }

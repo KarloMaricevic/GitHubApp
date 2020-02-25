@@ -10,28 +10,29 @@ import my.app.githubapp.domain.GitHubRepo
 interface RepositorySearchContract {
 
     interface RepositorySearchView : BaseView {
-        fun showData(data : List<GitHubRepo>)
+        fun showData(data: List<GitHubRepo>)
         fun queryError()
     }
 
 
     interface RepositorySearchViewStateInterface : State {
-        fun getQuery() : String
-        fun getSortBy() : Int
+        fun getQuery(): String
+        fun getSortBy(): Int
     }
 
-    abstract class RepositorySearchPresenterAbstraction : BaseStatefulPresenter<RepositorySearchView, RepositorySearchViewStateInterface>() {
-        abstract fun searchForRepos(query : String)
-        abstract fun sortShowingRepos(sort : Int)
+    abstract class RepositorySearchPresenterAbstraction :
+        BaseStatefulPresenter<RepositorySearchView, RepositorySearchViewStateInterface>() {
+        abstract fun searchForRepos(query: String)
+        abstract fun sortShowingRepos(sort: Int)
         abstract fun tryQueryAgain()
     }
 
-    interface RepositorySearchInteractorInterface : BaseInteractor{
-        fun getReposForQuery(query : String) : Single<List<GitHubRepo>>
+    interface RepositorySearchInteractorInterface : BaseInteractor {
+        fun getReposForQuery(query: String): Single<List<GitHubRepo>>
     }
 
-    interface RepositorySearchRepositoryInterface{
-        fun getReposFromQuery(query : String) : Single<List<GitHubRepo>>
+    interface RepositorySearchRepositoryInterface {
+        fun getReposFromQuery(query: String): Single<List<GitHubRepo>>
     }
 
 }

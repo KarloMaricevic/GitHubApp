@@ -14,8 +14,8 @@ interface AuthGitHubService {
     @POST("login/oauth/access_token")
     @FormUrlEncoded
     fun getAccessToken(
-        @Field("client_id") clientId : String,
-        @Field("client_secret") clientSecret : String,
-        @Field("client_id") code : String
-    ) : Single<AccessTokenResponse>
+        @Field("client_id") clientId: String,
+        @Field("client_secret") clientSecret: String,
+        @Field("client_id") code: String
+    ): Single<AccessTokenResponse>
 }

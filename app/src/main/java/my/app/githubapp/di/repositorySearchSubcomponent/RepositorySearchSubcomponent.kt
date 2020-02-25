@@ -8,15 +8,17 @@ import my.app.githubapp.ui.repositorySearchView.RepositorySearchFragment
 
 @PerFragment
 @Subcomponent
-    (modules = [RepositorySearchModule::class,
-                QueryGitHubSourceModule::class,
-                RepositoryGitHubSourceModule::class])
+    (
+    modules = [RepositorySearchModule::class,
+        QueryGitHubSourceModule::class,
+        RepositoryGitHubSourceModule::class]
+)
 interface RepositorySearchSubcomponent {
 
     fun inject(repositorySearchFragment: RepositorySearchFragment)
 
     @Subcomponent.Factory
-    interface Factory{
-        fun create() : RepositorySearchSubcomponent
+    interface Factory {
+        fun create(): RepositorySearchSubcomponent
     }
 }

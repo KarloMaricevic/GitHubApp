@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 @PerFragment
 class UserDetailsInteractor @Inject constructor(
-    private val mRepository : UserDetailsRepository
-) : UserDetailsInteractorInterface{
+    private val mRepository: UserDetailsRepository
+) : UserDetailsInteractorInterface {
 
     override fun getUserInfo(userLogin: String): Single<GitHubUser> {
         return mRepository.getGitHubUser(userLogin)

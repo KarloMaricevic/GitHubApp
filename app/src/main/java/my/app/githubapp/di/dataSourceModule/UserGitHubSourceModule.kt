@@ -25,8 +25,8 @@ interface UserGitHubSourceModule {
 
         @Provides
         @PerFragment
-        fun providesUsersRepositoriesDataSource(networkSource: UsersRepositoriesNetworkDataSource) : DataSource<UsersRepositoriesKey,List<GitHubRepo>>{
-            return DataSource.Builder<UsersRepositoriesKey,List<GitHubRepo>>()
+        fun providesUsersRepositoriesDataSource(networkSource: UsersRepositoriesNetworkDataSource): DataSource<UsersRepositoriesKey, List<GitHubRepo>> {
+            return DataSource.Builder<UsersRepositoriesKey, List<GitHubRepo>>()
                 .setNetworkDataSource(networkSource)
                 .build()
         }

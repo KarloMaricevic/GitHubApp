@@ -10,10 +10,10 @@ import my.app.githubapp.di.userDetailsSubcompnent.UserDetailsSubcomponent
 class BaseApplication : Application() {
 
 
-    private lateinit var mAppComponent : AppComponent
-    private var mRepositorySearchSubcomponent : RepositorySearchSubcomponent? = null
-    private var mRepositoryDetailSubcomponent : RepositoryDetailSubcomponent? = null
-    private var mUserDetailSubcomponent : UserDetailsSubcomponent? = null
+    private lateinit var mAppComponent: AppComponent
+    private var mRepositorySearchSubcomponent: RepositorySearchSubcomponent? = null
+    private var mRepositoryDetailSubcomponent: RepositoryDetailSubcomponent? = null
+    private var mUserDetailSubcomponent: UserDetailsSubcomponent? = null
 
 
     override fun onCreate() {
@@ -22,9 +22,10 @@ class BaseApplication : Application() {
     }
 
 
-    fun getRepositorySearchSubcomponent() : RepositorySearchSubcomponent{
-        if(mRepositorySearchSubcomponent == null) {
-            mRepositorySearchSubcomponent = mAppComponent.getRepositorySearchSubcomponentFactory().create()
+    fun getRepositorySearchSubcomponent(): RepositorySearchSubcomponent {
+        if (mRepositorySearchSubcomponent == null) {
+            mRepositorySearchSubcomponent =
+                mAppComponent.getRepositorySearchSubcomponentFactory().create()
         }
         return mRepositorySearchSubcomponent ?: throw NullPointerException()
     }
@@ -33,31 +34,28 @@ class BaseApplication : Application() {
         mRepositorySearchSubcomponent = null
     }
 
-    fun getRepositoryDetailSubcomponent() : RepositoryDetailSubcomponent{
-        if(mRepositoryDetailSubcomponent == null) {
+    fun getRepositoryDetailSubcomponent(): RepositoryDetailSubcomponent {
+        if (mRepositoryDetailSubcomponent == null) {
             mRepositoryDetailSubcomponent =
                 mAppComponent.getRepositoryDetailsSubcmponentFactory().create()
         }
         return mRepositoryDetailSubcomponent ?: throw NullPointerException()
     }
 
-    fun releaseRepositoryDetailSobcomponent(){
+    fun releaseRepositoryDetailSobcomponent() {
         mRepositoryDetailSubcomponent = null
     }
 
-    fun getUserDetailSubcomponent() : UserDetailsSubcomponent{
-        if(mUserDetailSubcomponent == null){
+    fun getUserDetailSubcomponent(): UserDetailsSubcomponent {
+        if (mUserDetailSubcomponent == null) {
             mUserDetailSubcomponent = mAppComponent.getUserDetailsSubcomponentFactory().create()
         }
         return mUserDetailSubcomponent ?: throw NullPointerException()
     }
 
-    fun releaseUserDetailSubcomponent(){
+    fun releaseUserDetailSubcomponent() {
         mUserDetailSubcomponent = null
     }
-
-
-
 
 
 }

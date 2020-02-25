@@ -13,13 +13,13 @@ interface RepositoryDetailsModule {
 
     @Binds
     @PerFragment
-    fun providesPresenter(presenter : RepositoryDetailPresenter) : RepositoryDetailsPresenterAbstraction
+    fun providesPresenter(presenter: RepositoryDetailPresenter): RepositoryDetailsPresenterAbstraction
 
     @Binds
     @PerFragment
-    fun providesInteractor(interactor : RepositoryDetailsInteractor) : RepositoryDetailsInteractorInterface
+    fun providesInteractor(interactor: RepositoryDetailsInteractor): RepositoryDetailsInteractorInterface
 
     @Binds
     @PerFragment
-    fun providesRepository(repository : RepositoryDetailsRepository) : RepositoryDetailsRepositoryInterface
+    fun providesRepository(repository: RepositoryDetailsRepository): RepositoryDetailsRepositoryInterface
 }

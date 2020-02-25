@@ -18,7 +18,7 @@ interface UserDetailsSubcomponent {
     fun inject(userDetailsFragment: UserDetailsFragment)
 
     @Subcomponent.Factory
-    interface Factory{
-        fun create() : UserDetailsSubcomponent
+    interface Factory {
+        fun create(): UserDetailsSubcomponent
     }
 }

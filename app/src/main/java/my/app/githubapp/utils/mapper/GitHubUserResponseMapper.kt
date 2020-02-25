@@ -3,7 +3,7 @@ package my.app.githubapp.utils.mapper
 import my.app.githubapp.domain.GitHubUser
 import my.app.githubapp.mvp.model.retrofitService.responses.GitHubUserResponse
 
-object GitHubUserResponseMapper : MapperInterface<GitHubUserResponse,GitHubUser> {
+object GitHubUserResponseMapper : MapperInterface<GitHubUserResponse, GitHubUser> {
     override fun convert(objectToConvert: GitHubUserResponse): GitHubUser {
         return GitHubUser(
             objectToConvert.id,

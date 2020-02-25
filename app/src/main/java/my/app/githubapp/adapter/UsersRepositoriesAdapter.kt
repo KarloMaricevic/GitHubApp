@@ -11,7 +11,13 @@ class UsersRepositoriesAdapter : RecyclerView.Adapter<UserRepositoryViewHolder>(
     var mGitHubRepoList = listOf<GitHubRepo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserRepositoryViewHolder {
-        return UserRepositoryViewHolder(ItemUsersRepositoryBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return UserRepositoryViewHolder(
+            ItemUsersRepositoryBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                ), parent, false
+            )
+        )
     }
 
     override fun getItemCount() = mGitHubRepoList.count()
@@ -21,7 +27,7 @@ class UsersRepositoriesAdapter : RecyclerView.Adapter<UserRepositoryViewHolder>(
         holder.bind(gitHubRepo)
     }
 
-    fun setData(gitHubRepoList : List<GitHubRepo>){
+    fun setData(gitHubRepoList: List<GitHubRepo>) {
         mGitHubRepoList = gitHubRepoList
         notifyDataSetChanged()
     }
@@ -29,9 +35,10 @@ class UsersRepositoriesAdapter : RecyclerView.Adapter<UserRepositoryViewHolder>(
 }
 
 
-class UserRepositoryViewHolder(private val mBinding : ItemUsersRepositoryBinding) : RecyclerView.ViewHolder(mBinding.root){
+class UserRepositoryViewHolder(private val mBinding: ItemUsersRepositoryBinding) :
+    RecyclerView.ViewHolder(mBinding.root) {
 
-    fun bind(gitHubRepo : GitHubRepo){
+    fun bind(gitHubRepo: GitHubRepo) {
         mBinding.gitHubRepo = gitHubRepo
         mBinding.executePendingBindings()
     }

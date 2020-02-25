@@ -14,13 +14,13 @@ interface RepositorySearchModule {
 
     @Binds
     @PerFragment
-    fun providesPresenter(presenter : RepositorySearchPresenter) : RepositorySearchPresenterAbstraction
+    fun providesPresenter(presenter: RepositorySearchPresenter): RepositorySearchPresenterAbstraction
 
     @Binds
     @PerFragment
-    fun providesInteractor(interactor : RepositorySearchInteractor) : RepositorySearchInteractorInterface
+    fun providesInteractor(interactor: RepositorySearchInteractor): RepositorySearchInteractorInterface
 
     @Binds
     @PerFragment
-    fun providesRepository(repository : RepositorySearchRepository) : RepositorySearchRepositoryInterface
+    fun providesRepository(repository: RepositorySearchRepository): RepositorySearchRepositoryInterface
 }

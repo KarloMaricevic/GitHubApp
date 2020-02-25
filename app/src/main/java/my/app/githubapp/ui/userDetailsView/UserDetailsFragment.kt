@@ -26,24 +26,23 @@ import javax.inject.Inject
 class UserDetailsFragment : Fragment(), UserDetailsView {
 
     @Inject
-    lateinit var mPresenter : UserDetailsPresenterAbstraction
+    lateinit var mPresenter: UserDetailsPresenterAbstraction
 
-    private lateinit var mBinding : FragmentUserDetailsBinding
+    private lateinit var mBinding: FragmentUserDetailsBinding
 
-    private var mViewState : UserDetailsViewStateInterface? = null
+    private var mViewState: UserDetailsViewStateInterface? = null
 
     private val mAdapter = UsersRepositoriesAdapter()
 
     private val contributorsButtonOnClick = View.OnClickListener {
-        if(!it.isActivated){
+        if (!it.isActivated) {
             loadUsersRepositories()
-        }
-        else{
+        } else {
             mPresenter.hideUserRepositories()
         }
     }
 
-    private val toWebImageClick =View.OnClickListener {
+    private val toWebImageClick = View.OnClickListener {
         openBrowserWithLink(Uri.parse(mBinding.gitHubUser?.htmlUrl))
     }
 
@@ -55,7 +54,7 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
             .getUserDetailSubcomponent()
             .inject(this)
 
-        val navigationArgs : UserDetailsFragmentArgs by navArgs()
+        val navigationArgs: UserDetailsFragmentArgs by navArgs()
         mPresenter.setUserLogin(navigationArgs.userLogin)
         super.onCreate(savedInstanceState)
     }
@@ -64,7 +63,7 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = FragmentUserDetailsBinding.inflate(inflater,container,false)
+        mBinding = FragmentUserDetailsBinding.inflate(inflater, container, false)
 
         mBinding.showContributorsButton.setOnClickListener(contributorsButtonOnClick)
         mBinding.goToWebImageView.setOnClickListener(toWebImageClick)
@@ -76,14 +75,14 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             mViewState = savedInstanceState.getParcelable(getString(R.string.viewState))
         }
     }
 
 
     override fun onStart() {
-        mPresenter.subscribe(this,mViewState)
+        mPresenter.subscribe(this, mViewState)
         super.onStart()
     }
 
@@ -94,7 +93,7 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable(getString(R.string.viewState),mPresenter.getState())
+        outState.putParcelable(getString(R.string.viewState), mPresenter.getState())
     }
 
     //region viewImpl
@@ -122,7 +121,11 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
     }
 
     override fun showErrorLoadingRepositories() {
-        mSnackbar = Snackbar.make(mBinding.root,R.string.error_loading_user_repositories,Snackbar.LENGTH_LONG)
+        mSnackbar = Snackbar.make(
+            mBinding.root,
+            R.string.error_loading_user_repositories,
+            Snackbar.LENGTH_LONG
+        )
             .setAction(R.string.try_again) {
                 loadUsersRepositories()
                 mSnackbar.dismiss()
@@ -132,23 +135,23 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
 
 
     override fun fatalError() {
-       navigateBack()
+        navigateBack()
     }
 
     //endregion
 
-    private fun loadUsersRepositories(){
+    private fun loadUsersRepositories() {
         mBinding.showContributorsButton.isClickable = false
         mBinding.showContributorsButton.isActivated = true
         mPresenter.presentUserRepositories()
     }
 
-    private fun openBrowserWithLink(uri : Uri){
-        val browserIntent = Intent(Intent.ACTION_VIEW,uri)
-        ContextCompat.startActivity(context!!,browserIntent,null)
+    private fun openBrowserWithLink(uri: Uri) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, uri)
+        ContextCompat.startActivity(context!!, browserIntent, null)
     }
 
-    private fun navigateBack(){
+    private fun navigateBack() {
         (activity!!.application as BaseApplication)
             .releaseUserDetailSubcomponent()
         findNavController().popBackStack()

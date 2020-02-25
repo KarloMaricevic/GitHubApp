@@ -13,10 +13,13 @@ import my.app.githubapp.databinding.ItemBasicRepositoryInfoBinding
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.ui.repositorySearchView.RepositorySearchViewAdapterCallback
 
-class RepositorySearchAdapter(fragment : Fragment, private val mCallback : RepositorySearchViewAdapterCallback) : RecyclerView.Adapter<BasicRepositoryInfoViewHolder>(),RepositorySearchAdapterInterface {
+class RepositorySearchAdapter(
+    fragment: Fragment,
+    private val mCallback: RepositorySearchViewAdapterCallback
+) : RecyclerView.Adapter<BasicRepositoryInfoViewHolder>(), RepositorySearchAdapterInterface {
 
 
-    private var mData : List<GitHubRepo> = listOf()
+    private var mData: List<GitHubRepo> = listOf()
     private var mGlide = Glide.with(fragment)
 
 
@@ -24,7 +27,13 @@ class RepositorySearchAdapter(fragment : Fragment, private val mCallback : Repos
         parent: ViewGroup,
         viewType: Int
     ): BasicRepositoryInfoViewHolder {
-        return BasicRepositoryInfoViewHolder(ItemBasicRepositoryInfoBinding.inflate(LayoutInflater.from(parent.context),parent,false),this)
+        return BasicRepositoryInfoViewHolder(
+            ItemBasicRepositoryInfoBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                ), parent, false
+            ), this
+        )
     }
 
     override fun getItemCount(): Int {
@@ -41,13 +50,13 @@ class RepositorySearchAdapter(fragment : Fragment, private val mCallback : Repos
     }
 
 
-    fun setData(newData : List<GitHubRepo>){
+    fun setData(newData: List<GitHubRepo>) {
         mData = newData
         notifyDataSetChanged()
     }
 
 
-    fun changeContext(context: Context){
+    fun changeContext(context: Context) {
         mGlide = Glide.with(context)
     }
 
@@ -57,26 +66,33 @@ class RepositorySearchAdapter(fragment : Fragment, private val mCallback : Repos
     }
 
     override fun clickedOnRepo(ownerLogin: String, repoName: String) {
-        mCallback.navigateToRepoDetailView(ownerLogin,repoName)
+        mCallback.navigateToRepoDetailView(ownerLogin, repoName)
     }
 
 }
 
 
-class BasicRepositoryInfoViewHolder(private val mBinding : ItemBasicRepositoryInfoBinding,private val mRepositorySearchAdapterInterface: RepositorySearchAdapterInterface) : RecyclerView.ViewHolder(mBinding.root)
-{
+class BasicRepositoryInfoViewHolder(
+    private val mBinding: ItemBasicRepositoryInfoBinding,
+    private val mRepositorySearchAdapterInterface: RepositorySearchAdapterInterface
+) : RecyclerView.ViewHolder(mBinding.root) {
 
 
-    fun bind(item : GitHubRepo){
+    fun bind(item: GitHubRepo) {
         mBinding.gitHubRepo = item
-        mBinding.repoOnClick = View.OnClickListener { mRepositorySearchAdapterInterface.clickedOnRepo(item.owner.login,item.name) }
-        mBinding.userOnClick = View.OnClickListener { mRepositorySearchAdapterInterface.clickedOnOwner(item.owner.login) }
+        mBinding.repoOnClick = View.OnClickListener {
+            mRepositorySearchAdapterInterface.clickedOnRepo(
+                item.owner.login,
+                item.name
+            )
+        }
+        mBinding.userOnClick =
+            View.OnClickListener { mRepositorySearchAdapterInterface.clickedOnOwner(item.owner.login) }
         mBinding.executePendingBindings()
     }
 
 
-    fun getImageView() : ImageView
-    {
+    fun getImageView(): ImageView {
         return mBinding.ownerPictureImageButton
     }
 

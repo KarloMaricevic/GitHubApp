@@ -9,23 +9,30 @@ import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetails
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsRepositoryInterface
 import javax.inject.Inject
 
-class RepositoryDetailsInteractor @Inject constructor(private  val mRepository : RepositoryDetailsRepositoryInterface) : RepositoryDetailsInteractorInterface{
+class RepositoryDetailsInteractor @Inject constructor(private val mRepository: RepositoryDetailsRepositoryInterface) :
+    RepositoryDetailsInteractorInterface {
 
 
     override fun getRepoDetails(ownerLogin: String, repoName: String): Single<GitHubRepo> {
-        return mRepository.getGitHubRepo(ownerLogin,repoName)
+        return mRepository.getGitHubRepo(ownerLogin, repoName)
     }
 
-    override fun getRepoLanguages(ownerLogin: String, repoName: String) : Single<List<LanguagePercentage>> {
-        return mRepository.getRepoLanguages(ownerLogin,repoName)
+    override fun getRepoLanguages(
+        ownerLogin: String,
+        repoName: String
+    ): Single<List<LanguagePercentage>> {
+        return mRepository.getRepoLanguages(ownerLogin, repoName)
     }
 
-    override fun getOwnerInfo(ownerLogin: String) : Single<GitHubUser>{
+    override fun getOwnerInfo(ownerLogin: String): Single<GitHubUser> {
         return mRepository.getOwnerDetails(ownerLogin)
     }
 
-    override fun getRepoContributors(ownerLogin: String, repoName: String): Single<List<GitHubContributor>> {
-        return mRepository.getRepoContributors(ownerLogin,repoName)
+    override fun getRepoContributors(
+        ownerLogin: String,
+        repoName: String
+    ): Single<List<GitHubContributor>> {
+        return mRepository.getRepoContributors(ownerLogin, repoName)
     }
 
 

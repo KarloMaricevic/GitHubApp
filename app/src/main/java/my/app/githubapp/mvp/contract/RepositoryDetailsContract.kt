@@ -12,26 +12,27 @@ import my.app.githubapp.domain.LanguagePercentage
 
 interface RepositoryDetailsContract {
 
-    interface RepositoryDetailsView : BaseView{
+    interface RepositoryDetailsView : BaseView {
         fun bindRepoDetails(gitHubRepo: GitHubRepo)
         fun bindUserInfo(owner: GitHubUser)
-        fun showRepoLanguages(languagesPercentileList : List<LanguagePercentage>)
+        fun showRepoLanguages(languagesPercentileList: List<LanguagePercentage>)
         fun hideRepoLanguages()
-        fun showContributors(contributorsList : List<GitHubContributor>)
+        fun showContributors(contributorsList: List<GitHubContributor>)
         fun hideContributors()
         fun loadingContributorsError()
         fun loadingLanguagesError()
     }
 
-    interface RepositoryDetailsViewStateInterface : State{
-        fun isRepoLanguagesVisible() : Boolean
-        fun isContributorsShown() : Boolean
+    interface RepositoryDetailsViewStateInterface : State {
+        fun isRepoLanguagesVisible(): Boolean
+        fun isContributorsShown(): Boolean
 
     }
 
 
-    abstract  class RepositoryDetailsPresenterAbstraction : BaseStatefulPresenter<RepositoryDetailsView, RepositoryDetailsViewStateInterface>() {
-        abstract fun setLoginAndRepoName(ownerLogin: String,repoName: String)
+    abstract class RepositoryDetailsPresenterAbstraction :
+        BaseStatefulPresenter<RepositoryDetailsView, RepositoryDetailsViewStateInterface>() {
+        abstract fun setLoginAndRepoName(ownerLogin: String, repoName: String)
         abstract fun presentRepoLanguages()
         abstract fun hideRepoLanguages()
         abstract fun presentContributors()
@@ -39,18 +40,25 @@ interface RepositoryDetailsContract {
     }
 
 
-    interface RepositoryDetailsInteractorInterface : BaseInteractor{
-        fun getRepoDetails(ownerLogin: String,repoName: String) : Single<GitHubRepo>
-        fun getRepoLanguages(ownerLogin: String,repoName: String): Single<List<LanguagePercentage>>
+    interface RepositoryDetailsInteractorInterface : BaseInteractor {
+        fun getRepoDetails(ownerLogin: String, repoName: String): Single<GitHubRepo>
+        fun getRepoLanguages(ownerLogin: String, repoName: String): Single<List<LanguagePercentage>>
         fun getOwnerInfo(ownerLogin: String): Single<GitHubUser>
-        fun getRepoContributors(ownerLogin : String,repoName : String ) : Single<List<GitHubContributor>>
+        fun getRepoContributors(
+            ownerLogin: String,
+            repoName: String
+        ): Single<List<GitHubContributor>>
     }
 
     interface RepositoryDetailsRepositoryInterface {
-        fun getGitHubRepo(ownerLogin: String,repoName: String) : Single<GitHubRepo>
-        fun getRepoContributors(ownerLogin : String,repoName : String ) : Single<List<GitHubContributor>>
-        fun getRepoLanguages(ownerLogin: String,repoName: String) : Single<List<LanguagePercentage>>
-        fun getOwnerDetails(ownerLogin: String) : Single<GitHubUser>
+        fun getGitHubRepo(ownerLogin: String, repoName: String): Single<GitHubRepo>
+        fun getRepoContributors(
+            ownerLogin: String,
+            repoName: String
+        ): Single<List<GitHubContributor>>
+
+        fun getRepoLanguages(ownerLogin: String, repoName: String): Single<List<LanguagePercentage>>
+        fun getOwnerDetails(ownerLogin: String): Single<GitHubUser>
     }
 
 }

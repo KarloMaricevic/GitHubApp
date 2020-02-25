@@ -9,17 +9,17 @@ import my.app.githubapp.mvp.model.userDetails.UserDetailsRepository
 import my.app.githubapp.mvp.presenter.UserDetailsPresenter
 
 @Module
-interface UserDetailsModule{
+interface UserDetailsModule {
 
     @Binds
     @PerFragment
-    fun providePresenter(userDetailsPresenter: UserDetailsPresenter) : UserDetailsPresenterAbstraction
+    fun providePresenter(userDetailsPresenter: UserDetailsPresenter): UserDetailsPresenterAbstraction
 
     @Binds
     @PerFragment
-    fun provideInteractor(userDetailsInteractor: UserDetailsInteractor) : UserDetailsInteractorInterface
+    fun provideInteractor(userDetailsInteractor: UserDetailsInteractor): UserDetailsInteractorInterface
 
     @Binds
     @PerFragment
-    fun provideRepository(userDetailsRepository: UserDetailsRepository) : UserDetailsRepositoryInterface
+    fun provideRepository(userDetailsRepository: UserDetailsRepository): UserDetailsRepositoryInterface
 }

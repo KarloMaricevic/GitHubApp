@@ -31,22 +31,24 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
 
 
     @Inject
-    lateinit var mPresenter : RepositorySearchPresenterAbstraction
+    lateinit var mPresenter: RepositorySearchPresenterAbstraction
 
-    private lateinit var mBinding : FragmentRepositorySearchBinding
+    private lateinit var mBinding: FragmentRepositorySearchBinding
 
-    private lateinit  var mAdapter :RepositorySearchAdapter
+    private lateinit var mAdapter: RepositorySearchAdapter
 
-    private var mStateView : RepositorySearchContract.RepositorySearchViewStateInterface? = null
+    private var mStateView: RepositorySearchContract.RepositorySearchViewStateInterface? = null
 
-    private lateinit var mSnackbar : Snackbar
+    private lateinit var mSnackbar: Snackbar
 
-    private val mOnSearchActionClickListener = { it : View ->
-        (it as androidx.appcompat.widget.SearchView).setQuery(mPresenter.getState().getQuery(),false)
+    private val mOnSearchActionClickListener = { it: View ->
+        (it as androidx.appcompat.widget.SearchView).setQuery(
+            mPresenter.getState().getQuery(),
+            false
+        )
         val width = Resources.getSystem().displayMetrics.widthPixels
         it.maxWidth = width
     }
-
 
 
     //region lifecycle
@@ -58,7 +60,7 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
 
         super.onCreate(savedInstanceState)
 
-        mAdapter = RepositorySearchAdapter(this,this)
+        mAdapter = RepositorySearchAdapter(this, this)
     }
 
     override fun onCreateView(
@@ -66,12 +68,16 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
         savedInstanceState: Bundle?
     ): View? {
 
-        mBinding = FragmentRepositorySearchBinding.inflate(inflater,container,false)
+        mBinding = FragmentRepositorySearchBinding.inflate(inflater, container, false)
 
         mBinding.githubBasicInfoRecyclerView.adapter = mAdapter
 
-        (mBinding.searchToolbar.menu.findItem(R.id.action_search).actionView as androidx.appcompat.widget.SearchView).setOnQueryTextListener(this)
-        (mBinding.searchToolbar.menu.findItem(R.id.action_search).actionView as androidx.appcompat.widget.SearchView).setOnSearchClickListener(mOnSearchActionClickListener)
+        (mBinding.searchToolbar.menu.findItem(R.id.action_search).actionView as androidx.appcompat.widget.SearchView).setOnQueryTextListener(
+            this
+        )
+        (mBinding.searchToolbar.menu.findItem(R.id.action_search).actionView as androidx.appcompat.widget.SearchView).setOnSearchClickListener(
+            mOnSearchActionClickListener
+        )
 
         setUpSortMenu()
         return mBinding.root
@@ -80,7 +86,7 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             mStateView = savedInstanceState.getParcelable(getString(R.string.viewState))
         }
     }
@@ -88,12 +94,12 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
 
     override fun onStart() {
         super.onStart()
-        mPresenter.subscribe(this,mStateView)
+        mPresenter.subscribe(this, mStateView)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable(getString(R.string.viewState),mPresenter.getState())
+        outState.putParcelable(getString(R.string.viewState), mPresenter.getState())
     }
 
     override fun onStop() {
@@ -112,7 +118,7 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
 
     override fun queryError() {
         mSnackbar = Snackbar
-            .make(mBinding.root, R.string.query_error,Snackbar.LENGTH_LONG)
+            .make(mBinding.root, R.string.query_error, Snackbar.LENGTH_LONG)
             .setAction(R.string.try_again) {
                 mPresenter.tryQueryAgain()
             }
@@ -125,7 +131,7 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
     //endregion
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        if(query != null) {
+        if (query != null) {
             mPresenter.searchForRepos(query)
         }
         return true
@@ -136,18 +142,25 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
     }
 
     override fun navigateToUserDetailView(userLogin: String) {
-        val action = RepositorySearchFragmentDirections.actionRepositorySearchFragment2ToUserDetailsFragment(userLogin)
+        val action =
+            RepositorySearchFragmentDirections.actionRepositorySearchFragment2ToUserDetailsFragment(
+                userLogin
+            )
         (activity!!.application as BaseApplication).releaseRepositorySearchSobcomponent()
         findNavController().navigate(action)
     }
 
     override fun navigateToRepoDetailView(ownerLogin: String, repoName: String) {
-        val action = RepositorySearchFragmentDirections.actionRepositorySearchFragment2ToRepositoryDetailsScreen(ownerLogin,repoName)
+        val action =
+            RepositorySearchFragmentDirections.actionRepositorySearchFragment2ToRepositoryDetailsScreen(
+                ownerLogin,
+                repoName
+            )
         (activity!!.application as BaseApplication).releaseRepositorySearchSobcomponent()
         findNavController().navigate(action)
     }
 
-    private fun setUpSortMenu(){
+    private fun setUpSortMenu() {
         (mBinding.searchToolbar.menu.findItem(R.id.action_sort).subMenu as Menu)
             .findItem(R.id.sort_by_repo_name)
             .setOnMenuItemClickListener {
@@ -182,8 +195,6 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
             return@setOnMenuItemClickListener true
         }
     }
-
-
 
 
 }

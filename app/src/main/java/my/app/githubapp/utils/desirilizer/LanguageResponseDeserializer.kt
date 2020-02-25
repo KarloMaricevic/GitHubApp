@@ -6,7 +6,7 @@ import com.google.gson.JsonElement
 import my.app.githubapp.mvp.model.retrofitService.responses.LanguageResponse
 import java.lang.reflect.Type
 
-class LanguageResponseDeserializer :  JsonDeserializer<LanguageResponse> {
+class LanguageResponseDeserializer : JsonDeserializer<LanguageResponse> {
 
     override fun deserialize(
         json: JsonElement?,

@@ -9,9 +9,10 @@ import javax.inject.Inject
 
 
 @PerFragment
-class RepositorySearchInteractor @Inject constructor(private val mRepositorySearchRepository: RepositorySearchRepositoryInterface) : RepositorySearchInteractorInterface {
+class RepositorySearchInteractor @Inject constructor(private val mRepositorySearchRepository: RepositorySearchRepositoryInterface) :
+    RepositorySearchInteractorInterface {
 
-    override fun getReposForQuery(query : String) : Single<List<GitHubRepo>>{
+    override fun getReposForQuery(query: String): Single<List<GitHubRepo>> {
         return mRepositorySearchRepository.getReposFromQuery(query)
     }
 }

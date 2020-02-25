@@ -8,9 +8,11 @@ import my.app.githubapp.mvp.model.retrofitService.UserGitHubService
 import my.app.githubapp.utils.mapper.GitHubRepoResponseMapper
 import javax.inject.Inject
 
-class UsersRepositoriesNetworkDataSource @Inject constructor(private val mUserGitHubService: UserGitHubService) : NetworkDataSourceInterface<UsersRepositoriesKey,List<GitHubRepo>> {
+class UsersRepositoriesNetworkDataSource @Inject constructor(private val mUserGitHubService: UserGitHubService) :
+    NetworkDataSourceInterface<UsersRepositoriesKey, List<GitHubRepo>> {
     override fun getData(key: UsersRepositoriesKey): Single<List<GitHubRepo>> {
         return mUserGitHubService
             .getUsersRepositories(key.usersLogin)
-            .map { GitHubRepoResponseMapper.convertList(it) }}
+            .map { GitHubRepoResponseMapper.convertList(it) }
+    }
 }
