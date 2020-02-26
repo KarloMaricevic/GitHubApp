@@ -1,7 +1,6 @@
 package my.app.githubapp.mvp.presenter
 
 import io.reactivex.Single
-import io.reactivex.disposables.CompositeDisposable
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositoryDetailsContract.*
@@ -15,11 +14,6 @@ class RepositoryDetailPresenter @Inject constructor(
     private val mSchedulersProvider: SchedulersProviderInterface
 ) :
     RepositoryDetailsPresenterAbstraction() {
-
-
-    private var mView: RepositoryDetailsView? = null
-
-    private val mCompositeDisposable = CompositeDisposable()
 
     private lateinit var mOwnerName: String
     private lateinit var mRepoName: String
@@ -45,11 +39,6 @@ class RepositoryDetailPresenter @Inject constructor(
 
     override fun getState(): RepositoryDetailsViewStateInterface {
         return RepositoryDetailsViewState(areLanguagesExpanded, areContributorsExpanded)
-    }
-
-    override fun unsubscribe() {
-        mView = null
-        mCompositeDisposable.clear()
     }
 
     override fun setLoginAndRepoName(ownerLogin: String, repoName: String) {

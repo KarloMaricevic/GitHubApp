@@ -1,6 +1,5 @@
 package my.app.githubapp.mvp.presenter
 
-import io.reactivex.disposables.CompositeDisposable
 import my.app.githubapp.mvp.contract.UserDetailsContract.*
 import my.app.githubapp.ui.userDetailsView.UserDetailsViewState
 import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
@@ -11,13 +10,9 @@ class UserDetailsPresenter @Inject constructor(
     private val mSchedulersProvider: SchedulersProviderInterface
 ) : UserDetailsPresenterAbstraction() {
 
-    private var mView: UserDetailsView? = null
-
     private var isUserRepositoriesButtonActivated: Boolean = false
 
     private lateinit var mUserLogin: String
-
-    private val mCompositeDisposable = CompositeDisposable()
 
     override fun subscribe(
         view: UserDetailsView,
@@ -76,11 +71,6 @@ class UserDetailsPresenter @Inject constructor(
 
     override fun setUserLogin(userLogin: String) {
         mUserLogin = userLogin
-    }
-
-    override fun unsubscribe() {
-        mCompositeDisposable.clear()
-        mView = null
     }
 
     private fun getUserInfo(userLogin: String) = mInteractor.getUserInfo(userLogin)

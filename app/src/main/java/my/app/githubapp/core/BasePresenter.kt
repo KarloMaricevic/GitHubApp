@@ -1,6 +1,15 @@
 package my.app.githubapp.core
 
-interface BasePresenter<in V : BaseView> {
-    fun subscribe(view: V)
-    fun unsubscribe()
+import io.reactivex.disposables.CompositeDisposable
+
+abstract class BasePresenter<V : BaseView> {
+    protected var mView: V? = null
+    protected val mCompositeDisposable = CompositeDisposable()
+
+    abstract fun subscribe(view: V)
+
+    fun unsubscribe() {
+        mView = null
+        mCompositeDisposable.clear()
+    }
 }

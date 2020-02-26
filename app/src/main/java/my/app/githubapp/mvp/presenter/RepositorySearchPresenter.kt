@@ -1,6 +1,5 @@
 package my.app.githubapp.mvp.presenter
 
-import io.reactivex.disposables.CompositeDisposable
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositorySearchContract
@@ -17,11 +16,8 @@ class RepositorySearchPresenter @Inject constructor(
 ) :
     RepositorySearchPresenterAbstraction() {
 
-    private var mView: RepositorySearchContract.RepositorySearchView? = null
     private var mQuery: String = ""
     private var mSortBy: Int = SORT_BY_REPO_NAME
-
-    private val compositeDisposable = CompositeDisposable()
 
 
     override fun subscribe(
@@ -46,7 +42,7 @@ class RepositorySearchPresenter @Inject constructor(
 
     override fun searchForRepos(query: String) {
         mQuery = query
-        compositeDisposable.add(mRepositorySearchInteractor
+        mCompositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(query)
             .observeOn(mSchedulersProvider.getMainThread())
             .map { sortList(it, mSortBy) }
@@ -62,7 +58,7 @@ class RepositorySearchPresenter @Inject constructor(
     }
 
     override fun sortShowingRepos(sort: Int) {
-        compositeDisposable.add(mRepositorySearchInteractor
+        mCompositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(mQuery)
             .observeOn(mSchedulersProvider.getMainThread())
             .map { sortList(it, sort) }
@@ -90,10 +86,4 @@ class RepositorySearchPresenter @Inject constructor(
             else -> throw NoSuchMethodException("Sort not implemented")
         }
     }
-
-    override fun unsubscribe() {
-        mView = null
-        compositeDisposable.clear()
-    }
-
 }
