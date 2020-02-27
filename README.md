@@ -27,3 +27,5 @@ Technologies and libraries
   - [Dagger 2](https://github.com/google/dagger)
   - [Glide](https://github.com/bumptech/glide)
   - [Retrofit](https://github.com/square/retrofit)
+  - [Junit5](https://github.com/junit-team/junit5)
+  - [MockK](https://github.com/mockk/mockk)
