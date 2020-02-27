@@ -4,16 +4,20 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.junit5.MockKExtension
-import io.mockk.slot
 import io.mockk.verify
+import io.mockk.verifyOrder
 import io.reactivex.Single
 import my.app.githubapp.domain.BasicGitHubUser
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchInteractorInterface
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchView
 import my.app.githubapp.testExtensition.SchedulersProviderInterfaceResolution
+import my.app.githubapp.ui.repositorySearchView.SORT_BY_DATE
+import my.app.githubapp.ui.repositorySearchView.SORT_BY_FORKED
 import my.app.githubapp.ui.repositorySearchView.SORT_BY_REPO_NAME
+import my.app.githubapp.ui.repositorySearchView.SORT_BY_STAR
 import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
+import my.app.githubapp.utils.sorter.SorterInterface
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.extension.ExtendWith
 import java.time.Instant
@@ -24,11 +28,12 @@ class RepositorySearchPresenterUnitTest(
 
     mThreadDOC: SchedulersProviderInterface,
     @MockK val mInteractorDOC: RepositorySearchInteractorInterface,
-    @RelaxedMockK val mViewDOC: RepositorySearchView
+    @RelaxedMockK val mViewDOC: RepositorySearchView,
+    @MockK val mSorterDOC : SorterInterface<GitHubRepo>
 
 ) {
 
-    val mPresenterSUT = RepositorySearchPresenter(mInteractorDOC,mThreadDOC)
+    val mPresenterSUT = RepositorySearchPresenter(mInteractorDOC,mThreadDOC,mSorterDOC)
 
 
     private val emptyResponseForStringQuery = "String that returns empty query response"
@@ -73,6 +78,22 @@ class RepositorySearchPresenterUnitTest(
     @BeforeEach
     fun mockInteractorDOC(){
         every { mInteractorDOC.getReposForQuery(populatedResponseForStringQuery) } returns (Single.just(populatedList))
+    }
+
+    @BeforeEach
+    fun mockSorterDOC()
+    {
+        every { mSorterDOC.sortIterable(populatedList, SORT_BY_REPO_NAME) } returns populatedList.sortedBy { it.name }
+        every { mSorterDOC.sortIterable(populatedList, SORT_BY_FORKED) } returns populatedList.sortedBy { it.forks }
+        every { mSorterDOC.sortIterable(populatedList, SORT_BY_DATE) } returns populatedList.sortedBy { it.createdAt }
+        every { mSorterDOC.sortIterable(populatedList, SORT_BY_STAR) } returns populatedList.sortedBy { it.watcherNumber }
+
+        every { mSorterDOC.sortIterable(listOf(), SORT_BY_REPO_NAME) } returns listOf()
+        every { mSorterDOC.sortIterable(listOf(), SORT_BY_FORKED) } returns listOf()
+        every { mSorterDOC.sortIterable(listOf(), SORT_BY_DATE) } returns listOf()
+        every { mSorterDOC.sortIterable(listOf(), SORT_BY_STAR) } returns listOf()
+
+
     }
 
 
@@ -131,13 +152,6 @@ class RepositorySearchPresenterUnitTest(
     @Nested
     inner class SortShowingReposTest{
 
-        private val mSlot = slot<List<GitHubRepo>>()
-
-        @BeforeEach
-        fun viewDOCsetUp(){
-            every { mViewDOC.showData(capture(mSlot))}
-        }
-
         @TestFactory
         fun callingSortShowingWithSortByRepoName() : Collection<DynamicTest>{
             mPresenterSUT.searchForRepos(populatedResponseForStringQuery)
@@ -145,18 +159,27 @@ class RepositorySearchPresenterUnitTest(
             mPresenterSUT.sortShowingRepos(SORT_BY_REPO_NAME)
 
             return listOf(
-                DynamicTest.dynamicTest("Repo's sorted by name"){Assertions.assertEquals(populatedList.sortedBy { it.name }, mSlot.captured)},
                 DynamicTest.dynamicTest("View's showData method(with right parameters) called"){
                     verify {
                         mViewDOC.showData(populatedList.sortedBy { it.name })
                     }
                 },
+                DynamicTest.dynamicTest("Sorter sort method(with right parameters) called"){
+                 verify {
+                     mSorterDOC.sortIterable(populatedList, SORT_BY_REPO_NAME)
+                 }
+                },
+
+                DynamicTest.dynamicTest("dependency methods called in right order"){
+                    verifyOrder {
+                        mSorterDOC.sortIterable(any(), any())
+                        mViewDOC.showData(any())
+                    }
+                },
+
                 DynamicTest.dynamicTest("Changed SortBy state"){Assertions.assertEquals(SORT_BY_REPO_NAME,mPresenterSUT.getState().getSortBy())}
             )
         }
-
-
-
     }
 
 }

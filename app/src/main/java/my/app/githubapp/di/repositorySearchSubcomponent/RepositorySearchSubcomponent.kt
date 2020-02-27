@@ -11,6 +11,7 @@ import my.app.githubapp.ui.repositorySearchView.RepositorySearchFragment
     (
     modules = [RepositorySearchModule::class,
         QueryGitHubSourceModule::class,
+        GitHubRepoSorterModule::class,
         RepositoryGitHubSourceModule::class]
 )
 interface RepositorySearchSubcomponent {

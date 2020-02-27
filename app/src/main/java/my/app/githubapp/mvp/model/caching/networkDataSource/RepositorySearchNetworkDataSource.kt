@@ -9,12 +9,14 @@ import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.model.caching.key.QueryKey
 import my.app.githubapp.mvp.model.retrofitService.QueryGitHubService
 import my.app.githubapp.mvp.model.retrofitService.RepositoryGitHubService
-import my.app.githubapp.utils.mapper.GitHubRepoResponseMapper
+import my.app.githubapp.mvp.model.retrofitService.responses.GitHubRepoResponse
+import my.app.githubapp.utils.mapper.BasicListMapper
 import javax.inject.Inject
 
 class RepositorySearchNetworkDataSource @Inject constructor(
     private val mQueryService: QueryGitHubService,
-    private val mRepoService: RepositoryGitHubService
+    private val mRepoService: RepositoryGitHubService,
+    private val mMapper: BasicListMapper<GitHubRepoResponse, GitHubRepo>
 ) : NetworkDataSourceInterface<QueryKey, List<GitHubRepo>> {
     override fun getData(key: QueryKey): Single<List<GitHubRepo>> {
 
@@ -33,7 +35,7 @@ class RepositorySearchNetworkDataSource @Inject constructor(
                             )
                             .toObservable()
                     observableList.add(gitHubRepoObservable.map {
-                        GitHubRepoResponseMapper.convert(it)
+                        mMapper.convert(it)
                     })
                 }
 

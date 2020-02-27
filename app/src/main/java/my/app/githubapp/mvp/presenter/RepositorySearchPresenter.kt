@@ -5,14 +5,17 @@ import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositorySearchContract
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchInteractorInterface
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchPresenterAbstraction
-import my.app.githubapp.ui.repositorySearchView.*
+import my.app.githubapp.ui.repositorySearchView.RepositorySearchViewState
+import my.app.githubapp.ui.repositorySearchView.SORT_BY_REPO_NAME
 import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
+import my.app.githubapp.utils.sorter.SorterInterface
 import javax.inject.Inject
 
 @PerFragment
 class RepositorySearchPresenter @Inject constructor(
     private val mRepositorySearchInteractor: RepositorySearchInteractorInterface,
-    private val mSchedulersProvider: SchedulersProviderInterface
+    private val mSchedulersProvider: SchedulersProviderInterface,
+    private val mGitHubRepoSorter : SorterInterface<GitHubRepo>
 ) :
     RepositorySearchPresenterAbstraction() {
 
@@ -45,7 +48,7 @@ class RepositorySearchPresenter @Inject constructor(
         mCompositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(query)
             .observeOn(mSchedulersProvider.getMainThread())
-            .map { sortList(it, mSortBy) }
+            .map { mGitHubRepoSorter.sortIterable(it, mSortBy).toList() }
             .subscribe(
                 {
                     mView?.showData(it)
@@ -58,13 +61,13 @@ class RepositorySearchPresenter @Inject constructor(
     }
 
     override fun sortShowingRepos(sort: Int) {
+        mSortBy = sort
         mCompositeDisposable.add(mRepositorySearchInteractor
             .getReposForQuery(mQuery)
             .observeOn(mSchedulersProvider.getMainThread())
-            .map { sortList(it, sort) }
+            .map { mGitHubRepoSorter.sortIterable(it, sort).toList() }
             .subscribe(
                 {
-                    mSortBy = sort
                     mView?.showData(it)
                 },
                 {
@@ -75,15 +78,5 @@ class RepositorySearchPresenter @Inject constructor(
 
     override fun tryQueryAgain() {
         searchForRepos(mQuery)
-    }
-
-    private fun sortList(gitHubRepoList: List<GitHubRepo>, sort: Int): List<GitHubRepo> {
-        return when (sort) {
-            SORT_BY_REPO_NAME -> gitHubRepoList.sortedBy { it.name }
-            SORT_BY_STAR -> gitHubRepoList.sortedByDescending { it.staredNumber }
-            SORT_BY_DATE -> gitHubRepoList.sortedByDescending { it.createdAt }
-            SORT_BY_FORKED -> gitHubRepoList.sortedByDescending { it.forks }
-            else -> throw NoSuchMethodException("Sort not implemented")
-        }
     }
 }

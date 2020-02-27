@@ -17,6 +17,7 @@ import javax.inject.Singleton
         SchedulerModule::class,
         RepositorySearchSubomponentFactory::class,
         RepositoryDetailsSubcomponentFactory::class,
+        MapperModule::class,
         UserDetailSubcomponentFactory::class
     ]
 )

@@ -8,7 +8,7 @@ import my.app.githubapp.domain.GitHubRepo
 
 class UsersRepositoriesAdapter : RecyclerView.Adapter<UserRepositoryViewHolder>() {
 
-    var mGitHubRepoList = listOf<GitHubRepo>()
+    private var mGitHubRepoList = listOf<GitHubRepo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserRepositoryViewHolder {
         return UserRepositoryViewHolder(
