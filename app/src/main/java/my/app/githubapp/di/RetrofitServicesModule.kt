@@ -18,7 +18,6 @@ import javax.inject.Singleton
 @Module
 interface RetrofitServicesModule {
 
-
     companion object {
         @Singleton
         @Provides
@@ -52,13 +51,11 @@ interface RetrofitServicesModule {
                 .build()
         }
 
-
         @Singleton
         @Provides
         fun providesQueryGitHubService(@Named("GitHubApiRetrofit") retrofit: Retrofit): QueryGitHubService {
             return retrofit.create(QueryGitHubService::class.java)
         }
-
 
         @Singleton
         @Provides
@@ -78,6 +75,5 @@ interface RetrofitServicesModule {
         fun providesAuthGitHubService(@Named("GitHubAuthRetrofit") retrofit: Retrofit): AuthGitHubService {
             return retrofit.create(AuthGitHubService::class.java)
         }
-
     }
 }

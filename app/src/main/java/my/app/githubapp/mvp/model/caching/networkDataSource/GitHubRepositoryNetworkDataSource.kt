@@ -12,8 +12,7 @@ import javax.inject.Inject
 class GitHubRepositoryNetworkDataSource @Inject constructor(
     private val mService: RepositoryGitHubService,
     private val mMapper: BasicListMapper<GitHubRepoResponse, GitHubRepo>
-) :
-    NetworkDataSourceInterface<RepoKey, GitHubRepo> {
+) : NetworkDataSourceInterface<RepoKey, GitHubRepo> {
     override fun getData(key: RepoKey): Single<GitHubRepo> {
         return mService.getRepositoryInformation(key.ownerLogin, key.repoName)
             .map { mMapper.convert(it) }

@@ -1,6 +1,6 @@
 package my.app.githubapp.domain
 
-import java.util.*
+import java.util.Date
 
 class GitHubRepo(
     name: String,
@@ -20,7 +20,10 @@ class GitHubRepo(
         if (other is GitHubRepo) {
             return this.id == other.id
         }
-
         return super.equals(other)
+    }
+
+    override fun hashCode(): Int {
+        return id
     }
 }

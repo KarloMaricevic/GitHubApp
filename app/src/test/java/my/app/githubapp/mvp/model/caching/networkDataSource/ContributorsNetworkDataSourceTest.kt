@@ -16,18 +16,17 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import java.net.UnknownHostException
 
-
 @ExtendWith(MockKExtension::class)
-class ContributorsNetworkDataSourceTest(@MockK val mServiceDOC: RepositoryGitHubService,@MockK val mMapperDOC : BasicListMapper<GitHubRepoContributorResponse, GitHubContributor>) {
+class ContributorsNetworkDataSourceTest(
+    @MockK val mServiceDOC: RepositoryGitHubService,
+    @MockK val mMapperDOC: BasicListMapper<GitHubRepoContributorResponse, GitHubContributor>
+) {
 
     private val stringForPopulatedResponse = "stringForPopulatedResponse"
     private val stringForNoNetworkErrorResponse = "stringForErrorResponse"
-
-
     private val testNumbersOfContributions = 5
     private val testIdNumber = 6
     private val testIsSiteAdmin = false
-
 
     private val populatedList = listOf(
         GitHubRepoContributorResponse(
@@ -71,7 +70,7 @@ class ContributorsNetworkDataSourceTest(@MockK val mServiceDOC: RepositoryGitHub
 
     @Test
     fun sendsValidOutputForPopulatedServiceResponse() {
-        val dataSourceSUT = ContributorsNetworkDataSource(mServiceDOC,mMapperDOC)
+        val dataSourceSUT = ContributorsNetworkDataSource(mServiceDOC, mMapperDOC)
 
         val testObserver: TestObserver<List<GitHubContributor>> = dataSourceSUT.getData(
             ContributorsKey(
@@ -87,7 +86,7 @@ class ContributorsNetworkDataSourceTest(@MockK val mServiceDOC: RepositoryGitHub
 
     @Test
     fun sendsUnknownHostExceptionForNoNetworkServiceResponse() {
-        val dataSourceSUT = ContributorsNetworkDataSource(mServiceDOC,mMapperDOC)
+        val dataSourceSUT = ContributorsNetworkDataSource(mServiceDOC, mMapperDOC)
 
         val testObserver: TestObserver<List<GitHubContributor>> = dataSourceSUT.getData(
             ContributorsKey(
@@ -100,5 +99,4 @@ class ContributorsNetworkDataSourceTest(@MockK val mServiceDOC: RepositoryGitHub
             UnknownHostException::class.java
         )
     }
-
 }

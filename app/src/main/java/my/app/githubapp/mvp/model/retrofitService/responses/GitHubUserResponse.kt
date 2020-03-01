@@ -1,7 +1,7 @@
 package my.app.githubapp.mvp.model.retrofitService.responses
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import java.util.Date
 
 data class GitHubUserResponse(
     @SerializedName("login") val login: String,
@@ -27,7 +27,7 @@ data class GitHubUserResponse(
     @SerializedName("blog") val blog: String,
     @SerializedName("location") val location: String,
     @SerializedName("email") val email: String,
-    @SerializedName("hireable") val hireable: String,
+    @SerializedName("hireable") val canEmploy: String,
     @SerializedName("bio") val bio: String,
     @SerializedName("public_repos") val publicRepos: Int,
     @SerializedName("public_gists") val publicGists: Int,

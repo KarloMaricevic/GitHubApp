@@ -12,7 +12,7 @@ data class BasicGitHubUserResponse(
     @SerializedName("html_url") val htmlUrl: String,
     @SerializedName("id") val id: Int,
     @SerializedName("login") val login: String,
-    @SerializedName("node_id") val node_id: String,
+    @SerializedName("node_id") val nodeId: String,
     @SerializedName("organizations_url") val organizationsUrl: String,
     @SerializedName("received_events_url") val receivedEventsUrl: String,
     @SerializedName("repos_url") val reposUrl: String,

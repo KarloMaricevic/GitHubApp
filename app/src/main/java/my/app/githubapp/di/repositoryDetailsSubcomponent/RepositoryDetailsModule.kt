@@ -3,7 +3,9 @@ package my.app.githubapp.di.repositoryDetailsSubcomponent
 import dagger.Binds
 import dagger.Module
 import my.app.githubapp.di.scope.PerFragment
-import my.app.githubapp.mvp.contract.RepositoryDetailsContract.*
+import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsInteractorInterface
+import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsPresenterAbstraction
+import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsRepositoryInterface
 import my.app.githubapp.mvp.model.repositoryDetails.RepositoryDetailsInteractor
 import my.app.githubapp.mvp.model.repositoryDetails.RepositoryDetailsRepository
 import my.app.githubapp.mvp.presenter.RepositoryDetailPresenter

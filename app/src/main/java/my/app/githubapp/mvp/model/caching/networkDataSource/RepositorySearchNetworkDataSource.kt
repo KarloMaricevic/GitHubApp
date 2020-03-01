@@ -43,6 +43,5 @@ class RepositorySearchNetworkDataSource @Inject constructor(
                     .combineLatest { it }
                     .firstOrError()
             }
-
     }
 }

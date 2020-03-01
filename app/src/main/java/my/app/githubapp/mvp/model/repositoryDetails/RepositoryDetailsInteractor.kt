@@ -12,7 +12,6 @@ import javax.inject.Inject
 class RepositoryDetailsInteractor @Inject constructor(private val mRepository: RepositoryDetailsRepositoryInterface) :
     RepositoryDetailsInteractorInterface {
 
-
     override fun getRepoDetails(ownerLogin: String, repoName: String): Single<GitHubRepo> {
         return mRepository.getGitHubRepo(ownerLogin, repoName)
     }
@@ -34,6 +33,4 @@ class RepositoryDetailsInteractor @Inject constructor(private val mRepository: R
     ): Single<List<GitHubContributor>> {
         return mRepository.getRepoContributors(ownerLogin, repoName)
     }
-
-
 }

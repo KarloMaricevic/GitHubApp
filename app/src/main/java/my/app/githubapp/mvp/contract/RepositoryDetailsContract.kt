@@ -26,9 +26,7 @@ interface RepositoryDetailsContract {
     interface RepositoryDetailsViewStateInterface : State {
         fun isRepoLanguagesVisible(): Boolean
         fun isContributorsShown(): Boolean
-
     }
-
 
     abstract class RepositoryDetailsPresenterAbstraction :
         BaseStatefulPresenter<RepositoryDetailsView, RepositoryDetailsViewStateInterface>() {
@@ -38,7 +36,6 @@ interface RepositoryDetailsContract {
         abstract fun presentContributors()
         abstract fun hideContributors()
     }
-
 
     interface RepositoryDetailsInteractorInterface : BaseInteractor {
         fun getRepoDetails(ownerLogin: String, repoName: String): Single<GitHubRepo>
@@ -60,5 +57,4 @@ interface RepositoryDetailsContract {
         fun getRepoLanguages(ownerLogin: String, repoName: String): Single<List<LanguagePercentage>>
         fun getOwnerDetails(ownerLogin: String): Single<GitHubUser>
     }
-
 }

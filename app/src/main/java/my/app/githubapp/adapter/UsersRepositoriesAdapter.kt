@@ -31,9 +31,7 @@ class UsersRepositoriesAdapter : RecyclerView.Adapter<UserRepositoryViewHolder>(
         mGitHubRepoList = gitHubRepoList
         notifyDataSetChanged()
     }
-
 }
-
 
 class UserRepositoryViewHolder(private val mBinding: ItemUsersRepositoryBinding) :
     RecyclerView.ViewHolder(mBinding.root) {
@@ -42,5 +40,4 @@ class UserRepositoryViewHolder(private val mBinding: ItemUsersRepositoryBinding)
         mBinding.gitHubRepo = gitHubRepo
         mBinding.executePendingBindings()
     }
-
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DetektProjectConfiguration">
+    <enableDetekt>true</enableDetekt>
+    <enableFormatting>true</enableFormatting>
+    <failFast>true</failFast>
+    <treatAsError>true</treatAsError>
+    <rulesPath>C:\Users\Karlo\Desktop\Github projekti\GitHubApp\config\detekt\detekt.yml</rulesPath>
+  </component>
+</project>

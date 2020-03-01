@@ -2,7 +2,7 @@ package my.app.githubapp.bindingConversions
 
 import androidx.databinding.BindingConversion
 import java.text.DateFormat
-import java.util.*
+import java.util.Date
 
 object BindingConversions {
 
@@ -15,5 +15,4 @@ object BindingConversions {
             return DateFormat.getDateInstance().format(date)
         }
     }
-
 }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-
 class MathFunctionsTest {
 
     @Nested
@@ -57,14 +56,12 @@ class MathFunctionsTest {
         }
     }
 
-
     @Nested
     inner class GetRoundedPercentageMethodTest {
         private val testNumerator = 45
         private val testDenominator = 101
         private val numOfDecimalPlaces = 2
         private val expectedValue = 44.55
-
 
         @Test
         fun getsRightValueForValidArguments() {
@@ -82,7 +79,6 @@ class MathFunctionsTest {
         private val testValue = 101.45622
         private val numOfDecimalPlaces = 2
         private val expectedValue = 101.46
-
 
         @Test
         fun getRightValueForArguments() {

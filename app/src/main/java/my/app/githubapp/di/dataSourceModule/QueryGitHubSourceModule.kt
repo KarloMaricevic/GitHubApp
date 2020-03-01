@@ -8,10 +8,9 @@ import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.model.caching.key.QueryKey
 import my.app.githubapp.mvp.model.caching.networkDataSource.RepositorySearchNetworkDataSource
 
+@Suppress("MaxLineLength")
 @Module
 interface QueryGitHubSourceModule {
-
-
     companion object {
         @Provides
         @PerFragment

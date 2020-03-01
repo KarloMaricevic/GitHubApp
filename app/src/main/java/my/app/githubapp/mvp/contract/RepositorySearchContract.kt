@@ -8,12 +8,10 @@ import my.app.githubapp.core.State
 import my.app.githubapp.domain.GitHubRepo
 
 interface RepositorySearchContract {
-
     interface RepositorySearchView : BaseView {
         fun showData(data: List<GitHubRepo>)
         fun queryError()
     }
-
 
     interface RepositorySearchViewStateInterface : State {
         fun getQuery(): String
@@ -34,5 +32,4 @@ interface RepositorySearchContract {
     interface RepositorySearchRepositoryInterface {
         fun getReposFromQuery(query: String): Single<List<GitHubRepo>>
     }
-
 }

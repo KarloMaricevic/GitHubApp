@@ -6,7 +6,6 @@ import my.app.githubapp.di.dataSourceModule.UserGitHubSourceModule
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.ui.repositoryDetailsView.RepositoryDetailsFragment
 
-
 @PerFragment
 @Subcomponent
     (
@@ -17,7 +16,6 @@ import my.app.githubapp.ui.repositoryDetailsView.RepositoryDetailsFragment
 interface RepositoryDetailSubcomponent {
 
     fun inject(repositoryDetailsFragment: RepositoryDetailsFragment)
-
 
     @Subcomponent.Factory
     interface Factory {

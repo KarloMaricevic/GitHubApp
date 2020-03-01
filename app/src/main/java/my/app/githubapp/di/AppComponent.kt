@@ -32,5 +32,4 @@ interface AppComponent {
     interface Factory {
         fun create(): AppComponent
     }
-
 }

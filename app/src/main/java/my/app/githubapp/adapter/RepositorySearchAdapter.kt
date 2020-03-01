@@ -18,10 +18,8 @@ class RepositorySearchAdapter(
     private val mCallback: RepositorySearchViewAdapterCallback
 ) : RecyclerView.Adapter<BasicRepositoryInfoViewHolder>(), RepositorySearchAdapterInterface {
 
-
     private var mData: List<GitHubRepo> = listOf()
     private var mGlide = Glide.with(fragment)
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -49,17 +47,14 @@ class RepositorySearchAdapter(
             .into(holder.getImageView())
     }
 
-
     fun setData(newData: List<GitHubRepo>) {
         mData = newData
         notifyDataSetChanged()
     }
 
-
     fun changeContext(context: Context) {
         mGlide = Glide.with(context)
     }
-
 
     override fun clickedOnOwner(ownerLogin: String) {
         mCallback.navigateToUserDetailView(ownerLogin)
@@ -68,15 +63,12 @@ class RepositorySearchAdapter(
     override fun clickedOnRepo(ownerLogin: String, repoName: String) {
         mCallback.navigateToRepoDetailView(ownerLogin, repoName)
     }
-
 }
-
 
 class BasicRepositoryInfoViewHolder(
     private val mBinding: ItemBasicRepositoryInfoBinding,
     private val mRepositorySearchAdapterInterface: RepositorySearchAdapterInterface
 ) : RecyclerView.ViewHolder(mBinding.root) {
-
 
     fun bind(item: GitHubRepo) {
         mBinding.gitHubRepo = item
@@ -91,10 +83,7 @@ class BasicRepositoryInfoViewHolder(
         mBinding.executePendingBindings()
     }
 
-
     fun getImageView(): ImageView {
         return mBinding.ownerPictureImageButton
     }
-
-
 }

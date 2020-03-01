@@ -1,7 +1,8 @@
 package my.app.githubapp.domain
 
-import java.util.*
+import java.util.Date
 
+@Suppress("Unused")
 class GitHubUser(
     id: Int,
     login: String,

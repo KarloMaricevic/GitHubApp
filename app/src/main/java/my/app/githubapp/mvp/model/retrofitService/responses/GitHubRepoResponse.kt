@@ -1,11 +1,11 @@
 package my.app.githubapp.mvp.model.retrofitService.responses
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import java.util.Date
 
 data class GitHubRepoResponse(
     @SerializedName("id") val id: Int,
-    @SerializedName("node_id") val node_id: String,
+    @SerializedName("node_id") val nodeId: String,
     @SerializedName("name") val name: String,
     @SerializedName("full_name") val fullName: String,
     @SerializedName("private") val private: Boolean,

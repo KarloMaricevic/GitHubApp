@@ -1,7 +1,7 @@
 package my.app.githubapp.mvp.model.retrofitService.responses
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import java.util.Date
 
 data class BasicGitHubRepoResponse(
     @SerializedName("archive_url") val archiveUrl: String,
@@ -16,7 +16,7 @@ data class BasicGitHubRepoResponse(
     @SerializedName("compare_url") val compareUrl: String,
     @SerializedName("contents_url") val contentsUrl: String,
     @SerializedName("contributors_url") val contributorsUrl: String,
-    @SerializedName("created_at") val created_at: Date,
+    @SerializedName("created_at") val createdAt: Date,
     @SerializedName("default_branch") val defaultBranch: String,
     @SerializedName("deployments_url") val deploymentsUrl: String,
     @SerializedName("description") val description: String,
@@ -47,7 +47,7 @@ data class BasicGitHubRepoResponse(
     @SerializedName("keys_url") val keysUrl: String,
     @SerializedName("labels_url") val labelsUrl: String,
     @SerializedName("language") val language: String,
-    @SerializedName("languages_url") val languages_url: String,
+    @SerializedName("languages_url") val languagesUrl: String,
     @SerializedName("merges_url") val mergesUrl: String,
     @SerializedName("milestones_url") val milestonesUrl: String,
     @SerializedName("mirror_url") val mirrorUrl: Any,
@@ -55,9 +55,9 @@ data class BasicGitHubRepoResponse(
     @SerializedName("node_id") val nodeId: String,
     @SerializedName("notifications_url") val notificationsUrl: String,
     @SerializedName("open_issues") val openIssues: Int,
-    @SerializedName("open_issues_count") val open_issues_count: Int,
+    @SerializedName("open_issues_count") val openIssuesCount: Int,
     @SerializedName("owner") val owner: BasicGitHubUserResponse,
-    @SerializedName("private") val `private`: Boolean,
+    @SerializedName("private") val isPrivate: Boolean,
     @SerializedName("pulls_url") val pullsUrl: String,
     @SerializedName("pushed_at") val pushedAt: String,
     @SerializedName("releases_url") val releasesUrl: String,

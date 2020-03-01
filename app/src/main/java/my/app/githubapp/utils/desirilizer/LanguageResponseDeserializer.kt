@@ -7,14 +7,11 @@ import my.app.githubapp.mvp.model.retrofitService.responses.LanguageResponse
 import java.lang.reflect.Type
 
 class LanguageResponseDeserializer : JsonDeserializer<LanguageResponse> {
-
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
     ): LanguageResponse {
-
-
         val languageList = HashMap<String, Int>()
         if (json != null) {
             for (language in json.asJsonObject.entrySet()) {

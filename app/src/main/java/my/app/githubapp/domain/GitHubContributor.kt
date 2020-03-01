@@ -1,6 +1,5 @@
 package my.app.githubapp.domain
 
-
 class GitHubContributor constructor(
     userLogin: String,
     userId: Int,
@@ -15,11 +14,14 @@ class GitHubContributor constructor(
         numberOfCommits
     )
 
-
     override fun equals(other: Any?): Boolean {
         if (other is GitHubContributor) {
-            return other.login == login && other.numberOfCommits == numberOfCommits && other.id == id && other.thumbnailUrl == other.thumbnailUrl
+            return other.id == id
         }
         return super.equals(other)
+    }
+
+    override fun hashCode(): Int {
+        return id
     }
 }

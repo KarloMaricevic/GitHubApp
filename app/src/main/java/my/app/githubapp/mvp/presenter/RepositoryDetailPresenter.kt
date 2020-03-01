@@ -3,23 +3,25 @@ package my.app.githubapp.mvp.presenter
 import io.reactivex.Single
 import my.app.githubapp.di.scope.PerFragment
 import my.app.githubapp.domain.GitHubRepo
-import my.app.githubapp.mvp.contract.RepositoryDetailsContract.*
+import my.app.githubapp.mvp.contract.RepositoryDetailsContract
+import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsView
+import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetailsViewStateInterface
 import my.app.githubapp.ui.repositoryDetailsView.RepositoryDetailsViewState
 import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
 import javax.inject.Inject
 
 @PerFragment
+@Suppress("TooManyFunctions")
 class RepositoryDetailPresenter @Inject constructor(
-    private val mInteractor: RepositoryDetailsInteractorInterface,
+    private val mInteractor: RepositoryDetailsContract.RepositoryDetailsInteractorInterface,
     private val mSchedulersProvider: SchedulersProviderInterface
 ) :
-    RepositoryDetailsPresenterAbstraction() {
+    RepositoryDetailsContract.RepositoryDetailsPresenterAbstraction() {
 
     private lateinit var mOwnerName: String
     private lateinit var mRepoName: String
     private var areLanguagesExpanded: Boolean = false
     private var areContributorsExpanded: Boolean = false
-
 
     override fun subscribe(
         view: RepositoryDetailsView,
@@ -113,7 +115,6 @@ class RepositoryDetailPresenter @Inject constructor(
                     }
                 )
         mCompositeDisposable.addAll(repoDetailsDisposable, ownerDetailsDisposable)
-
     }
 
     private fun getRepositoryDetails(ownerName: String, repoName: String): Single<GitHubRepo> =
@@ -123,5 +124,4 @@ class RepositoryDetailPresenter @Inject constructor(
         mInteractor.getRepoLanguages(ownerName, repoName)
 
     private fun getOwnerDetails(ownerName: String) = mInteractor.getOwnerInfo(ownerName)
-
 }

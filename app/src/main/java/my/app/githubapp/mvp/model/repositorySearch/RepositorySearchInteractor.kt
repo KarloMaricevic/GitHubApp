@@ -7,9 +7,10 @@ import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchIn
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchRepositoryInterface
 import javax.inject.Inject
 
-
 @PerFragment
-class RepositorySearchInteractor @Inject constructor(private val mRepositorySearchRepository: RepositorySearchRepositoryInterface) :
+class RepositorySearchInteractor @Inject constructor(
+    private val mRepositorySearchRepository: RepositorySearchRepositoryInterface
+) :
     RepositorySearchInteractorInterface {
 
     override fun getReposForQuery(query: String): Single<List<GitHubRepo>> {

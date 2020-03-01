@@ -16,11 +16,8 @@ class LanguageResponseMapperTest {
             )
         val expectedValue = listOf<LanguagePercentage>()
 
-
         val actualValue = LanguageResponseMapper.convert(emptyLanguageResponse)
         assertEquals(expectedValue, actualValue)
-
-
     }
 
     @Test
@@ -43,6 +40,4 @@ class LanguageResponseMapperTest {
 
         Truth.assertThat(actualValue).containsExactlyElementsIn(expectedValue)
     }
-
-
 }

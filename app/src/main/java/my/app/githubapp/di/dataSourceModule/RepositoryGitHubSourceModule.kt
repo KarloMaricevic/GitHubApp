@@ -14,6 +14,7 @@ import my.app.githubapp.mvp.model.caching.networkDataSource.ContributorsNetworkD
 import my.app.githubapp.mvp.model.caching.networkDataSource.GitHubRepositoryNetworkDataSource
 import my.app.githubapp.mvp.model.caching.networkDataSource.RepoLanguagesNetworkDataSource
 
+@Suppress("MaxLineLength")
 @Module
 interface RepositoryGitHubSourceModule {
 
@@ -32,7 +33,6 @@ interface RepositoryGitHubSourceModule {
             return DataSource.Builder<LanguageKey, List<LanguagePercentage>>()
                 .setNetworkDataSource(networkDataSource).build()
         }
-
 
         @Provides
         @PerFragment

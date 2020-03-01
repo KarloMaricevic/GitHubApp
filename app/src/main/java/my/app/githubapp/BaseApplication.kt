@@ -8,19 +8,15 @@ import my.app.githubapp.di.repositorySearchSubcomponent.RepositorySearchSubcompo
 import my.app.githubapp.di.userDetailsSubcompnent.UserDetailsSubcomponent
 
 class BaseApplication : Application() {
-
-
     private lateinit var mAppComponent: AppComponent
     private var mRepositorySearchSubcomponent: RepositorySearchSubcomponent? = null
     private var mRepositoryDetailSubcomponent: RepositoryDetailSubcomponent? = null
     private var mUserDetailSubcomponent: UserDetailsSubcomponent? = null
 
-
     override fun onCreate() {
         super.onCreate()
         mAppComponent = DaggerAppComponent.create()
     }
-
 
     fun getRepositorySearchSubcomponent(): RepositorySearchSubcomponent {
         if (mRepositorySearchSubcomponent == null) {
@@ -30,7 +26,7 @@ class BaseApplication : Application() {
         return mRepositorySearchSubcomponent ?: throw NullPointerException()
     }
 
-    fun releaseRepositorySearchSobcomponent() {
+    fun releaseRepositorySearchSubcomponent() {
         mRepositorySearchSubcomponent = null
     }
 
@@ -42,7 +38,7 @@ class BaseApplication : Application() {
         return mRepositoryDetailSubcomponent ?: throw NullPointerException()
     }
 
-    fun releaseRepositoryDetailSobcomponent() {
+    fun releaseRepositoryDetailSubcomponent() {
         mRepositoryDetailSubcomponent = null
     }
 
@@ -56,6 +52,4 @@ class BaseApplication : Application() {
     fun releaseUserDetailSubcomponent() {
         mUserDetailSubcomponent = null
     }
-
-
 }

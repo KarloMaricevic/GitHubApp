@@ -1,14 +1,16 @@
 package my.app.githubapp.mvp.presenter
 
-import my.app.githubapp.mvp.contract.UserDetailsContract.*
+import my.app.githubapp.mvp.contract.UserDetailsContract
+import my.app.githubapp.mvp.contract.UserDetailsContract.UserDetailsView
+import my.app.githubapp.mvp.contract.UserDetailsContract.UserDetailsViewStateInterface
 import my.app.githubapp.ui.userDetailsView.UserDetailsViewState
 import my.app.githubapp.utils.schedulers.SchedulersProviderInterface
 import javax.inject.Inject
 
 class UserDetailsPresenter @Inject constructor(
-    private val mInteractor: UserDetailsInteractorInterface,
+    private val mInteractor: UserDetailsContract.UserDetailsInteractorInterface,
     private val mSchedulersProvider: SchedulersProviderInterface
-) : UserDetailsPresenterAbstraction() {
+) : UserDetailsContract.UserDetailsPresenterAbstraction() {
 
     private var isUserRepositoriesButtonActivated: Boolean = false
 
@@ -76,5 +78,4 @@ class UserDetailsPresenter @Inject constructor(
     private fun getUserInfo(userLogin: String) = mInteractor.getUserInfo(userLogin)
 
     private fun getUsersRepositories(userLogin: String) = mInteractor.getUserRepositories(userLogin)
-
 }

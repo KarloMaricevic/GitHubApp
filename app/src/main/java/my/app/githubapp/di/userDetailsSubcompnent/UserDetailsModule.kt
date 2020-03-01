@@ -3,7 +3,9 @@ package my.app.githubapp.di.userDetailsSubcompnent
 import dagger.Binds
 import dagger.Module
 import my.app.githubapp.di.scope.PerFragment
-import my.app.githubapp.mvp.contract.UserDetailsContract.*
+import my.app.githubapp.mvp.contract.UserDetailsContract.UserDetailsInteractorInterface
+import my.app.githubapp.mvp.contract.UserDetailsContract.UserDetailsPresenterAbstraction
+import my.app.githubapp.mvp.contract.UserDetailsContract.UserDetailsRepositoryInterface
 import my.app.githubapp.mvp.model.userDetails.UserDetailsInteractor
 import my.app.githubapp.mvp.model.userDetails.UserDetailsRepository
 import my.app.githubapp.mvp.presenter.UserDetailsPresenter

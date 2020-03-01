@@ -12,9 +12,8 @@ import my.app.githubapp.domain.GitHubContributor
 
 class RepositoryContributorsAdapter(fragment: Fragment) :
     RecyclerView.Adapter<ContributorViewHolder>() {
-
-    var mContributorList = listOf<GitHubContributor>()
-    val mGlide = Glide.with(fragment)
+    private var mContributorList = listOf<GitHubContributor>()
+    private val mGlide = Glide.with(fragment)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContributorViewHolder {
         return ContributorViewHolder(

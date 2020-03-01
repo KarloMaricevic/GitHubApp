@@ -14,7 +14,7 @@ data class GitHubRepoContributorResponse(
     @SerializedName("id") val id: Int,
     @SerializedName("login") val login: String,
     @SerializedName("node_id") val nodeId: String,
-    @SerializedName("organizations_url") val organizations_url: String,
+    @SerializedName("organizations_url") val organizationsUrl: String,
     @SerializedName("received_events_url") val receivedEventsUrl: String,
     @SerializedName("repos_url") val reposUrl: String,
     @SerializedName("site_admin") val siteAdmin: Boolean,

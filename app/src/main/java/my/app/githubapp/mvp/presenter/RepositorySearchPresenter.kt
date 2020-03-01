@@ -15,13 +15,12 @@ import javax.inject.Inject
 class RepositorySearchPresenter @Inject constructor(
     private val mRepositorySearchInteractor: RepositorySearchInteractorInterface,
     private val mSchedulersProvider: SchedulersProviderInterface,
-    private val mGitHubRepoSorter : SorterInterface<GitHubRepo>
+    private val mGitHubRepoSorter: SorterInterface<GitHubRepo>
 ) :
     RepositorySearchPresenterAbstraction() {
 
     private var mQuery: String = ""
     private var mSortBy: Int = SORT_BY_REPO_NAME
-
 
     override fun subscribe(
         view: RepositorySearchContract.RepositorySearchView,
@@ -34,7 +33,6 @@ class RepositorySearchPresenter @Inject constructor(
             searchForRepos(mQuery)
         }
     }
-
 
     override fun getState(): RepositorySearchContract.RepositorySearchViewStateInterface {
         return RepositorySearchViewState(

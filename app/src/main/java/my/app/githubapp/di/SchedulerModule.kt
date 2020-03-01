@@ -13,6 +13,5 @@ interface SchedulerModule {
         @Provides
         @Singleton
         fun providesSchedulers(): SchedulersProviderInterface = SchedulersProvider
-
     }
 }

@@ -1,5 +1,6 @@
-package my.app.githubapp.ui.repositoryDetailsView
+@file:Suppress("TooManyFunctions")
 
+package my.app.githubapp.ui.repositoryDetailsView
 
 import android.content.Intent
 import android.net.Uri
@@ -31,9 +32,8 @@ import my.app.githubapp.mvp.contract.RepositoryDetailsContract.RepositoryDetails
 import my.app.githubapp.mvp.presenter.RepositoryDetailPresenter
 import javax.inject.Inject
 
-/**
- * A simple [Fragment] subclass.
- */
+const val NUMBER_OF_ITEMS_IN_GRID_LAYOUT_ROW = 4
+
 class RepositoryDetailsFragment : Fragment(), RepositoryDetailsView {
 
     @Inject
@@ -78,7 +78,6 @@ class RepositoryDetailsFragment : Fragment(), RepositoryDetailsView {
         }
     }
 
-
     //region Lifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,7 +95,6 @@ class RepositoryDetailsFragment : Fragment(), RepositoryDetailsView {
             requireActivity().onBackPressedDispatcher.addCallback(this) { navigateBack() }
 
         mContributorsAdapter = RepositoryContributorsAdapter(this)
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -107,13 +105,17 @@ class RepositoryDetailsFragment : Fragment(), RepositoryDetailsView {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         mBinding = FragmentRepositoryDetailsScreenBinding.inflate(inflater, container, false)
 
         mBinding.languagesRecyclerView.adapter = mLanguagesAdapter
-        mBinding.contributorsRecyclerView.layoutManager = GridLayoutManager(context, 4)
+        mBinding.contributorsRecyclerView.layoutManager = GridLayoutManager(
+            context!!,
+            NUMBER_OF_ITEMS_IN_GRID_LAYOUT_ROW
+        )
         mBinding.contributorsRecyclerView.adapter = mContributorsAdapter
 
         mBinding.showLanguagesButton.setOnClickListener(mShowLanguagesOnClick)
@@ -151,7 +153,6 @@ class RepositoryDetailsFragment : Fragment(), RepositoryDetailsView {
     override fun bindRepoDetails(gitHubRepo: GitHubRepo) {
         mBinding.gitHubRepo = gitHubRepo
         mBinding.executePendingBindings()
-
     }
 
     override fun bindUserInfo(owner: GitHubUser) {
@@ -176,7 +177,6 @@ class RepositoryDetailsFragment : Fragment(), RepositoryDetailsView {
     override fun showContributors(contributorsList: List<GitHubContributor>) {
         mBinding.showContributorsButton.isClickable = true
         mContributorsAdapter.setData(contributorsList)
-
     }
 
     override fun hideContributors() {
@@ -232,7 +232,7 @@ class RepositoryDetailsFragment : Fragment(), RepositoryDetailsView {
                 userLogin
             )
         (activity!!.application as BaseApplication)
-            .releaseRepositoryDetailSobcomponent()
+            .releaseRepositoryDetailSubcomponent()
         findNavController().navigate(action)
     }
 
@@ -243,9 +243,7 @@ class RepositoryDetailsFragment : Fragment(), RepositoryDetailsView {
 
     private fun navigateBack() {
         (activity!!.application as BaseApplication)
-            .releaseRepositoryDetailSobcomponent()
+            .releaseRepositoryDetailSubcomponent()
         findNavController().popBackStack()
     }
-
-
 }

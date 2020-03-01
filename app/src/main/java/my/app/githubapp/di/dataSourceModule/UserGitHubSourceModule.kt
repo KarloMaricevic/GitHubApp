@@ -11,6 +11,7 @@ import my.app.githubapp.mvp.model.caching.key.UsersRepositoriesKey
 import my.app.githubapp.mvp.model.caching.networkDataSource.GitHubUserNetworkDataSource
 import my.app.githubapp.mvp.model.caching.networkDataSource.UsersRepositoriesNetworkDataSource
 
+@Suppress("MaxLineLength")
 @Module
 interface UserGitHubSourceModule {
 

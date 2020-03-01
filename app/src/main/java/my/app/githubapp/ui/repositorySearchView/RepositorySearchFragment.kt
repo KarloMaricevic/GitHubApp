@@ -1,6 +1,5 @@
 package my.app.githubapp.ui.repositorySearchView
 
-
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
@@ -8,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -19,16 +19,16 @@ import my.app.githubapp.databinding.FragmentRepositorySearchBinding
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.mvp.contract.RepositorySearchContract
 import my.app.githubapp.mvp.contract.RepositorySearchContract.RepositorySearchPresenterAbstraction
-import my.app.githubapp.utils.authLink
-import my.app.githubapp.utils.clientId
+import my.app.githubapp.utils.AUTH_LINK
+import my.app.githubapp.utils.CLIENT_ID
 import javax.inject.Inject
 import kotlin.system.exitProcess
 
-
-class RepositorySearchFragment : Fragment(), RepositorySearchContract.RepositorySearchView,
-    androidx.appcompat.widget.SearchView.OnQueryTextListener,
+@Suppress("TooManyFunctions")
+class RepositorySearchFragment : Fragment(),
+    RepositorySearchContract.RepositorySearchView,
+    SearchView.OnQueryTextListener,
     RepositorySearchViewAdapterCallback {
-
 
     @Inject
     lateinit var mPresenter: RepositorySearchPresenterAbstraction
@@ -42,14 +42,13 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
     private lateinit var mSnackbar: Snackbar
 
     private val mOnSearchActionClickListener = { it: View ->
-        (it as androidx.appcompat.widget.SearchView).setQuery(
+        (it as SearchView).setQuery(
             mPresenter.getState().getQuery(),
             false
         )
         val width = Resources.getSystem().displayMetrics.widthPixels
         it.maxWidth = width
     }
-
 
     //region lifecycle
 
@@ -64,25 +63,23 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         mBinding = FragmentRepositorySearchBinding.inflate(inflater, container, false)
 
         mBinding.githubBasicInfoRecyclerView.adapter = mAdapter
 
-        (mBinding.searchToolbar.menu.findItem(R.id.action_search).actionView as androidx.appcompat.widget.SearchView).setOnQueryTextListener(
-            this
-        )
-        (mBinding.searchToolbar.menu.findItem(R.id.action_search).actionView as androidx.appcompat.widget.SearchView).setOnSearchClickListener(
-            mOnSearchActionClickListener
-        )
+        (mBinding.searchToolbar.menu.findItem(R.id.action_search).actionView as SearchView)
+            .setOnQueryTextListener(this)
+
+        (mBinding.searchToolbar.menu.findItem(R.id.action_search).actionView as SearchView)
+            .setOnSearchClickListener(mOnSearchActionClickListener)
 
         setUpSortMenu()
         return mBinding.root
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -90,7 +87,6 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
             mStateView = savedInstanceState.getParcelable(getString(R.string.viewState))
         }
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -106,7 +102,6 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
         mPresenter.unsubscribe()
         super.onStop()
     }
-
 
     //endregion
 
@@ -146,7 +141,7 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
             RepositorySearchFragmentDirections.actionRepositorySearchFragment2ToUserDetailsFragment(
                 userLogin
             )
-        (activity!!.application as BaseApplication).releaseRepositorySearchSobcomponent()
+        (activity!!.application as BaseApplication).releaseRepositorySearchSubcomponent()
         findNavController().navigate(action)
     }
 
@@ -156,7 +151,7 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
                 ownerLogin,
                 repoName
             )
-        (activity!!.application as BaseApplication).releaseRepositorySearchSobcomponent()
+        (activity!!.application as BaseApplication).releaseRepositorySearchSubcomponent()
         findNavController().navigate(action)
     }
 
@@ -191,10 +186,8 @@ class RepositorySearchFragment : Fragment(), RepositorySearchContract.Repository
 
             val builder = CustomTabsIntent.Builder()
                 .build()
-            builder.launchUrl(context!!, Uri.parse(authLink + clientId))
+            builder.launchUrl(context!!, Uri.parse(AUTH_LINK + CLIENT_ID))
             return@setOnMenuItemClickListener true
         }
     }
-
-
 }

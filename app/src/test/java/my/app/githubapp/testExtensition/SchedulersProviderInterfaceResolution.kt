@@ -28,6 +28,5 @@ class SchedulersProviderInterfaceResolution : ParameterResolver {
         every { mockedProvider.getMainThread() }.returns(Schedulers.trampoline())
         every { mockedProvider.getNetworkThread() }.returns(Schedulers.trampoline())
         return mockedProvider
-
     }
 }

@@ -12,14 +12,26 @@ import retrofit2.http.Path
 interface RepositoryGitHubService {
 
     @GET("repos/{owner}/{repoName}")
-    fun getRepositoryInformation(@Path("owner") ownerLogin: String, @Path("repoName") repoName: String): Single<GitHubRepoResponse>
+    fun getRepositoryInformation(
+        @Path("owner") ownerLogin: String,
+        @Path("repoName") repoName: String
+    ): Single<GitHubRepoResponse>
 
     @GET("repos/{owner}/{repo}/subscribers")
-    fun getRepoWatchers(@Path("owner") ownerLogin: String, @Path("repo") repoName: String): Observable<List<BasicGitHubUserResponse>>
+    fun getRepoWatchers(
+        @Path("owner") ownerLogin: String,
+        @Path("repo") repoName: String
+    ): Observable<List<BasicGitHubUserResponse>>
 
     @GET("repos/{owner}/{repoName}/languages")
-    fun getRepositoryLanguage(@Path("owner") ownerLogin: String, @Path("repoName") repoName: String): Single<LanguageResponse>
+    fun getRepositoryLanguage(
+        @Path("owner") ownerLogin: String,
+        @Path("repoName") repoName: String
+    ): Single<LanguageResponse>
 
     @GET("repos/{owner}/{repoName}/contributors")
-    fun getRepositoryContributors(@Path("owner") ownerLogin: String, @Path("repoName") repoName: String): Single<List<GitHubRepoContributorResponse>>
+    fun getRepositoryContributors(
+        @Path("owner") ownerLogin: String,
+        @Path("repoName") repoName: String
+    ): Single<List<GitHubRepoContributorResponse>>
 }

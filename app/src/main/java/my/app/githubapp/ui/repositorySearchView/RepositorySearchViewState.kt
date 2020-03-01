@@ -15,7 +15,4 @@ data class RepositorySearchViewState(
 ) : RepositorySearchContract.RepositorySearchViewStateInterface {
     override fun getQuery() = query
     override fun getSortBy(): Int = sortBy
-
 }
-
-

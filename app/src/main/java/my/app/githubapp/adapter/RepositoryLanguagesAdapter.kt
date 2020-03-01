@@ -8,7 +8,6 @@ import my.app.githubapp.domain.LanguagePercentage
 
 class RepositoryLanguagesAdapter : RecyclerView.Adapter<ItemLanguageViewHolder>() {
 
-
     private var mData: List<LanguagePercentage> = listOf()
 
     override fun onCreateViewHolder(
@@ -33,13 +32,11 @@ class RepositoryLanguagesAdapter : RecyclerView.Adapter<ItemLanguageViewHolder>(
         holder.bind(gitHubRepoLanguage)
     }
 
-
     fun setData(newData: List<LanguagePercentage>) {
         mData = newData
         notifyDataSetChanged()
     }
 }
-
 
 class ItemLanguageViewHolder(private val mBinding: ItemLanguageBinding) :
     RecyclerView.ViewHolder(mBinding.root) {
@@ -47,9 +44,5 @@ class ItemLanguageViewHolder(private val mBinding: ItemLanguageBinding) :
     fun bind(data: LanguagePercentage) {
         mBinding.language = data
         mBinding.executePendingBindings()
-
     }
 }
-
-
-

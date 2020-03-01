@@ -19,18 +19,20 @@ import my.app.githubapp.adapter.UsersRepositoriesAdapter
 import my.app.githubapp.databinding.FragmentUserDetailsBinding
 import my.app.githubapp.domain.GitHubRepo
 import my.app.githubapp.domain.GitHubUser
-import my.app.githubapp.mvp.contract.UserDetailsContract.*
+import my.app.githubapp.mvp.contract.UserDetailsContract
+import my.app.githubapp.mvp.contract.UserDetailsContract.UserDetailsView
+
 import javax.inject.Inject
 
-
+@Suppress("TooManyFunctions")
 class UserDetailsFragment : Fragment(), UserDetailsView {
 
     @Inject
-    lateinit var mPresenter: UserDetailsPresenterAbstraction
+    lateinit var mPresenter: UserDetailsContract.UserDetailsPresenterAbstraction
 
     private lateinit var mBinding: FragmentUserDetailsBinding
 
-    private var mViewState: UserDetailsViewStateInterface? = null
+    private var mViewState: UserDetailsContract.UserDetailsViewStateInterface? = null
 
     private val mAdapter = UsersRepositoriesAdapter()
 
@@ -48,7 +50,6 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
 
     private lateinit var mSnackbar: Snackbar
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         (activity!!.application as BaseApplication)
             .getUserDetailSubcomponent()
@@ -60,7 +61,8 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         mBinding = FragmentUserDetailsBinding.inflate(inflater, container, false)
@@ -79,7 +81,6 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
             mViewState = savedInstanceState.getParcelable(getString(R.string.viewState))
         }
     }
-
 
     override fun onStart() {
         mPresenter.subscribe(this, mViewState)
@@ -132,7 +133,6 @@ class UserDetailsFragment : Fragment(), UserDetailsView {
             }
         mSnackbar.show()
     }
-
 
     override fun fatalError() {
         navigateBack()
